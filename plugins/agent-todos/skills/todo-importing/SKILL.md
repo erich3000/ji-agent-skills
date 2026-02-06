@@ -20,4 +20,4 @@ Import open GitHub issues into local todo files.
 
 - Only import open issues (closed issues are already done)
 - If no label matches a category, ask the user or use `misc/`
-- The comment on the closed issue should include the path like: `Imported to docs/agent-todos/data/001_task-name.md`
+- The comment on the closed issue should include the path like: `Imported to docs/agent-todos/data/0001_task-name.md`

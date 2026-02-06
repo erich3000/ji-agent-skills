@@ -15,8 +15,8 @@ Todo files are organized in category subdirectories. Categories are flexible and
 ```
 docs/agent-todos/
 ├── [category]/     # e.g., data, menu, misc, tags, thai-food-dict
-│   ├── 001_task-description.md
-│   ├── DONE_002_completed-task.md
+│   ├── 0001_task-description.md
+│   ├── DONE_0002_completed-task.md
 │   └── ...
 └── [another-category]/
 ```
@@ -25,20 +25,20 @@ docs/agent-todos/
 
 ### Open Tasks
 
-- `[3-digit-number]_[description].md` - e.g., `001_create-new-feature.md`
+- `[4-digit-number]_[description].md` - e.g., `0001_create-new-feature.md`
 - `TODO-[DESCRIPTION].md` - alternative format for quick todos
 
 ### Completed Tasks
 
 - `DONE_[original-filename].md` - Add `DONE_` prefix when task is complete
-- Example: `001_create-feature.md` → `DONE_001_create-feature.md`
+- Example: `0001_create-feature.md` → `DONE_0001_create-feature.md`
 
 ### Supporting Files
 
 Tasks may have supporting files (CSV, JSON, images, etc.) with the same number prefix:
 
-- `001_fix-soft-404.md` - the task file
-- `001_Tabelle.csv` - supporting data for the task
+- `0001_fix-soft-404.md` - the task file
+- `0001_Tabelle.csv` - supporting data for the task
 
 When marking a task as done, also rename supporting files with the `DONE_` prefix.
 

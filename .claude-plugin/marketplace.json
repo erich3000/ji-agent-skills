@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "agent-todos",
-      "version": "0.0.1",
+      "version": "0.0.2",
       "source": "./plugins/agent-todos",
       "description": "Agent todo file management skills"
     },

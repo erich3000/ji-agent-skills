@@ -5,7 +5,7 @@ This folder contains task files for AI agents working on this project.
 ## Structure
 
 - Each subdirectory represents a category of tasks
-- Task files use the naming convention: `[NNN]_[description].md`
+- Task files use the naming convention: `[NNNN]_[description].md`
 - Completed tasks are prefixed with `DONE_`
 
 ## Related Skills
