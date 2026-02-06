@@ -1,19 +1,19 @@
 ---
 name: todo-processing
-description: Work with AI agent todo files in docs/agents-todos
+description: Work with AI agent todo files in docs/agent-todos
 invocation: none
 ---
 
 # todo-processing
 
-This skill describes how to work with todo files located in `docs/agents-todos/`. These files track tasks for AI agents working on this project.
+This skill describes how to work with todo files located in `docs/agent-todos/`. These files track tasks for AI agents working on this project.
 
 ## Directory Structure
 
 Todo files are organized in category subdirectories. Categories are flexible and can be created as needed.
 
 ```
-docs/agents-todos/
+docs/agent-todos/
 ├── [category]/     # e.g., data, menu, misc, tags, thai-food-dict
 │   ├── 001_task-description.md
 │   ├── DONE_002_completed-task.md
@@ -127,11 +127,11 @@ When task is complete:
 To list all open (not done) tasks:
 
 ```bash
-find docs/agents-todos -name "*.md" ! -name "DONE_*" -type f
+find docs/agent-todos -name "*.md" ! -name "DONE_*" -type f
 ```
 
 To list all completed tasks:
 
 ```bash
-find docs/agents-todos -name "DONE_*.md" -type f
+find docs/agent-todos -name "DONE_*.md" -type f
 ```

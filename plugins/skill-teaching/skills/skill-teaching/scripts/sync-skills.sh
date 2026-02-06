@@ -46,13 +46,13 @@ if [[ -f "$MANIFEST" ]]; then
   done < <(jq -r '.skills[]' "$MANIFEST" 2>/dev/null || true)
 fi
 
-# Step 2: Copy local skills (except skill-sharing itself)
+# Step 2: Copy local skills (except skill-teaching itself)
 echo "Copying local skills..."
 if [[ -d "$SKILLS_DIR" ]]; then
   for skill_dir in "$SKILLS_DIR"/*/; do
     [[ -d "$skill_dir" ]] || continue
     skill_name="$(basename "$skill_dir")"
-    if [[ "$skill_name" != "skill-sharing" ]]; then
+    if [[ "$skill_name" != "skill-teaching" ]]; then
       cp -R "${skill_dir%/}" "$DEST/"
       echo "$skill_name" >> "$TEMP_FILE"
       echo "  Copied: $skill_name"
@@ -76,7 +76,7 @@ if [[ -f "$SETTINGS_FILE" ]]; then
         for skill_dir in "$plugin_dir/$latest_version/skills"/*/; do
           [[ -d "$skill_dir" ]] || continue
           skill_name="$(basename "$skill_dir")"
-          if [[ "$skill_name" != "skill-sharing" ]]; then
+          if [[ "$skill_name" != "skill-teaching" ]]; then
             cp -R "${skill_dir%/}" "$DEST/"
             echo "$skill_name" >> "$TEMP_FILE"
             echo "  Copied: $skill_name (from $plugin_name@$marketplace)"

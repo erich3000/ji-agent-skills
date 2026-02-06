@@ -1,12 +1,12 @@
 ---
-name: skill-sharing
-description: Share Claude Code skills with other AI agents
+name: skill-teaching
+description: Teach Claude Code skills to other AI agents
 allowed-tools: Bash
 user-invocable: true
 argument-hint: <target>
 ---
 
-# skill-sharing
+# skill-teaching
 
 Push Claude Code skills to other AI agents in this project.
 
@@ -30,7 +30,7 @@ Where `<base_directory>` is the path shown in "Base directory for this skill:" a
 
 1. Reads previously synced skills from manifest (`.claude-synced-skills.json`)
 2. Deletes only those skills (preserves target agent's own skills)
-3. Copies local skills from `.claude/skills/` (except `skill-sharing` itself)
+3. Copies local skills from `.claude/skills/` (except `skill-teaching` itself)
 4. Copies plugin skills from enabled plugins in `.claude/settings.json`
 5. Writes updated manifest with list of synced skills
 

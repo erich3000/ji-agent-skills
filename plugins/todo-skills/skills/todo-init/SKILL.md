@@ -1,17 +1,17 @@
 ---
 name: todo-init
-description: Initialize the docs/agents-todos folder structure
+description: Initialize the docs/agent-todos folder structure
 allowed-tools: Bash, Read, Write, AskUserQuestion
 invocation: user
 ---
 
 # todo-init
 
-Initialize the `docs/agents-todos/` folder structure for AI agent task tracking.
+Initialize the `docs/agent-todos/` folder structure for AI agent task tracking.
 
 ## Workflow
 
-1. Check if `docs/agents-todos/` already exists
+1. Check if `docs/agent-todos/` already exists
    - If yes, inform the user and ask if they want to add more categories
    - If no, create the base directory
 
@@ -23,7 +23,7 @@ Initialize the `docs/agents-todos/` folder structure for AI agent task tracking.
 
 3. Create the selected subdirectories
 
-4. Copy the `<base_directory>/resources/README.md` into `docs/agents-todos/` in order to explain the structure (only on initial setup)
+4. Copy the `<base_directory>/resources/README.md` into `docs/agent-todos/` in order to explain the structure (only on initial setup)
 
 Where `<base_directory>` is the path shown in "Base directory for this skill:" at the top of the skill invocation.
 
