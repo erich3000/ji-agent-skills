@@ -18,7 +18,7 @@ The project follows Claude Code's plugin system conventions:
 
 ### Plugins
 
-**todo-skills** — Task management system for AI agents using file-based todos in `docs/agent-todos/`:
+**agent-todos** — Task management system for AI agents using file-based todos in `docs/agent-todos/`:
 - `todo-init` — Initializes the todo folder structure with category subdirectories
 - `todo-importing` — Imports GitHub issues into local todo files via `gh issue list`, then closes them
 - `todo-processing` — Reference skill (not user-invocable) defining todo file conventions: naming (`[NNN]_description.md`), completion (`DONE_` prefix), and progress tracking format
@@ -31,7 +31,7 @@ The project follows Claude Code's plugin system conventions:
 
 ```bash
 claude plugin marketplace add https://github.com/erich3000/ji-agent-skills
-claude plugin install todo-skills@ji-agent-skills --scope project
+claude plugin install agent-todos@ji-agent-skills --scope project
 claude plugin install skill-teaching@ji-agent-skills --scope project
 ```
 

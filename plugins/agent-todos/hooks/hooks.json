@@ -4,7 +4,7 @@
       "hooks": [
         {
           "type": "command",
-          "command": "echo 'Installed todo-skills. Restart Claude Code to load new plugins.'",
+          "command": "echo 'Installed agent-todos. Restart Claude Code to load new plugins.'",
           "timeout": 5
         }
       ]

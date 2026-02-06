@@ -8,7 +8,7 @@ See the [Plugins Reference](https://code.claude.com/docs/en/plugins-reference) f
 
 | Plugin           | Description                                   |
 | ---------------- | --------------------------------------------- |
-| `todo-skills`    | Agent todo file management skills             |
+| `agent-todos`    | Agent todo file management skills             |
 | `skill-teaching` | Share Claude Code skills with other AI agents |
 
 ## Installation
@@ -22,7 +22,7 @@ claude plugin marketplace add https://github.com/erich3000/ji-agent-skills
 ### Install a Plugin
 
 ```bash
-claude plugin install todo-skills@ji-agent-skills --scope project
+claude plugin install agent-todos@ji-agent-skills --scope project
 ```
 
 Or for skill sharing:
@@ -33,5 +33,5 @@ claude plugin install skill-teaching@ji-agent-skills --scope project
 
 ## Usage
 
-- **todo-skills**: Manage agent todo files, organize workflows, and track progress
+- **agent-todos**: Manage agent todo files, organize workflows, and track progress
 - **skill-teaching**: Share and sync Claude Code skills with other AI agents

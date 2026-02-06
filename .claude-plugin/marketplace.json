@@ -9,9 +9,9 @@
   },
   "plugins": [
     {
-      "name": "todo-skills",
+      "name": "agent-todos",
       "version": "0.0.1",
-      "source": "./plugins/todo-skills",
+      "source": "./plugins/agent-todos",
       "description": "Agent todo file management skills"
     },
     {

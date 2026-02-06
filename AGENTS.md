@@ -12,13 +12,13 @@ This repository is a Claude Code plugin marketplace. There is no compiled app; i
 There is no build, test, or CI workflow. Typical usage is installing the plugin into Claude Code:
 
 - `claude plugin marketplace add https://github.com/erich3000/ji-agent-skills` adds this marketplace.
-- `claude plugin install todo-skills@ji-agent-skills --scope project` installs the `todo-skills` plugin.
+- `claude plugin install agent-todos@ji-agent-skills --scope project` installs the `agent-todos` plugin.
 - `claude plugin install skill-teaching@ji-agent-skills --scope project` installs the `skill-teaching` plugin.
 
 ## Coding Style & Naming Conventions
 - Skill definitions are Markdown with YAML frontmatter. Keep frontmatter keys in lowercase (for example `name`, `description`, `allowed-tools`, `user-invocable`, `argument-hint`).
 - Skill files must be named `SKILL.md` and live under `plugins/<plugin>/skills/<skill>/`.
-- Use concise, descriptive plugin and skill names with hyphens (for example `todo-skills`, `skill-teaching`).
+- Use concise, descriptive plugin and skill names with hyphens (for example `agent-todos`, `skill-teaching`).
 
 ## Testing Guidelines
 There are no automated tests or coverage requirements. Validate changes by reviewing the affected `SKILL.md` files and plugin metadata for correctness.
