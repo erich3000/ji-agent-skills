@@ -12,9 +12,30 @@ Import open GitHub issues into local todo files.
 ## Workflow
 
 1. Use `gh issue list` to fetch all open issues from the current repository
-2. For each issue, create a local todo file using the `/todo-processing` skill
+2. For each issue, create a local todo file using the `/todo-processing` skill format. Include YAML frontmatter with `title` (from the issue title) and `status: ready` (since imported issues already have content)
 3. Use GitHub labels to determine the appropriate category (e.g., label "data" → category `data/`)
 4. After creating the todo file, close the GitHub issue with a comment referencing the created filename
+
+## Example
+
+An imported issue titled "Fix soft 404 errors" with label "data" becomes `docs/agent-todos/data/0042_fix-soft-404-errors.md`:
+
+```markdown
+---
+title: Fix soft 404 errors
+status: ready
+---
+
+# Fix soft 404 errors
+
+## Problem / Context
+
+(content from the GitHub issue body)
+
+## Tasks
+
+- [ ] ...
+```
 
 ## Notes
 

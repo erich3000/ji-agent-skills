@@ -47,6 +47,11 @@ When marking a task as done, also rename supporting files with the `DONE_` prefi
 Each todo file should contain:
 
 ```markdown
+---
+title: Task Title
+status: ready
+---
+
 # Task Title
 
 ## Problem / Context
@@ -66,6 +71,37 @@ Description of the problem or context for the task.
 Description of what was done, decisions made, etc.
 ```
 
+## Frontmatter Fields
+
+Every todo file starts with YAML frontmatter (`---` delimiters) containing:
+
+### `title`
+
+A human-readable title derived from the filename:
+
+1. Strip `DONE_` prefix if present
+2. Strip the numeric prefix (e.g. `0001_`)
+3. Replace hyphens and underscores with spaces
+4. Capitalize the first letter
+
+Example: `DONE_0042_fix-soft-404-errors.md` → `Fix soft 404 errors`
+
+### `status`
+
+Tracks the lifecycle of a todo. Values and transitions:
+
+| Status     | Meaning                        | Transitions to     |
+|------------|--------------------------------|--------------------|
+| `new`      | Created but not yet fleshed out | `ready`           |
+| `ready`    | Has content, ready to work on  | `doing`           |
+| `doing`    | Currently being worked on      | `done`, `ready`   |
+| `done`     | Completed                      | `archived`        |
+| `archived` | Archived (reserved)            | —                  |
+
+- A file with the `DONE_` prefix should always have `status: done`.
+- When a file has meaningful content (problem description, tasks), use `ready`.
+- A freshly created empty file uses `new`.
+
 ## Workflow
 
 ### 1. Reading a Todo
@@ -73,8 +109,9 @@ Description of what was done, decisions made, etc.
 When assigned a task:
 
 1. Read the todo file to understand the task
-2. Note any prerequisites or context
-3. Check for existing progress entries
+2. Update the frontmatter status from `ready` → `doing`
+3. Note any prerequisites or context
+4. Check for existing progress entries
 
 ### 2. Working on a Task
 
@@ -109,9 +146,10 @@ Add progress entries with this format:
 
 When task is complete:
 
-1. Add a final progress entry documenting completion
-2. If the file has checkboxes, mark them all as `[x]`
-3. Rename the file with `DONE_` prefix
+1. Update the frontmatter status to `done`
+2. Add a final progress entry documenting completion
+3. If the file has checkboxes, mark them all as `[x]`
+4. Rename the file with `DONE_` prefix
 
 ## Best Practices
 
@@ -134,4 +172,10 @@ To list all completed tasks:
 
 ```bash
 find docs/agent-todos -name "DONE_*.md" -type f
+```
+
+To find tasks ready to be picked up (by frontmatter status):
+
+```bash
+grep -rl "^status: ready" docs/agent-todos/
 ```

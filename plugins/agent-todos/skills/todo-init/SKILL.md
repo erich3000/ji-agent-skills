@@ -38,12 +38,14 @@ This folder contains task files for AI agents working on this project.
 
 - Each subdirectory represents a category of tasks
 - Task files use the naming convention: `[NNNN]_[description].md`
+- Each todo file has YAML frontmatter with `title` and `status` fields
 - Completed tasks are prefixed with `DONE_`
 
 ## Related Skills
 
 - `/todo-importing` - Import GitHub issues as todo files
 - `/todo-processing` - Work with and update todo files
+- `/todo-migration` - Migrate existing todos (rename prefixes, add frontmatter)
 
 See the skill documentation for details on file format and workflow.
 ```
@@ -53,3 +55,4 @@ See the skill documentation for details on file format and workflow.
 - This skill only creates the folder structure
 - Use `/todo-importing` to populate with tasks from GitHub issues
 - Use `/todo-processing` to work with existing todo files
+- Use `/todo-migration` to upgrade existing todo files with frontmatter
