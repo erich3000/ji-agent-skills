@@ -1,13 +1,15 @@
 {
-  "SessionStart": [
-    {
-      "hooks": [
-        {
-          "type": "command",
-          "command": "echo 'Installed skill-teaching. Restart Claude Code to load new plugins.'",
-          "timeout": 5
-        }
-      ]
-    }
-  ]
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Installed skill-teaching. Restart Claude Code to load new plugins.'",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
 }
