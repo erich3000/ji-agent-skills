@@ -16,7 +16,7 @@
     },
     {
       "name": "skill-teaching",
-      "version": "0.0.2",
+      "version": "0.0.3",
       "source": "./plugins/skill-teaching",
       "description": "Share Claude Code skills with other AI agents"
     }

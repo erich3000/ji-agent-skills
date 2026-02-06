@@ -15,7 +15,7 @@ Push Claude Code skills to other AI agents in this project.
 Run the sync script from your project root with a target agent:
 
 ```bash
-bash <base_directory>/scripts/sync-skills.sh <target>
+bash <base_directory>/scripts/sync-skills.sh <target> <project_root>
 ```
 
 Where `<base_directory>` is the path shown in "Base directory for this skill:" at the top of the skill invocation.

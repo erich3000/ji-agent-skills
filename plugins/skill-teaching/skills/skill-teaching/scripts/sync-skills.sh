@@ -2,12 +2,10 @@
 set -euo pipefail
 
 # Sync Claude Code skills to other AI agents
-# Usage: sync-skills.sh <target>
+# Usage: sync-skills.sh <target> [project-root]
 # Targets: codex
-#
-# NOTE: Run this script from your project root directory.
 
-PROJECT_ROOT="$PWD"
+PROJECT_ROOT="${2:-$PWD}"
 SETTINGS_FILE="$PROJECT_ROOT/.claude/settings.json"
 SKILLS_DIR="$PROJECT_ROOT/.claude/skills"
 TEMP_FILE="/tmp/synced_skills_$$"
