@@ -1,5 +1,7 @@
 {
   "enabledPlugins": {
-    "todo-skills@ji-agent-skills": true
+    "todo-skills@ji-agent-skills": true,
+    "skill-teaching@ji-agent-skills": true,
+    "plugin-dev@claude-plugins-official": true
   }
 }
