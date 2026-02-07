@@ -1,5 +1,5 @@
 ---
-title: Error when installing
+title: Error when installing Plugin
 status: done
 ---
 
