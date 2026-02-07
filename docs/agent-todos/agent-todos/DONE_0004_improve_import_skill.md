@@ -3,7 +3,7 @@ title: "improve import skill"
 status: done
 ---
 
-# improve import skill
+## Tasks
 
 - [x] Use the /skill-development skill to perform this task
 - [x] rename the `/todo-importing` skill into `/todo-gh-issue-import`
@@ -29,5 +29,5 @@ status: done
 **Decisions made:**
 
 - Used the Agent Skills `compatibility` field (not a custom field) to declare the `gh` dependency, since the spec supports this
-- Did not modify historical DONE_ files — those are immutable records
+- Did not modify historical DONE\_ files — those are immutable records
 - Added `Edit` and `AskUserQuestion` to allowed-tools since the skill now needs to edit files created by /todo-creation and may ask the user for category selection

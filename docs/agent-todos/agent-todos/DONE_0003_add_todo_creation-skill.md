@@ -3,8 +3,6 @@ title: Add Skill `/todo-creation`
 status: done
 ---
 
-# Add Skill `/todo-creation`
-
 ## Task
 
 - [x] Use the /skill-development skill to perform this task

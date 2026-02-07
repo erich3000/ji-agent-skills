@@ -5,12 +5,12 @@
   },
   "metadata": {
     "description": "A collection of Claude Code plugins for AI agent workflows and skill sharing",
-    "version": "0.0.1"
+    "version": "0.0.2"
   },
   "plugins": [
     {
       "name": "agent-todos",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "source": "./plugins/agent-todos",
       "description": "Agent todo file management skills"
     },

@@ -1,9 +1,7 @@
 ---
-title: Change todo prefix
+title: Change Todo Prefix To 4 Digits
 status: done
 ---
-
-# Change Todo Prefix To 4 Digits
 
 ## Problem / Context
 

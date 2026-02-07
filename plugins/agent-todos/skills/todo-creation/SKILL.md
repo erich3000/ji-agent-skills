@@ -57,8 +57,9 @@ title: Fix soft 404 errors
 status: new
 ---
 
-# Fix soft 404 errors
+## Context
 
+## Tasks
 ```
 
 After the user provides content, the recommended structure is:

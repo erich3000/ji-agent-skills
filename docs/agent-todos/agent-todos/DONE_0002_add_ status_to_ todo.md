@@ -3,8 +3,6 @@ title: Add status to todo
 status: done
 ---
 
-# Add Status to Todo Files
-
 ## Task
 
 - [x] Add YAML frontmatter to todo files with two fields: `title` and `status`

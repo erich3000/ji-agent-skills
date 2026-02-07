@@ -69,7 +69,9 @@ title: '${YAML_TITLE}'
 status: new
 ---
 
-# $TITLE
+## Context
+
+## Tasks
 
 EOF
 

@@ -3,8 +3,6 @@ title: Describe plugins in readme
 status: done
 ---
 
-# Describe Plugins In The README
-
 ## Problem / Context
 
 Enhance `README.md` by describing both plugins using the mixed-language notes below. Translate the notes to English first, then write a short description for each plugin (max 120 words). No marketing language; formal information only.
