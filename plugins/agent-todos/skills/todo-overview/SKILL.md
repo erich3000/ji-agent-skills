@@ -7,11 +7,14 @@ invocation: user
 
 # todo-overview
 
-Create or update `docs/agent-todos/TODO_OVERVIEW.md` with a markdown table of all todo files.
+Create or update `docs/agent-todos/TODO_OVERVIEW.md` with a Mermaid Kanban followed by a markdown table of all todo files.
 
 ## Output Format
 
-Write a table with exactly these columns:
+Write sections in this order:
+
+1. `## Todo Kanban` with lanes `new`, `ready`, `doing`, and `done`
+2. `## Todo List` table with exactly these columns:
 
 - `category`
 - `todo`
@@ -34,7 +37,7 @@ Where:
 - `<project_root>` is the current project root.
 
 3. Confirm the generated file path from script output.
-4. Optionally read `docs/agent-todos/TODO_OVERVIEW.md` to verify rows and status values.
+4. Optionally read `docs/agent-todos/TODO_OVERVIEW.md` to verify Kanban + table output and status values.
 
 ## Notes
 

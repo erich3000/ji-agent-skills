@@ -90,26 +90,18 @@ append_lane() {
   echo "# Todo Overview"
   echo
   echo "Generated on $(date '+%F %H:%M:%S %Z')."
-  echo
-  echo "| category | todo | status |"
-  echo "| --- | --- | --- |"
 
   has_rows=0
-
-  while IFS=$'\t' read -r category title status rel_path ticket; do
+  while IFS=$'\t' read -r _ _ _ _ _; do
     has_rows=1
-    esc_title="${title//|/\\|}"
-    esc_category="${category//|/\\|}"
-    esc_status="${status//|/\\|}"
-
-    echo "| $esc_category | [$esc_title]($rel_path) | $esc_status |"
+    break
   done < "$rowsfile"
 
+  echo
+  echo "## Todo Kanban"
+  echo
+
   if [ "$has_rows" -eq 0 ]; then
-    echo "| - | - | - |"
-    echo
-    echo "## Todo Kanban"
-    echo
     echo "_No todos available for visualization._"
   else
     : > "$kanbanfile"
@@ -122,10 +114,25 @@ append_lane() {
     append_lane "done" "Done"
     echo '```' >> "$kanbanfile"
 
-    echo
-    echo "## Todo Kanban"
-    echo
     cat "$kanbanfile"
+  fi
+
+  echo
+  echo "## Todo List"
+  echo
+  echo "| category | todo | status |"
+  echo "| --- | --- | --- |"
+
+  if [ "$has_rows" -eq 0 ]; then
+    echo "| - | - | - |"
+  else
+    while IFS=$'\t' read -r category title status rel_path ticket; do
+      esc_title="${title//|/\\|}"
+      esc_category="${category//|/\\|}"
+      esc_status="${status//|/\\|}"
+
+      echo "| $esc_category | [$esc_title]($rel_path) | $esc_status |"
+    done < "$rowsfile"
   fi
 } > "$tmpfile"
 
