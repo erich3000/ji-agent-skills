@@ -112,6 +112,7 @@ When assigned a task:
 2. Update the frontmatter status from `ready` → `doing`
 3. Note any prerequisites or context
 4. Check for existing progress entries
+5. Run `/todo-overview` after status changes to refresh `docs/agent-todos/TODO_OVERVIEW.md`
 
 ### 2. Working on a Task
 
@@ -150,6 +151,7 @@ When task is complete:
 2. Add a final progress entry documenting completion
 3. If the file has checkboxes, mark them all as `[x]`
 4. Rename the file with `DONE_` prefix
+5. Run `/todo-overview` after marking done to refresh `docs/agent-todos/TODO_OVERVIEW.md`
 
 ## Best Practices
 
@@ -159,6 +161,7 @@ When task is complete:
 4. **Link to related files** - Reference files that were created/modified
 5. **Ask before assuming** - Add questions to the file and ask the user
 6. **Update internal docs** - After completing a task, update relevant documentation
+7. **Keep overview current** - Trigger `/todo-overview` whenever todo status changes
 
 ## Finding Tasks
 

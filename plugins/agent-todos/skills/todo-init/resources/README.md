@@ -27,6 +27,7 @@ timeline
 - `/todo-init` - Initialize the folder structure
 - `/todo-creation` - Create a new todo file with sequential numbering
 - `/todo-gh-issue-import` - Import GitHub issues as todo files
+- `/todo-overview` - Create and update the todo overview table
 - `/todo-processing` - Work with and update todo files
 - `/todo-migration` - Migrate existing todos (rename prefixes, add frontmatter)
 

@@ -47,6 +47,10 @@ If the script exits with a non-zero status, report the error output to the user 
 
 After the file is created, inform the user of the file path and ask them to add a description or task details. Once content is added, update the frontmatter status from `new` to `ready`.
 
+### 4. Update Overview
+
+After creating the todo (and again after switching `status` to `ready`), run `/todo-overview` to refresh `docs/agent-todos/TODO_OVERVIEW.md`.
+
 ## File Format
 
 The created file follows this structure:
@@ -88,3 +92,4 @@ status: ready
 - If the category directory does not exist, it is created automatically.
 - The filename is truncated to 60 characters (before the `.md` extension) to keep paths manageable.
 - After the user adds content, update the status to `ready` so the todo is recognized as actionable under the conventions defined by `todo-processing`.
+- Keep `docs/agent-todos/TODO_OVERVIEW.md` in sync by invoking `/todo-overview` after creation and status updates.

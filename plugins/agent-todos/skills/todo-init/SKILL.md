@@ -45,6 +45,7 @@ This folder contains task files for AI agents working on this project.
 
 - `/todo-creation` - Create a new todo file with sequential numbering
 - `/todo-gh-issue-import` - Import GitHub issues as todo files
+- `/todo-overview` - Create and update the todo overview table
 - `/todo-processing` - Work with and update todo files
 - `/todo-migration` - Migrate existing todos (rename prefixes, add frontmatter)
 
@@ -56,5 +57,6 @@ See the skill documentation for details on file format and workflow.
 - This skill only creates the folder structure
 - Use `/todo-creation` to create individual todo files
 - Use `/todo-gh-issue-import` to populate with tasks from GitHub issues
+- Use `/todo-overview` to generate or refresh `docs/agent-todos/TODO_OVERVIEW.md`
 - Use `/todo-processing` to work with existing todo files
 - Use `/todo-migration` to upgrade existing todo files with frontmatter
