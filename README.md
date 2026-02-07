@@ -15,6 +15,20 @@ See the [Plugins Reference](https://code.claude.com/docs/en/plugins-reference) f
 
 `agent-todos` organizes AI agent work into structured todo files under `docs/agent-todos/`. It formalizes a workflow where detailed prompts and context live in Markdown files instead of ad hoc CLI messages, making tasks easier to review, share, and track across a team. The skills define folder structure, naming conventions, progress logging, and completion rules so agent work stays consistent and discoverable.
 
+#### Status Lifecycle
+
+Todo files include YAML frontmatter with a `status` field. Typical flow:
+
+```mermaid
+timeline
+  title Todo Status Lifecycle
+  new : Created but not yet fleshed out
+  ready : Has content and can be picked up
+  doing : Active work in progress
+  done : Completed (also rename file with DONE_ prefix)
+  archived : Reserved for future archiving
+```
+
 ### Skill Teaching
 
 `skill-teaching` uses the Agent Skills open standard (originally developed by Anthropic and published at [agentskills.io](https://agentskills.io/)) and copies project-scoped skills to other agents' expected directories (for example `.codex/skills`). It only operates on your project-scoped skills in `.claude/skills` and plugin skills you explicitly share via `.claude/settings.json`.
