@@ -41,6 +41,26 @@ This folder contains task files for AI agents working on this project.
 - Each todo file has YAML frontmatter with `title` and `status` fields
 - Completed tasks are prefixed with `DONE_`
 
+## Status Lifecycle
+
+Todo files include YAML frontmatter with a `status` field. Typical flow:
+
+```mermaid
+timeline
+  title Todo Status Lifecycle
+  new : Created but not yet fleshed out
+  ready : Has content and can be picked up
+  doing : Active work in progress
+  done : Completed (also rename file with DONE_ prefix)
+  archived : Reserved for future archiving
+```
+
+## Overview
+
+For an up-to-date overview of all todos, see:
+
+- [`/docs/agent-todos/TODO_OVERVIEW.md`](/docs/agent-todos/TODO_OVERVIEW.md)
+
 ## Related Skills
 
 - `/todo-creation` - Create a new todo file with sequential numbering

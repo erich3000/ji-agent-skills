@@ -22,6 +22,12 @@ timeline
   archived : Reserved for future archiving
 ```
 
+## Overview
+
+For an up-to-date overview of all todos, see:
+
+- [`/docs/agent-todos/TODO_OVERVIEW.md`](/docs/agent-todos/TODO_OVERVIEW.md)
+
 ## Related Skills
 
 - `/todo-init` - Initialize the folder structure
