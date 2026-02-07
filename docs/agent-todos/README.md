@@ -35,6 +35,5 @@ For an up-to-date overview of all todos, see:
 - `/todo-gh-issue-import` - Import GitHub issues as todo files
 - `/todo-overview` - Create and update the todo overview table
 - `/todo-processing` - Work with and update todo files
-- `/todo-migration` - Migrate existing todos (rename prefixes, add frontmatter)
 
 See the skill documentation for details on file format and workflow.

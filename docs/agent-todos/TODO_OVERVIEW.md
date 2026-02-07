@@ -1,6 +1,6 @@
 # Todo Overview
 
-Generated on 2026-02-07 20:43:58 CET.
+Generated on 2026-02-07 22:59:25 CET.
 
 ## Todo Kanban
 
@@ -24,6 +24,7 @@ kanban
     agent-todos-0007[add link to overview]@{ ticket: agent-todos-0007 }
     agent-todos-0008[adjust links in overview]@{ ticket: agent-todos-0008 }
     agent-todos-0009[improve overview]@{ ticket: agent-todos-0009 }
+    agent-todos-0010[remove migration skill]@{ ticket: agent-todos-0010 }
     common-0001[Describe plugins in readme]@{ ticket: common-0001 }
     skill-teaching-0000[Error when excecuting script]@{ ticket: skill-teaching-0000 }
 ```
@@ -42,5 +43,6 @@ kanban
 | agent-todos | [add link to overview](/docs/agent-todos/agent-todos/DONE_0007_add_link_to_overview.md) | done |
 | agent-todos | [adjust links in overview](/docs/agent-todos/agent-todos/DONE_0008_adjust_links_in_overview.md) | done |
 | agent-todos | [improve overview](/docs/agent-todos/agent-todos/DONE_0009_improve_overview.md) | done |
+| agent-todos | [remove migration skill](/docs/agent-todos/agent-todos/DONE_0010_remove_migration_skill.md) | done |
 | common | [Describe plugins in readme](/docs/agent-todos/common/DONE_0001-describe-plugins-in-readme.md) | done |
 | skill-teaching | [Error when excecuting script](/docs/agent-todos/skill-teaching/DONE_0000_error_when_excecuting_script.md) | done |

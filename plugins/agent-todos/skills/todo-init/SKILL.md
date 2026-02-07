@@ -67,7 +67,6 @@ For an up-to-date overview of all todos, see:
 - `/todo-gh-issue-import` - Import GitHub issues as todo files
 - `/todo-overview` - Create and update the todo overview table
 - `/todo-processing` - Work with and update todo files
-- `/todo-migration` - Migrate existing todos (rename prefixes, add frontmatter)
 
 See the skill documentation for details on file format and workflow.
 ```
@@ -79,4 +78,3 @@ See the skill documentation for details on file format and workflow.
 - Use `/todo-gh-issue-import` to populate with tasks from GitHub issues
 - Use `/todo-overview` to generate or refresh `docs/agent-todos/TODO_OVERVIEW.md`
 - Use `/todo-processing` to work with existing todo files
-- Use `/todo-migration` to upgrade existing todo files with frontmatter
