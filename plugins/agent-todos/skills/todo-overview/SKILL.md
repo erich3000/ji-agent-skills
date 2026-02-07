@@ -42,3 +42,4 @@ Where:
 - Exclude `docs/agent-todos/README.md` and `docs/agent-todos/TODO_OVERVIEW.md` from the row scan.
 - Preserve status values from YAML frontmatter when present.
 - Infer `status: done` for `DONE_` files that lack frontmatter.
+- Generate todo links with a leading slash (`/docs/...`) so links resolve correctly on GitHub.

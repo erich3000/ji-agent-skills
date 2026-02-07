@@ -33,7 +33,7 @@ extract_frontmatter_value() {
 }
 
 while IFS= read -r file; do
-  rel_path="${file#"$PROJECT_ROOT"/}"
+  rel_path="/${file#"$PROJECT_ROOT"/}"
   category="$(basename "$(dirname "$file")")"
   filename="$(basename "$file")"
 
