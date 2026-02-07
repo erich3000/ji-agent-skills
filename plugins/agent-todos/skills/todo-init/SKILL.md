@@ -43,6 +43,7 @@ This folder contains task files for AI agents working on this project.
 
 ## Related Skills
 
+- `/todo-creation` - Create a new todo file with sequential numbering
 - `/todo-importing` - Import GitHub issues as todo files
 - `/todo-processing` - Work with and update todo files
 - `/todo-migration` - Migrate existing todos (rename prefixes, add frontmatter)
@@ -53,6 +54,7 @@ See the skill documentation for details on file format and workflow.
 ## Notes
 
 - This skill only creates the folder structure
+- Use `/todo-creation` to create individual todo files
 - Use `/todo-importing` to populate with tasks from GitHub issues
 - Use `/todo-processing` to work with existing todo files
 - Use `/todo-migration` to upgrade existing todo files with frontmatter
