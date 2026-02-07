@@ -1,3 +1,8 @@
+---
+title: Describe plugins in readme
+status: done
+---
+
 # Describe Plugins In The README
 
 ## Problem / Context

@@ -1,3 +1,8 @@
+---
+title: Error when installing
+status: done
+---
+
 ## Error when installing agent-todos plugin
 
 A user got an error when installing the `agent-todos` plugin. Can you find out why?

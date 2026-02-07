@@ -1,3 +1,8 @@
+---
+title: Error when excecuting script
+status: done
+---
+
 ## Bug report
 
 A user reported an error when executing /skill-teaching.
