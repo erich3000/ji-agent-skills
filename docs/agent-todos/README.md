@@ -8,6 +8,20 @@ This folder contains task files for AI agents working on this project.
 - Task files use the naming convention: `[NNNN]_[description].md`
 - Completed tasks are prefixed with `DONE_`
 
+## Status Lifecycle
+
+Todo files include YAML frontmatter with a `status` field. Typical flow:
+
+```mermaid
+timeline
+  title Todo Status Lifecycle
+  new : Created but not yet fleshed out
+  ready : Has content and can be picked up
+  doing : Active work in progress
+  done : Completed (also rename file with DONE_ prefix)
+  archived : Reserved for future archiving
+```
+
 ## Related Skills
 
 - `/todo-init` - Initialize the folder structure
