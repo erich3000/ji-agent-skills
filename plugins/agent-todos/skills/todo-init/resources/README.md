@@ -13,7 +13,7 @@ This folder contains task files for AI agents working on this project.
 
 - `/todo-init` - Initialize the folder structure
 - `/todo-creation` - Create a new todo file with sequential numbering
-- `/todo-importing` - Import GitHub issues as todo files
+- `/todo-gh-issue-import` - Import GitHub issues as todo files
 - `/todo-processing` - Work with and update todo files
 - `/todo-migration` - Migrate existing todos (rename prefixes, add frontmatter)
 

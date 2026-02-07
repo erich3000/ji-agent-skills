@@ -21,7 +21,7 @@ The project follows Claude Code's plugin system conventions:
 **agent-todos** — Organizes AI agent work into structured todo files under `docs/agent-todos/`. Formalizes a workflow where detailed prompts and context live in Markdown files instead of ad hoc CLI messages, making tasks easier to review, share, and track across a team:
 - `todo-init` — Initializes the todo folder structure with category subdirectories
 - `todo-creation` — Creates a new todo file with sequential 4-digit numbering and YAML frontmatter via a bash script
-- `todo-importing` — Imports GitHub issues into local todo files via `gh issue list`, then closes them
+- `todo-gh-issue-import` — Imports GitHub issues into local todo files via `gh issue list`, then closes them
 - `todo-processing` — Reference skill (not user-invocable) defining todo file conventions: naming (`[NNNN]_description.md`), completion (`DONE_` prefix), and progress tracking format
 - `todo-migration` — Migrates existing projects to 4-digit prefixes and adds YAML frontmatter
 
@@ -40,6 +40,6 @@ claude plugin install skill-teaching@ji-agent-skills --scope project
 ## Key Conventions
 
 - Skills use YAML frontmatter in SKILL.md to declare metadata: `name`, `description`, `allowed-tools`, `user-invocable`, `argument-hint`
-- Inter-skill invocation: `todo-importing` calls `todo-processing` via the Skill tool
+- Inter-skill invocation: `todo-gh-issue-import` calls `todo-creation` and `todo-processing` via the Skill tool
 - `sync-skills.sh` reads `.claude/settings.json` for enabled plugins and accesses the plugin cache at `~/.claude/plugins/cache/`
 - No build step, no tests, no CI — changes are purely configuration and documentation
