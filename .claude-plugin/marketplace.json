@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "agent-todos",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "source": "./plugins/agent-todos",
       "description": "Agent todo file management skills"
     },
@@ -19,6 +19,12 @@
       "version": "0.0.3",
       "source": "./plugins/skill-teaching",
       "description": "Share Claude Code skills with other AI agents"
+    },
+    {
+      "name": "hugo-blog",
+      "version": "0.1.0",
+      "source": "./plugins/hugo-blog",
+      "description": "Hugo blog post management skills"
     }
   ]
 }

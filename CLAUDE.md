@@ -29,12 +29,17 @@ The project follows Claude Code's plugin system conventions:
 - Only operates on project-scoped skills in `.claude/skills` and plugin skills explicitly shared via `.claude/settings.json`
 - Tracks synced skills via `.claude-synced-skills.json` manifest to avoid overwriting the target agent's own skills
 
+**hugo-blog** — Hugo blog post management skills for content creation and quality assurance:
+- `hugo-new` — Creates new Hugo content files using project archetypes, with archetype discovery, path convention detection, and `hugo new` execution
+- `markdown-proofreading` — Proofreads markdown files for typos, grammar, formatting consistency, and clarity (not user-invocable, activates contextually)
+
 ## Installation
 
 ```bash
 claude plugin marketplace add https://github.com/erich3000/ji-agent-skills
 claude plugin install agent-todos@ji-agent-skills --scope project
 claude plugin install skill-teaching@ji-agent-skills --scope project
+claude plugin install hugo-blog@ji-agent-skills --scope project
 ```
 
 ## Key Conventions
