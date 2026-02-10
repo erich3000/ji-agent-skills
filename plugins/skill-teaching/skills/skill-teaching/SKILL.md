@@ -1,42 +1,51 @@
 ---
 name: skill-teaching
-description: Teach Claude Code skills to other AI agents
-allowed-tools: Bash
-user-invocable: true
-argument-hint: <target>
+description: This skill should be used when the user asks to "sync skills to agent", "share skills with agent", "push skills to target", "teach agent skills", or requests synchronizing Claude Code skills with other AI agents in the project.
 ---
 
-# skill-teaching
+# Skill Teaching
 
-Push Claude Code skills to other AI agents in this project.
+Synchronize Claude Code skills to other AI agents in the project. This enables knowledge and workflow sharing across agents while preserving each agent's own skills.
 
-## Usage
+## Workflow
 
-Run the sync script from your project root with a target agent:
+### Step 1: Identify Target Agent
+
+Determine the target agent where skills should be synced:
+
+- `codex` - OpenAI Codex agent (destination: `.codex/skills`)
+
+### Step 2: Execute Sync Script
+
+Run the sync script from the project root with the target agent identifier:
 
 ```bash
 bash <base_directory>/scripts/sync-skills.sh <target> <project_root>
 ```
 
-Where `<base_directory>` is the path shown in "Base directory for this skill:" at the top of the skill invocation.
+Where `<base_directory>` is the path shown in "Base directory for this skill:" output.
 
-## Available Targets
+### Step 3: Verify Sync Results
 
-| Target | Destination     | Description        |
-| ------ | --------------- | ------------------ |
-| codex  | `.codex/skills` | OpenAI Codex agent |
-
-## What It Does
+The script performs these operations:
 
 1. Reads previously synced skills from manifest (`.claude-synced-skills.json`)
-2. Deletes only those skills (preserves target agent's own skills)
+2. Deletes only previously synced skills (preserves target agent's own skills)
 3. Copies local skills from `.claude/skills/` (except `skill-teaching` itself)
 4. Copies plugin skills from enabled plugins in `.claude/settings.json`
 5. Writes updated manifest with list of synced skills
 
-## Example
+## Example Invocation
 
 ```bash
-# Sync all skills to Codex
+# Sync all skills to Codex agent
 bash <base_directory>/scripts/sync-skills.sh codex
 ```
+
+## Additional Resources
+
+### Scripts
+
+The skill includes a utility script for skill synchronization:
+
+- **`scripts/sync-skills.sh`** - Executes the sync operation with manifest management
