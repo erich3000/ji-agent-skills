@@ -16,6 +16,37 @@ See the [Plugins Reference](https://code.claude.com/docs/en/plugins-reference) f
 
 `agent-todos` organizes AI agent work into structured todo files under `docs/agent-todos/`. It formalizes a workflow where detailed prompts and context live in Markdown files instead of ad hoc CLI messages, making tasks easier to review, share, and track across a team. The skills define folder structure, naming conventions, progress logging, and completion rules so agent work stays consistent and discoverable.
 
+#### Skills
+
+| Skill | Description |
+| ----- | ----------- |
+| `/todo-init` | Initializes the `docs/agent-todos/` folder structure with category subdirectories |
+| `/todo-creation` | Creates a new todo file with sequential 4-digit numbering and YAML frontmatter |
+| `/todo-processing` | Reference skill (not user-invocable) defining todo file conventions, naming, and progress tracking |
+| `/todo-overview` | Generates or updates `TODO_OVERVIEW.md` with a Mermaid Kanban and a markdown table of all todos |
+| `/todo-gh-issue-import` | Imports open GitHub issues into local todo files via `gh issue list` |
+| `/todo-obsidian-icloud-import` | Imports todos from a local Obsidian vault synced via iCloud Drive (macOS only) |
+
+#### Obsidian Import Setup
+
+The `/todo-obsidian-icloud-import` skill reads from an Obsidian vault synced via iCloud Drive. To use it, create an `agent-todos/` directory inside your vault with category subdirectories matching the project structure:
+
+```text
+<YourVault>/
+└── agent-todos/
+    └── <project-or-category>/
+        ├── 0001_some_task.md
+        └── 0002_another_task.md
+```
+
+On macOS, Obsidian vaults synced through iCloud are stored at:
+
+```text
+~/Library/Mobile Documents/iCloud~md~obsidian/Documents/<vault-name>/
+```
+
+Todo files in the vault follow the same naming convention (`[NNNN]_description.md`) as local todos. The skill lists open files (excluding `DONE_` prefixed ones), lets you choose a destination category, and creates local todos via `/todo-creation`.
+
 #### Status Lifecycle
 
 Todo files include YAML frontmatter with a `status` field. Typical flow:

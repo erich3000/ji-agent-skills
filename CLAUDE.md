@@ -23,6 +23,8 @@ The project follows Claude Code's plugin system conventions:
 - `todo-creation` — Creates a new todo file with sequential 4-digit numbering and YAML frontmatter via a bash script
 - `todo-gh-issue-import` — Imports GitHub issues into local todo files via `gh issue list`, then closes them
 - `todo-processing` — Reference skill (not user-invocable) defining todo file conventions: naming (`[NNNN]_description.md`), completion (`DONE_` prefix), and progress tracking format
+- `todo-overview` — Generates or updates `TODO_OVERVIEW.md` with a Mermaid Kanban and markdown table
+- `todo-obsidian-icloud-import` — Imports todos from a local Obsidian vault synced via iCloud Drive (macOS only)
 - `todo-migration` — Migrates existing projects to 4-digit prefixes and adds YAML frontmatter
 
 **skill-teaching** — Uses the Agent Skills open standard (from [agentskills.io](https://agentskills.io/)) to copy project-scoped skills to other agents' expected directories (e.g. `.codex/skills`):
