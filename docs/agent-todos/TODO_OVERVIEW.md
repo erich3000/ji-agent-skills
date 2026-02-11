@@ -1,6 +1,6 @@
 # Todo Overview
 
-Generated on 2026-02-11 07:13:20 CET.
+Generated on 2026-02-11 19:56:58 CET.
 
 ## Todo Kanban
 
@@ -32,6 +32,7 @@ kanban
     plugin-agent-todos-0010[remove migration skill]@{ ticket: plugin-agent-todos-0010 }
     plugin-agent-todos-0011[Agent Todos Obsidian Importer]@{ ticket: plugin-agent-todos-0011 }
     plugin-agent-todos-0012[Obselte first level headind still created]@{ ticket: plugin-agent-todos-0012 }
+    plugin-agent-todos-0013[Check wether the deletion on Obsidian works]@{ ticket: plugin-agent-todos-0013 }
     plugin-skill-teaching-0000[Error when excecuting script]@{ ticket: plugin-skill-teaching-0000 }
 ```
 
@@ -57,5 +58,6 @@ kanban
 | plugin-agent-todos | [remove migration skill](/docs/agent-todos/plugin-agent-todos/DONE_0010_remove_migration_skill.md) | done |
 | plugin-agent-todos | [Agent Todos Obsidian Importer](/docs/agent-todos/plugin-agent-todos/DONE_0011_agent_todos_obsidian_importer.md) | done |
 | plugin-agent-todos | [Obselte first level headind still created](/docs/agent-todos/plugin-agent-todos/DONE_0012_obselte_first_level_headind_still_created.md) | done |
+| plugin-agent-todos | [Check wether the deletion on Obsidian works](/docs/agent-todos/plugin-agent-todos/DONE_0013_check_wether_the_deletion_on_obsidian_works.md) | done |
 | plugin-hugo-blog | [Hugo markdown linting skill](/docs/agent-todos/plugin-hugo-blog/0001_hugo_markdown_linting_skill.md) | ready |
 | plugin-skill-teaching | [Error when excecuting script](/docs/agent-todos/plugin-skill-teaching/DONE_0000_error_when_excecuting_script.md) | done |
