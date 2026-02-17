@@ -25,6 +25,12 @@
       "version": "0.1.0",
       "source": "./plugins/hugo-blog",
       "description": "Hugo blog post management skills"
+    },
+    {
+      "name": "obsidian",
+      "version": "0.1.0",
+      "source": "./plugins/obsidian",
+      "description": "Obsidian vault management skills"
     }
   ]
 }

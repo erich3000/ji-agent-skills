@@ -11,6 +11,7 @@ See the [Plugins Reference](https://code.claude.com/docs/en/plugins-reference) f
 | `agent-todos`    | Agent todo file management skills             |
 | `skill-teaching` | Share Claude Code skills with other AI agents |
 | `hugo-blog`      | Hugo blog post management skills              |
+| `obsidian`       | Obsidian vault management skills              |
 
 ### Agent Todos
 
@@ -69,6 +70,10 @@ timeline
 
 `hugo-blog` provides skills for Hugo blog post management. `hugo-new` discovers project archetypes and content path conventions, then creates new content files via `hugo new`. `markdown-proofreading` reviews markdown files for typos, grammar, formatting consistency, and clarity.
 
+### Obsidian
+
+`obsidian` provides skills for managing Obsidian vault content. `obsidian-kanban` creates and manages Obsidian Kanban plugin board files — covering board structure, columns, card syntax (wiki-links, tags, dates, metadata), archive sections, and settings blocks.
+
 ## Installation
 
 ### Add the Marketplace
@@ -89,4 +94,8 @@ claude plugin install skill-teaching@ji-agent-skills --scope project
 
 ```bash
 claude plugin install hugo-blog@ji-agent-skills --scope project
+```
+
+```bash
+claude plugin install obsidian@ji-agent-skills --scope project
 ```

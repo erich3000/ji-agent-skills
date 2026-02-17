@@ -68,6 +68,10 @@ The project follows Claude Code's plugin system conventions:
 - `hugo-new` — Creates new Hugo content files using project archetypes, with archetype discovery, path convention detection, and `hugo new` execution
 - `markdown-proofreading` — Proofreads markdown files for typos, grammar, formatting consistency, and clarity (not user-invocable, activates contextually)
 
+**obsidian** — Obsidian vault management skills:
+
+- `obsidian-kanban` — Creates and manages Obsidian Kanban plugin board files (.md files with kanban-plugin frontmatter), covering board structure, card syntax, columns, archive, and settings
+
 ## Installation
 
 ```bash
@@ -75,6 +79,7 @@ claude plugin marketplace add https://github.com/erich3000/ji-agent-skills
 claude plugin install agent-todos@ji-agent-skills --scope project
 claude plugin install skill-teaching@ji-agent-skills --scope project
 claude plugin install hugo-blog@ji-agent-skills --scope project
+claude plugin install obsidian@ji-agent-skills --scope project
 ```
 
 ## Key Conventions
