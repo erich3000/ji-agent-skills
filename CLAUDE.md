@@ -56,8 +56,6 @@ The project follows Claude Code's plugin system conventions:
 - `todo-processing` — Reference skill (not user-invocable) defining todo file conventions: naming (`[NNNN]_description.md`), completion (`DONE_` prefix), and progress tracking format
 - `todo-overview` — Generates or updates `TODO_OVERVIEW.md` with a Mermaid Kanban and markdown table
 - `todo-obsidian-icloud-import` — Imports todos from a local Obsidian vault synced via iCloud Drive (macOS only)
-- `todo-migration` — Migrates existing projects to 4-digit prefixes and adds YAML frontmatter
-
 **skill-teaching** — Uses the Agent Skills open standard (from [agentskills.io](https://agentskills.io/)) to copy project-scoped skills to other agents' expected directories (e.g. `.codex/skills`):
 
 - Only operates on project-scoped skills in `.claude/skills` and plugin skills explicitly shared via `.claude/settings.json`
@@ -81,6 +79,12 @@ claude plugin install skill-teaching@ji-agent-skills --scope project
 claude plugin install hugo-blog@ji-agent-skills --scope project
 claude plugin install obsidian@ji-agent-skills --scope project
 ```
+
+## Development Workflow
+
+- To add a new plugin: create `plugins/<name>/.claude-plugin/plugin.json` and add an entry to `.claude-plugin/marketplace.json`
+- To add a new skill: use the `plugin-dev:skill-development` skill, then review with `plugin-dev:skill-reviewer`
+- To test locally: install the plugin with `claude plugin install <name>@ji-agent-skills --scope project`
 
 ## Key Conventions
 

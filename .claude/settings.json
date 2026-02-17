@@ -3,6 +3,7 @@
     "plugin-dev@claude-plugins-official": true,
     "skill-teaching@ji-agent-skills": true,
     "agent-todos@ji-agent-skills": true,
-    "hugo-blog@ji-agent-skills": true
+    "hugo-blog@ji-agent-skills": true,
+    "claude-md-management@claude-plugins-official": true
   }
 }
