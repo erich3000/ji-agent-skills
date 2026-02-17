@@ -31,6 +31,12 @@
       "version": "0.1.0",
       "source": "./plugins/obsidian",
       "description": "Obsidian vault management skills"
+    },
+    {
+      "name": "trello2obsidian",
+      "version": "0.1.0",
+      "source": "./plugins/trello2obsidian",
+      "description": "Convert Trello JSON exports into Obsidian-compatible notes"
     }
   ]
 }

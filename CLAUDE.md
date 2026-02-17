@@ -70,6 +70,13 @@ The project follows Claude Code's plugin system conventions:
 
 - `obsidian-kanban` — Creates and manages Obsidian Kanban plugin board files (.md files with kanban-plugin frontmatter), covering board structure, card syntax, columns, archive, and settings
 
+**trello2obsidian** — Converts Trello JSON exports into Obsidian-compatible notes and Kanban boards:
+
+- `trello-import` — Converts Trello board JSON exports into Markdown notes organized by board, list, and card under `TRELLO_IMPORT/`
+- `trello-convert-obsidian-kanban` — Turns `TRELLO_IMPORT/` board directories into Obsidian Kanban plugin board files
+- `trello-media-download` — Downloads Trello-hosted images locally and rewrites Markdown links to local paths
+- `trello-set-thumbnail` — Adds a `thumbnail` frontmatter field from the first image in each card note
+
 ## Installation
 
 ```bash
@@ -78,6 +85,7 @@ claude plugin install agent-todos@ji-agent-skills --scope project
 claude plugin install skill-teaching@ji-agent-skills --scope project
 claude plugin install hugo-blog@ji-agent-skills --scope project
 claude plugin install obsidian@ji-agent-skills --scope project
+claude plugin install trello2obsidian@ji-agent-skills --scope project
 ```
 
 ## Development Workflow

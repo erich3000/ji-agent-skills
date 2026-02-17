@@ -1,0 +1,5 @@
+{
+  "name": "trello2obsidian",
+  "description": "Convert Trello JSON exports into Obsidian-compatible notes",
+  "version": "0.1.0"
+}
