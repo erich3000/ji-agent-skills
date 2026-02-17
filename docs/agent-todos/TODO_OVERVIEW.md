@@ -1,6 +1,6 @@
 # Todo Overview
 
-Generated on 2026-02-17 17:02:23 CET.
+Generated on 2026-02-17 17:43:38 CET.
 
 ## Todo Kanban
 
@@ -19,6 +19,7 @@ kanban
   done[Done]
     common-0001[Describe plugins in readme]@{ ticket: common-0001 }
     common-0002[describe obsidian import in readme]@{ ticket: common-0002 }
+    common-0003[Improve plugin docs]@{ ticket: common-0003 }
     plugin-agent-todos-0000[Change Todo Prefix To 4 Digits]@{ ticket: plugin-agent-todos-0000 }
     plugin-agent-todos-0001[Error when installing Plugin]@{ ticket: plugin-agent-todos-0001 }
     plugin-agent-todos-0002[Add status to todo]@{ ticket: plugin-agent-todos-0002 }
@@ -42,6 +43,7 @@ kanban
 | --- | --- | --- |
 | common | [Describe plugins in readme](/docs/agent-todos/common/DONE_0001-describe-plugins-in-readme.md) | done |
 | common | [describe obsidian import in readme](/docs/agent-todos/common/DONE_0002_describe_obsidian_import_in_readme.md) | done |
+| common | [Improve plugin docs](/docs/agent-todos/common/DONE_0003_improve_plugin_docs.md) | done |
 | ideas | [Image Manipulation Skill with SIPs](/docs/agent-todos/ideas/0001_image_manipulation_skill_with_sips.md) | ready |
 | ideas | [Dev Toys CLI Skill](/docs/agent-todos/ideas/0002_dev_toys_cli_skill.md) | ready |
 | ideas | [Skill to Search Skillsmp](/docs/agent-todos/ideas/0003_skill_to_search_skillsmp.md) | ready |
