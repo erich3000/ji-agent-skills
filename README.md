@@ -11,7 +11,7 @@ See the [Plugins Reference](https://code.claude.com/docs/en/plugins-reference) f
 | `agent-todos`     | Agent todo file management skills                          | [agent-todos.md](docs/plugins/agent-todos.md)         |
 | `skill-teaching`  | Share Claude Code skills with other AI agents              | [skill-teaching.md](docs/plugins/skill-teaching.md)   |
 | `hugo-blog`       | Hugo blog post management skills                           | [hugo-blog.md](docs/plugins/hugo-blog.md)             |
-| `obsidian`        | Obsidian vault management skills                           | [obsidian.md](docs/plugins/obsidian.md)               |
+| `obsidian`        | Obsidian vault, Kanban, and styling skills                 | [obsidian.md](docs/plugins/obsidian.md)               |
 | `trello2obsidian` | Convert Trello JSON exports into Obsidian-compatible notes | [trello2obsidian.md](docs/plugins/trello2obsidian.md) |
 
 Plugin-specific details, skill lists, and setup can be found under `docs/plugins/`.
