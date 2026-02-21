@@ -8,7 +8,7 @@ See the [Plugins Reference](https://code.claude.com/docs/en/plugins-reference) f
 
 | Plugin            | Description                                                | Docs                                                  |
 | ----------------- | ---------------------------------------------------------- | ----------------------------------------------------- |
-| `agent-todos`     | Agent todo file management skills                          | [agent-todos.md](docs/plugins/agent-todos.md)         |
+| `agent-todos`     | Agent todo management, moving, and overview skills         | [agent-todos.md](docs/plugins/agent-todos.md)         |
 | `skill-teaching`  | Share Claude Code skills with other AI agents              | [skill-teaching.md](docs/plugins/skill-teaching.md)   |
 | `hugo-blog`       | Hugo blog post management skills                           | [hugo-blog.md](docs/plugins/hugo-blog.md)             |
 | `obsidian`        | Obsidian vault, Kanban, and styling skills                 | [obsidian.md](docs/plugins/obsidian.md)               |

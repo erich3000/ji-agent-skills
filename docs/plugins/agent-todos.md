@@ -7,6 +7,7 @@
 - Standardizes todo file creation, naming, and frontmatter.
 - Guides agents through a status lifecycle (`new`, `ready`, `doing`, `done`, `archived`).
 - Generates project-level todo overviews and visual status boards.
+- Moves open todos between categories and renumbers open items without colliding with DONE items.
 - Supports importing todos from GitHub issues and Obsidian/iCloud vaults.
 
 ## Skills
@@ -17,6 +18,7 @@
 | `/todo-creation`               | Creates a new todo file with sequential 4-digit numbering and YAML frontmatter.     |
 | `/todo-processing`             | Reference skill defining todo file conventions, naming, and progress tracking.      |
 | `/todo-overview`               | Generates or updates `docs/agent-todos/TODO_OVERVIEW.md` with Kanban + table views. |
+| `/todo-moving`                 | Moves selected open todos between categories and renumbers open todos in both folders. |
 | `/todo-gh-issue-import`        | Imports open GitHub issues into local todo files using `gh issue list`.             |
 | `/todo-obsidian-icloud-import` | Imports todos from a local Obsidian vault synced via iCloud Drive (macOS).          |
 
