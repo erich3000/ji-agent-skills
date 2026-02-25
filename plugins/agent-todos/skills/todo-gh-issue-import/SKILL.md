@@ -103,8 +103,6 @@ title: Fix soft 404 errors
 status: ready
 ---
 
-# Fix soft 404 errors
-
 ## Problem / Context
 
 (content from the GitHub issue body)

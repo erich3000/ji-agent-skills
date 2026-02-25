@@ -1,6 +1,6 @@
 # Todo Overview
 
-Generated on 2026-02-17 17:43:38 CET.
+Generated on 2026-02-25 06:06:21 CET.
 
 ## Todo Kanban
 
@@ -13,6 +13,7 @@ kanban
     ideas-0001[Image Manipulation Skill with SIPs]@{ ticket: ideas-0001 }
     ideas-0002[Dev Toys CLI Skill]@{ ticket: ideas-0002 }
     ideas-0003[Skill to Search Skillsmp]@{ ticket: ideas-0003 }
+    plugin-agent-todos-0015[Obsidian as primary todo store]@{ ticket: plugin-agent-todos-0015 }
     plugin-hugo-blog-0001[Hugo markdown linting skill]@{ ticket: plugin-hugo-blog-0001 }
   doing[Doing]
 
@@ -34,6 +35,7 @@ kanban
     plugin-agent-todos-0011[Agent Todos Obsidian Importer]@{ ticket: plugin-agent-todos-0011 }
     plugin-agent-todos-0012[Obselte first level headind still created]@{ ticket: plugin-agent-todos-0012 }
     plugin-agent-todos-0013[Check wether the deletion on Obsidian works]@{ ticket: plugin-agent-todos-0013 }
+    plugin-agent-todos-0014[Todos have still h1 when they are created]@{ ticket: plugin-agent-todos-0014 }
     plugin-skill-teaching-0000[Error when excecuting script]@{ ticket: plugin-skill-teaching-0000 }
 ```
 
@@ -47,6 +49,7 @@ kanban
 | ideas | [Image Manipulation Skill with SIPs](/docs/agent-todos/ideas/0001_image_manipulation_skill_with_sips.md) | ready |
 | ideas | [Dev Toys CLI Skill](/docs/agent-todos/ideas/0002_dev_toys_cli_skill.md) | ready |
 | ideas | [Skill to Search Skillsmp](/docs/agent-todos/ideas/0003_skill_to_search_skillsmp.md) | ready |
+| plugin-agent-todos | [Obsidian as primary todo store](/docs/agent-todos/plugin-agent-todos/0015_obsidian_as_primary_todo_store.md) | ready |
 | plugin-agent-todos | [Change Todo Prefix To 4 Digits](/docs/agent-todos/plugin-agent-todos/DONE_0000_change_todo_prefix.md) | done |
 | plugin-agent-todos | [Error when installing Plugin](/docs/agent-todos/plugin-agent-todos/DONE_0001_error_when_installing.md) | done |
 | plugin-agent-todos | [Add status to todo](/docs/agent-todos/plugin-agent-todos/DONE_0002_add_status_to_todo.md) | done |
@@ -61,5 +64,6 @@ kanban
 | plugin-agent-todos | [Agent Todos Obsidian Importer](/docs/agent-todos/plugin-agent-todos/DONE_0011_agent_todos_obsidian_importer.md) | done |
 | plugin-agent-todos | [Obselte first level headind still created](/docs/agent-todos/plugin-agent-todos/DONE_0012_obselte_first_level_headind_still_created.md) | done |
 | plugin-agent-todos | [Check wether the deletion on Obsidian works](/docs/agent-todos/plugin-agent-todos/DONE_0013_check_wether_the_deletion_on_obsidian_works.md) | done |
+| plugin-agent-todos | [Todos have still h1 when they are created](/docs/agent-todos/plugin-agent-todos/DONE_0014_todos_have_still_h1_when_they_are_created.md) | done |
 | plugin-hugo-blog | [Hugo markdown linting skill](/docs/agent-todos/plugin-hugo-blog/0001_hugo_markdown_linting_skill.md) | ready |
 | plugin-skill-teaching | [Error when excecuting script](/docs/agent-todos/plugin-skill-teaching/DONE_0000_error_when_excecuting_script.md) | done |

@@ -52,8 +52,6 @@ title: Task Title
 status: ready
 ---
 
-# Task Title
-
 ## Problem / Context
 
 Description of the problem or context for the task.

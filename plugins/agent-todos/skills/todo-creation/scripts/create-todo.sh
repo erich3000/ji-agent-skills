@@ -11,7 +11,7 @@
 #   1. Scans all files (open and DONE_) in the category to find the highest number
 #   2. Generates the next 4-digit prefix
 #   3. Converts the title to snake_case, truncated to 60 characters
-#   4. Creates the file with YAML frontmatter (title, status: new) and an H1 heading
+#   4. Creates the file with YAML frontmatter (title, status: new) and section stubs
 
 set -euo pipefail
 

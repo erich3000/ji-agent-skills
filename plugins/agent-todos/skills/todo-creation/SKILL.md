@@ -38,7 +38,7 @@ The script:
 1. Scans all files in the category directory (including `DONE_` files) to find the highest numeric prefix
 2. Assigns the next sequential 4-digit number
 3. Converts the title to snake_case, truncated to 60 characters
-4. Creates the file with YAML frontmatter (`title`, `status: new`) and an H1 heading
+4. Creates the file with YAML frontmatter (`title`, `status: new`) and section stubs (`## Context`, `## Tasks`)
 5. Prints the created file path to stdout
 
 If the script exits with a non-zero status, report the error output to the user and stop.
@@ -73,8 +73,6 @@ After the user provides content, the recommended structure is:
 title: Fix soft 404 errors
 status: ready
 ---
-
-# Fix soft 404 errors
 
 ## Problem / Context
 
