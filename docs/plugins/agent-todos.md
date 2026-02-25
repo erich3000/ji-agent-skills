@@ -1,6 +1,6 @@
 # agent-todos
 
-`agent-todos` provides structured todo workflows for AI agents. By default, todos are stored under `docs/agent-todos/` inside the project. For workplaces where committing AI task files is not acceptable, todos can be stored in an Obsidian vault instead — configured per project via `.claude/agent-todos.local.md`.
+`agent-todos` provides structured todo workflows for AI agents. By default, todos are stored under `docs/agent-todos/` inside the project. For workplaces where committing AI task files is not acceptable, todos can be stored in an Obsidian vault instead — configured per project via `.claude/agent-todos.local.json`.
 
 ## What It Does
 
@@ -32,21 +32,21 @@ All skills read from and write to `docs/agent-todos/` inside the project root. N
 
 ### Obsidian mode
 
-Create `.claude/agent-todos.local.md` in the project root (this file is gitignored by Claude Code conventions):
+Create `.claude/agent-todos.local.json` in the project root (this file is gitignored by Claude Code conventions):
 
-```markdown
----
-todos_root: ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/<vault-name>/agent-todos/<project-name>
-vault_root: ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/<vault-name>
-kanban_file: ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/<vault-name>/agent-todos/<project-name>-kanban.md
----
+```json
+{
+  "todosRoot": "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/<vault-name>/agent-todos/<project-name>",
+  "vaultRoot": "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/<vault-name>",
+  "kanbanFile": "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/<vault-name>/agent-todos/<project-name>-kanban.md"
+}
 ```
 
 | Field | Required | Description |
 | --- | --- | --- |
-| `todos_root` | yes | Absolute path to the todos root (holds category subdirectories). Replaces `docs/agent-todos/`. |
-| `vault_root` | no | Obsidian vault root. Used to compute wiki-link paths in the Kanban board. |
-| `kanban_file` | no | Obsidian Kanban output path. Defaults to `$(dirname todos_root)/$(basename todos_root)-kanban.md`. |
+| `todosRoot` | yes | Absolute path to the todos root (holds category subdirectories). Replaces `docs/agent-todos/`. |
+| `vaultRoot` | no | Obsidian vault root. Used to compute wiki-link paths in the Kanban board. |
+| `kanbanFile` | no | Obsidian Kanban output path. Defaults to `$(dirname todosRoot)/$(basename todosRoot)-kanban.md`. |
 
 `~` in paths is expanded to `$HOME` at runtime.
 
@@ -54,7 +54,7 @@ When `kanban_file` is set (or derived from a non-default `todos_root`), `/todo-o
 
 ### Switching back to default
 
-Delete `.claude/agent-todos.local.md`. All skills fall back to `docs/agent-todos/` immediately — no other changes needed.
+Delete `.claude/agent-todos.local.json`. All skills fall back to `docs/agent-todos/` immediately — no other changes needed.
 
 ### Migrating existing todos to Obsidian
 

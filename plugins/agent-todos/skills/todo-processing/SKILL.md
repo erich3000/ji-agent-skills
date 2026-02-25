@@ -12,7 +12,7 @@ This skill describes how to work with todo files located in the configured todos
 
 Todo files are organized in category subdirectories. Categories are flexible and can be created as needed.
 
-The todos directory is configurable via `.claude/agent-todos.local.md` (default: `docs/agent-todos/`).
+The todos directory is configurable via `.claude/agent-todos.local.json` (default: `docs/agent-todos/`).
 
 ```
 <todos-directory>/
@@ -165,7 +165,7 @@ When task is complete:
 
 ## Finding Tasks
 
-Replace `docs/agent-todos` with your configured todos directory if using Obsidian mode (see `.claude/agent-todos.local.md`).
+Replace `docs/agent-todos` with your configured todos directory if using Obsidian mode (see `.claude/agent-todos.local.json`).
 
 To list all open (not done) tasks:
 

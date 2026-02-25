@@ -7,7 +7,7 @@ invocation: user
 
 # todo-init
 
-Initialize the `docs/agent-todos/` folder structure for AI agent task tracking. If Obsidian mode is configured via `.claude/agent-todos.local.md`, create the structure in the configured todos directory instead.
+Initialize the `docs/agent-todos/` folder structure for AI agent task tracking. If Obsidian mode is configured via `.claude/agent-todos.local.json`, create the structure in the configured todos directory instead.
 
 ## Workflow
 
