@@ -1,19 +1,21 @@
 ---
 name: todo-processing
-description: Work with AI agent todo files in docs/agent-todos
+description: Work with AI agent todo files in the configured todos directory (default: docs/agent-todos)
 invocation: none
 ---
 
 # todo-processing
 
-This skill describes how to work with todo files located in `docs/agent-todos/`. These files track tasks for AI agents working on this project.
+This skill describes how to work with todo files located in the configured todos directory (default: `docs/agent-todos/`). These files track tasks for AI agents working on this project.
 
 ## Directory Structure
 
 Todo files are organized in category subdirectories. Categories are flexible and can be created as needed.
 
+The todos directory is configurable via `.claude/agent-todos.local.md` (default: `docs/agent-todos/`).
+
 ```
-docs/agent-todos/
+<todos-directory>/
 ├── [category]/     # e.g., data, menu, misc, tags, thai-food-dict
 │   ├── 0001_task-description.md
 │   ├── DONE_0002_completed-task.md
@@ -110,7 +112,7 @@ When assigned a task:
 2. Update the frontmatter status from `ready` → `doing`
 3. Note any prerequisites or context
 4. Check for existing progress entries
-5. Run `/todo-overview` after status changes to refresh `docs/agent-todos/TODO_OVERVIEW.md`
+5. Run `/todo-overview` after status changes to refresh the todo overview
 
 ### 2. Working on a Task
 
@@ -149,7 +151,7 @@ When task is complete:
 2. Add a final progress entry documenting completion
 3. If the file has checkboxes, mark them all as `[x]`
 4. Rename the file with `DONE_` prefix
-5. Run `/todo-overview` after marking done to refresh `docs/agent-todos/TODO_OVERVIEW.md`
+5. Run `/todo-overview` after marking done to refresh the todo overview
 
 ## Best Practices
 
@@ -159,9 +161,11 @@ When task is complete:
 4. **Link to related files** - Reference files that were created/modified
 5. **Ask before assuming** - Add questions to the file and ask the user
 6. **Update internal docs** - After completing a task, update relevant documentation
-7. **Keep overview current** - Trigger `/todo-overview` whenever todo status changes
+7. **Keep overview current** — Trigger `/todo-overview` whenever todo status changes
 
 ## Finding Tasks
+
+Replace `docs/agent-todos` with your configured todos directory if using Obsidian mode (see `.claude/agent-todos.local.md`).
 
 To list all open (not done) tasks:
 

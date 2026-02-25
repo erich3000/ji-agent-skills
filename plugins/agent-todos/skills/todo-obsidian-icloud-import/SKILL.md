@@ -4,7 +4,7 @@ description: >
   Import agent todos from a local Obsidian vault synced via iCloud Drive. Use when
   the user asks to "import from obsidian", "import obsidian todos", "sync obsidian
   todos", "get todos from obsidian", or wants to pull todos from an Obsidian vault
-  into docs/agent-todos/.
+  into the configured todos directory (default: docs/agent-todos/).
 compatibility: macOS only (requires iCloud Drive with Obsidian vault)
 allowed-tools: Bash, Read, Write, Edit, Skill, AskUserQuestion
 invocation: user
@@ -13,7 +13,7 @@ argument-hint: "[vaultname] [source-category]"
 
 # todo-obsidian-icloud-import
 
-Import agent todo markdown files from a local Obsidian vault stored on iCloud Drive into the project's `docs/agent-todos/` workflow.
+Import agent todo markdown files from a local Obsidian vault stored on iCloud Drive into the project's configured todos directory (default: `docs/agent-todos/`).
 
 ## Prerequisites
 
@@ -74,9 +74,9 @@ If no files are found, inform the user and stop.
 
 ### 4. Choose Destination Category
 
-The source category in the Obsidian vault may not match the desired local category. Ask the user which local `docs/agent-todos/` category the imported todos should be placed in.
+The source category in the Obsidian vault may not match the desired local category. Ask the user which category the imported todos should be placed in.
 
-List existing local categories by scanning subdirectories of `docs/agent-todos/` in the project root. Present them as options via AskUserQuestion, allowing the user to pick an existing category or type a new one.
+List existing categories by scanning subdirectories of the configured todos directory in the project root. Present them as options via AskUserQuestion, allowing the user to pick an existing category or type a new one.
 
 ### 5. Import Each Todo
 
@@ -117,7 +117,7 @@ Importing from vault "WorkNotes" source category "my-project":
 1. Script finds `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/WorkNotes/agent-todos/my-project/0001_fix_layout.md`
 2. User is asked to choose a destination category from existing local folders (e.g., `misc`, `data`) or type a new one
 3. User picks `misc` as the destination
-4. `/todo-creation misc "Fix layout"` creates `docs/agent-todos/misc/0005_fix_layout.md`
+4. `/todo-creation misc "Fix layout"` creates `<todos-directory>/misc/0005_fix_layout.md`
 5. Content is copied from the Obsidian file to the local todo
 6. Status is updated to `ready`
 7. User confirms deletion; source file is moved to Trash
@@ -129,5 +129,5 @@ Importing from vault "WorkNotes" source category "my-project":
 - Source files are moved to Trash (not permanently deleted) for safety
 - If the Obsidian vault path does not exist, the script will report an error
 - iCloud Drive may sync files with delay; ensure files are downloaded locally before importing
-- The vault's `agent-todos/` directory structure mirrors the local `docs/agent-todos/` convention
-- Keep `docs/agent-todos/TODO_OVERVIEW.md` in sync by invoking `/todo-overview` after imports
+- The vault's `agent-todos/` directory structure mirrors the local todos directory convention
+- Keep the todo overview in sync by invoking `/todo-overview` after imports

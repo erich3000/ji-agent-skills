@@ -23,7 +23,37 @@ fi
 CATEGORY="$1"
 TITLE="$2"
 BASE_DIR="${3:-$PWD}"
-TODO_DIR="$BASE_DIR/docs/agent-todos/$CATEGORY"
+PROJECT_ROOT="$BASE_DIR"
+
+# ---------------------------------------------------------------------------
+# Agent-todos config reader
+# Reads .claude/agent-todos.local.md and sets TODOS_ROOT, VAULT_ROOT, KANBAN_FILE
+# ---------------------------------------------------------------------------
+_read_fm_key() {
+  awk -v k="$1" '
+    NR==1&&/^---$/{f=1;next}
+    f&&/^---$/{exit}
+    f&&$1==k":"{sub("^"k":[[:space:]]*","");gsub(/^"|"$/,"");gsub(/^\047|\047$/,"");print;exit}
+  ' "$2"
+}
+
+read_agent_todos_config() {
+  local config_file="$PROJECT_ROOT/.claude/agent-todos.local.md"
+  TODOS_ROOT="$PROJECT_ROOT/docs/agent-todos"
+  VAULT_ROOT=""
+  KANBAN_FILE=""
+  [ -f "$config_file" ] || return 0
+  local v
+  v="$(_read_fm_key todos_root "$config_file")";  [ -n "$v" ] && TODOS_ROOT="${v/#\~/$HOME}"
+  v="$(_read_fm_key vault_root "$config_file")";  [ -n "$v" ] && VAULT_ROOT="${v/#\~/$HOME}"
+  v="$(_read_fm_key kanban_file "$config_file")"; [ -n "$v" ] && KANBAN_FILE="${v/#\~/$HOME}"
+  if [ -z "$KANBAN_FILE" ] && [ "$TODOS_ROOT" != "$PROJECT_ROOT/docs/agent-todos" ]; then
+    KANBAN_FILE="$(dirname "$TODOS_ROOT")/$(basename "$TODOS_ROOT")-kanban.md"
+  fi
+}
+
+read_agent_todos_config
+TODO_DIR="$TODOS_ROOT/$CATEGORY"
 
 # Create category directory if it does not exist
 mkdir -p "$TODO_DIR"

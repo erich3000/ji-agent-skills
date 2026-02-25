@@ -13,13 +13,13 @@ Move selected open todo files from one category folder to another and renumber o
 
 ## Purpose
 
-Apply this skill to todo migrations inside `docs/agent-todos/` when number consistency is required.
+Apply this skill to todo migrations inside the configured todos directory (default: `docs/agent-todos/`) when number consistency is required.
 
 ## Arguments
 
-- `source-category`: folder under `docs/agent-todos/` that currently contains the todos, for example `misc`
+- `source-category`: folder under the todos directory that currently contains the todos, for example `misc`
 - `todo-set`: comma-separated list of numbers and/or ranges, for example `0011-0014,0020`
-- `target-category`: destination folder under `docs/agent-todos/`, for example `seo`
+- `target-category`: destination folder under the todos directory, for example `seo`
 
 ## Workflow
 
@@ -36,7 +36,7 @@ Where:
 - `<project_root>` is the repository root.
 
 3. Review script output for moved files, warnings, and renumbering actions.
-4. Run `/todo-overview` to refresh `docs/agent-todos/TODO_OVERVIEW.md`.
+4. Run `/todo-overview` to refresh the todo overview.
 
 ## Todo Set Format
 
