@@ -1,6 +1,6 @@
 # Todo Overview
 
-Generated on 2026-02-25 06:06:21 CET.
+Generated on 2026-02-25 06:39:38 CET.
 
 ## Todo Kanban
 
@@ -13,10 +13,9 @@ kanban
     ideas-0001[Image Manipulation Skill with SIPs]@{ ticket: ideas-0001 }
     ideas-0002[Dev Toys CLI Skill]@{ ticket: ideas-0002 }
     ideas-0003[Skill to Search Skillsmp]@{ ticket: ideas-0003 }
-    plugin-agent-todos-0015[Obsidian as primary todo store]@{ ticket: plugin-agent-todos-0015 }
     plugin-hugo-blog-0001[Hugo markdown linting skill]@{ ticket: plugin-hugo-blog-0001 }
   doing[Doing]
-
+    plugin-agent-todos-0015[Obsidian as primary todo store]@{ ticket: plugin-agent-todos-0015 }
   done[Done]
     common-0001[Describe plugins in readme]@{ ticket: common-0001 }
     common-0002[describe obsidian import in readme]@{ ticket: common-0002 }
@@ -49,7 +48,7 @@ kanban
 | ideas | [Image Manipulation Skill with SIPs](/docs/agent-todos/ideas/0001_image_manipulation_skill_with_sips.md) | ready |
 | ideas | [Dev Toys CLI Skill](/docs/agent-todos/ideas/0002_dev_toys_cli_skill.md) | ready |
 | ideas | [Skill to Search Skillsmp](/docs/agent-todos/ideas/0003_skill_to_search_skillsmp.md) | ready |
-| plugin-agent-todos | [Obsidian as primary todo store](/docs/agent-todos/plugin-agent-todos/0015_obsidian_as_primary_todo_store.md) | ready |
+| plugin-agent-todos | [Obsidian as primary todo store](/docs/agent-todos/plugin-agent-todos/0015_obsidian_as_primary_todo_store.md) | doing |
 | plugin-agent-todos | [Change Todo Prefix To 4 Digits](/docs/agent-todos/plugin-agent-todos/DONE_0000_change_todo_prefix.md) | done |
 | plugin-agent-todos | [Error when installing Plugin](/docs/agent-todos/plugin-agent-todos/DONE_0001_error_when_installing.md) | done |
 | plugin-agent-todos | [Add status to todo](/docs/agent-todos/plugin-agent-todos/DONE_0002_add_status_to_todo.md) | done |

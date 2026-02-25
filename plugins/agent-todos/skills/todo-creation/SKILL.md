@@ -1,6 +1,6 @@
 ---
 name: todo-creation
-description: This skill should be used when the user asks to "create a todo", "add a todo", "new todo", "make a todo", "new task", "create a task", "add a task file", or wants to create a new agent todo file in docs/agent-todos/.
+description: This skill should be used when the user asks to "create a todo", "add a todo", "new todo", "make a todo", "new task", "create a task", "add a task file", or wants to create a new agent todo file in the configured todos directory (default: docs/agent-todos/).
 allowed-tools: Bash, Read, Write, Edit, AskUserQuestion
 invocation: user
 argument-hint: "[category] [title]"
@@ -8,7 +8,7 @@ argument-hint: "[category] [title]"
 
 # todo-creation
 
-Create a new todo file in `docs/agent-todos/` with proper sequential numbering and YAML frontmatter.
+Create a new todo file in the configured todos directory (default: `docs/agent-todos/`) with proper sequential numbering and YAML frontmatter.
 
 ## Workflow
 
@@ -16,7 +16,7 @@ Create a new todo file in `docs/agent-todos/` with proper sequential numbering a
 
 Collect the category and title. These may come from skill arguments or by asking the user.
 
-- **Category** — The subdirectory name under `docs/agent-todos/` (e.g., `data`, `misc`, `agent-todos`). If the directory does not exist, it will be created.
+- **Category** — The subdirectory name under the todos directory (e.g., `data`, `misc`, `agent-todos`). If the directory does not exist, it will be created.
 - **Title** — A human-readable title for the todo (e.g., "Fix soft 404 errors").
 
 If both values are provided as arguments (e.g., `/todo-creation data Fix soft 404 errors`), parse the first word as the category and the rest as the title.
@@ -49,7 +49,7 @@ After the file is created, inform the user of the file path and ask them to add 
 
 ### 4. Update Overview
 
-After creating the todo (and again after switching `status` to `ready`), run `/todo-overview` to refresh `docs/agent-todos/TODO_OVERVIEW.md`.
+After creating the todo (and again after switching `status` to `ready`), run `/todo-overview` to refresh the todo overview.
 
 ## File Format
 
@@ -90,4 +90,4 @@ status: ready
 - If the category directory does not exist, it is created automatically.
 - The filename is truncated to 60 characters (before the `.md` extension) to keep paths manageable.
 - After the user adds content, update the status to `ready` so the todo is recognized as actionable under the conventions defined by `todo-processing`.
-- Keep `docs/agent-todos/TODO_OVERVIEW.md` in sync by invoking `/todo-overview` after creation and status updates.
+- Keep the todo overview in sync by invoking `/todo-overview` after creation and status updates.

@@ -1,6 +1,6 @@
 ---
 name: todo-gh-issue-import
-description: Import open GitHub issues into local agent todo files. Use when the user asks to "import issues", "import from GitHub", "convert issues to todos", or wants to pull GitHub issues into the docs/agent-todos/ workflow.
+description: Import open GitHub issues into local agent todo files. Use when the user asks to "import issues", "import from GitHub", "convert issues to todos", or wants to pull GitHub issues into the configured todos directory (default: docs/agent-todos/).
 compatibility: Requires gh CLI (https://cli.github.com/)
 allowed-tools: Bash, Read, Write, Edit, Skill, AskUserQuestion
 invocation: user
@@ -9,7 +9,7 @@ argument-hint: "[category]"
 
 # todo-gh-issue-import
 
-Import open GitHub issues into local todo files using the `docs/agent-todos/` workflow.
+Import open GitHub issues into local todo files using the configured todos directory (default: `docs/agent-todos/`).
 
 ## Prerequisites
 
@@ -43,7 +43,7 @@ If there are no open issues, inform the user and stop.
 
 ### 3. Determine Category
 
-For each issue, determine the target category subdirectory under `docs/agent-todos/`:
+For each issue, determine the target category subdirectory under the todos directory:
 
 - If the issue has a label that matches an existing category directory, use that label
 - If a category argument was provided (e.g., `/todo-gh-issue-import data`), use it for all issues
@@ -91,11 +91,11 @@ Where `<file-path>` is the relative path like `docs/agent-todos/data/0042_fix_so
 
 ### 7. Update Overview
 
-After processing all issues (and closing them), run `/todo-overview` to refresh `docs/agent-todos/TODO_OVERVIEW.md`.
+After processing all issues (and closing them), run `/todo-overview` to refresh the todo overview.
 
 ## Example
 
-An imported issue #7 titled "Fix soft 404 errors" with label "data" becomes `docs/agent-todos/data/0042_fix_soft_404_errors.md`:
+An imported issue #7 titled "Fix soft 404 errors" with label "data" becomes `<todos-directory>/data/0042_fix_soft_404_errors.md`:
 
 ```markdown
 ---
@@ -112,7 +112,7 @@ status: ready
 - [ ] ...
 ```
 
-The GitHub issue is then closed with the comment: `Imported to docs/agent-todos/data/0042_fix_soft_404_errors.md`
+The GitHub issue is then closed with the comment: `Imported to <todos-directory>/data/0042_fix_soft_404_errors.md`
 
 ## Notes
 
@@ -121,4 +121,4 @@ The GitHub issue is then closed with the comment: `Imported to docs/agent-todos/
 - Imported todos always get `status: ready` since they already have content from the issue
 - The `/todo-creation` skill handles sequential numbering and file naming conventions
 - If `gh` is not authenticated, the user will see an auth error — direct them to run `gh auth login`
-- Keep `docs/agent-todos/TODO_OVERVIEW.md` in sync by invoking `/todo-overview` after imports.
+- Keep the todo overview in sync by invoking `/todo-overview` after imports.

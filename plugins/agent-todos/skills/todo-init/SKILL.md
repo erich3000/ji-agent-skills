@@ -1,13 +1,13 @@
 ---
 name: todo-init
-description: Initialize the docs/agent-todos folder structure
+description: Initialize the docs/agent-todos folder structure (or the configured todos directory)
 allowed-tools: Bash, Read, Write, AskUserQuestion
 invocation: user
 ---
 
 # todo-init
 
-Initialize the `docs/agent-todos/` folder structure for AI agent task tracking.
+Initialize the `docs/agent-todos/` folder structure for AI agent task tracking. If Obsidian mode is configured via `.claude/agent-todos.local.md`, create the structure in the configured todos directory instead.
 
 ## Workflow
 
@@ -76,5 +76,5 @@ See the skill documentation for details on file format and workflow.
 - This skill only creates the folder structure
 - Use `/todo-creation` to create individual todo files
 - Use `/todo-gh-issue-import` to populate with tasks from GitHub issues
-- Use `/todo-overview` to generate or refresh `docs/agent-todos/TODO_OVERVIEW.md`
+- Use `/todo-overview` to generate or refresh the todo overview
 - Use `/todo-processing` to work with existing todo files
