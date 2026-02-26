@@ -142,9 +142,7 @@ generate_obsidian_kanban() {
 ## Archive
 
 %% kanban:settings
-```json
 {"kanban-plugin":"board"}
-```
 %%
 KANBAN_EOF
 }
