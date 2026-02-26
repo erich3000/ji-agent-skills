@@ -1,14 +1,70 @@
 ---
 name: todo-processing
 description: >
-  Work with AI agent todo files in the configured todos directory
-  (default: docs/agent-todos)
-invocation: none
+  This skill should be used when the user asks to "process a todo", "work on
+  a todo", "start a todo", "pick up a task", "handle todo 0042", provides a
+  path to a todo file to begin working on it, or asks "what should I work on
+  next" and todos exist in the configured todos directory
+  (default: docs/agent-todos).
+allowed-tools: Bash, Read, Write, Edit, AskUserQuestion, Glob, Grep, Skill
+invocation: user
+argument-hint: "[path/to/todo.md]"
 ---
 
 # todo-processing
 
 This skill describes how to work with todo files located in the configured todos directory (default: `docs/agent-todos/`). These files track tasks for AI agents working on this project.
+
+## Invocation
+
+### Step 1: Identify the Todo to Process
+
+**If a todo file path is provided as argument:**
+
+Use that file directly. Proceed to Step 2.
+
+**If no argument is given:**
+
+1. Read the configured todos directory from `.claude/agent-todos.local.json` (`todosRoot`), defaulting to `docs/agent-todos`.
+
+2. Find all open todos (non-`DONE_`, non-`TODO_OVERVIEW.md` `.md` files):
+
+   ```bash
+   find <todos-dir> -name "*.md" ! -name "DONE_*" ! -name "TODO_OVERVIEW.md" -type f | sort
+   ```
+
+3. **If no open todos exist:** Ask the user with `AskUserQuestion` whether they want to create a new todo. If yes, invoke the `todo-creation` skill via the `Skill` tool.
+
+4. **If more than 5 open todos exist:** First ask the user to pick a category using `AskUserQuestion`. List only subdirectory names that contain at least one open todo as the options.
+
+5. **Present the list:** Ask the user to select a todo using `AskUserQuestion`. Show the filename (without full path) as each option label. Use `multiSelect: false`.
+
+### Step 2: Validate and Normalize the Todo File
+
+**Missing numeric prefix:**
+
+If the selected or given filename does not start with 4 digits (`NNNN_`):
+
+1. Scan all files in the same category directory (including `DONE_` files) to find the highest numeric prefix.
+2. Assign the next 4-digit prefix.
+3. Rename the file using Bash `mv`.
+
+**Missing or incomplete frontmatter:**
+
+If the file has no YAML frontmatter (no `---` block at the top), or if `title` or `status` fields are absent:
+
+1. Derive the title from the filename:
+   - Strip `DONE_` prefix if present
+   - Strip the numeric prefix (e.g. `0001_`)
+   - Replace hyphens and underscores with spaces
+   - Capitalize the first letter
+2. Prepend or patch the frontmatter block with `title` and `status: new`.
+
+### Step 3: Process the Todo
+
+Continue with `## Workflow` > **Reading a Todo** below.
+
+---
 
 ## Directory Structure
 
@@ -16,7 +72,7 @@ Todo files are organized in category subdirectories. Categories are flexible and
 
 The todos directory is configurable via `.claude/agent-todos.local.json` (default: `docs/agent-todos/`).
 
-```
+```text
 <todos-directory>/
 ├── [category]/     # e.g., data, menu, misc, tags, thai-food-dict
 │   ├── 0001_task-description.md
@@ -167,22 +223,22 @@ When task is complete:
 
 ## Finding Tasks
 
-Replace `docs/agent-todos` with your configured todos directory if using Obsidian mode (see `.claude/agent-todos.local.json`).
+Read the configured todos directory from `.claude/agent-todos.local.json` (`todosRoot`), defaulting to `docs/agent-todos`. Substitute `<todos-dir>` below with that value.
 
 To list all open (not done) tasks:
 
 ```bash
-find docs/agent-todos -name "*.md" ! -name "DONE_*" -type f
+find <todos-dir> -name "*.md" ! -name "DONE_*" -type f
 ```
 
 To list all completed tasks:
 
 ```bash
-find docs/agent-todos -name "DONE_*.md" -type f
+find <todos-dir> -name "DONE_*.md" -type f
 ```
 
 To find tasks ready to be picked up (by frontmatter status):
 
 ```bash
-grep -rl "^status: ready" docs/agent-todos/
+grep -rl "^status: ready" <todos-dir>/
 ```
