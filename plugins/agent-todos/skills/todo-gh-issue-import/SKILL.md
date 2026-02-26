@@ -1,6 +1,9 @@
 ---
 name: todo-gh-issue-import
-description: Import open GitHub issues into local agent todo files. Use when the user asks to "import issues", "import from GitHub", "convert issues to todos", or wants to pull GitHub issues into the configured todos directory (default: docs/agent-todos/).
+description: >
+  Import open GitHub issues into local agent todo files. Use when the user asks
+  to "import issues", "import from GitHub", "convert issues to todos", or wants
+  to pull GitHub issues into the configured todos directory (default: docs/agent-todos/).
 compatibility: Requires gh CLI (https://cli.github.com/)
 allowed-tools: Bash, Read, Write, Edit, Skill, AskUserQuestion
 invocation: user

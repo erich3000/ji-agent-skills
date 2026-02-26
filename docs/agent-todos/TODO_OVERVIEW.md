@@ -1,6 +1,6 @@
 # Todo Overview
 
-Generated on 2026-02-26 06:39:12 CET.
+Generated on 2026-02-26 14:19:40 CET.
 
 ## Todo Kanban
 
@@ -8,14 +8,14 @@ Generated on 2026-02-26 06:39:12 CET.
 %%{init: {"theme":"neutral"}}%%
 kanban
   new[New]
-    plugin-agent-todos-0017[make trello-vault path configurable]@{ ticket: plugin-agent-todos-0017 }
+
   ready[Ready]
     ideas-0001[Image Manipulation Skill with SIPs]@{ ticket: ideas-0001 }
     ideas-0002[Dev Toys CLI Skill]@{ ticket: ideas-0002 }
     ideas-0003[Skill to Search Skillsmp]@{ ticket: ideas-0003 }
     plugin-hugo-blog-0001[Hugo markdown linting skill]@{ ticket: plugin-hugo-blog-0001 }
   doing[Doing]
-
+    plugin-agent-todos-0017[make trello-vault path configurable]@{ ticket: plugin-agent-todos-0017 }
   done[Done]
     common-0001[Describe plugins in readme]@{ ticket: common-0001 }
     common-0002[describe obsidian import in readme]@{ ticket: common-0002 }
@@ -37,6 +37,7 @@ kanban
     plugin-agent-todos-0014[Todos have still h1 when they are created]@{ ticket: plugin-agent-todos-0014 }
     plugin-agent-todos-0015[Obsidian as primary todo store]@{ ticket: plugin-agent-todos-0015 }
     plugin-agent-todos-0016[Fix Obsidian Kanban settings block format]@{ ticket: plugin-agent-todos-0016 }
+    plugin-agent-todos-0018[improve interoperatablility]@{ ticket: plugin-agent-todos-0018 }
     plugin-skill-teaching-0000[Error when excecuting script]@{ ticket: plugin-skill-teaching-0000 }
 ```
 
@@ -50,7 +51,7 @@ kanban
 | ideas | [Image Manipulation Skill with SIPs](/docs/agent-todos/ideas/0001_image_manipulation_skill_with_sips.md) | ready |
 | ideas | [Dev Toys CLI Skill](/docs/agent-todos/ideas/0002_dev_toys_cli_skill.md) | ready |
 | ideas | [Skill to Search Skillsmp](/docs/agent-todos/ideas/0003_skill_to_search_skillsmp.md) | ready |
-| plugin-agent-todos | [make trello-vault path configurable](/docs/agent-todos/plugin-agent-todos/0017_make_trello_vault_path_configurable.md) | new |
+| plugin-agent-todos | [make trello-vault path configurable](/docs/agent-todos/plugin-agent-todos/0017_make_trello_vault_path_configurable.md) | doing |
 | plugin-agent-todos | [Change Todo Prefix To 4 Digits](/docs/agent-todos/plugin-agent-todos/DONE_0000_change_todo_prefix.md) | done |
 | plugin-agent-todos | [Error when installing Plugin](/docs/agent-todos/plugin-agent-todos/DONE_0001_error_when_installing.md) | done |
 | plugin-agent-todos | [Add status to todo](/docs/agent-todos/plugin-agent-todos/DONE_0002_add_status_to_todo.md) | done |
@@ -68,5 +69,6 @@ kanban
 | plugin-agent-todos | [Todos have still h1 when they are created](/docs/agent-todos/plugin-agent-todos/DONE_0014_todos_have_still_h1_when_they_are_created.md) | done |
 | plugin-agent-todos | [Obsidian as primary todo store](/docs/agent-todos/plugin-agent-todos/DONE_0015_obsidian_as_primary_todo_store.md) | done |
 | plugin-agent-todos | [Fix Obsidian Kanban settings block format](/docs/agent-todos/plugin-agent-todos/DONE_0016_fix_obsidian_kanban_settings_block_format.md) | done |
+| plugin-agent-todos | [improve interoperatablility](/docs/agent-todos/plugin-agent-todos/DONE_0018_improve_interoperatablility.md) | done |
 | plugin-hugo-blog | [Hugo markdown linting skill](/docs/agent-todos/plugin-hugo-blog/0001_hugo_markdown_linting_skill.md) | ready |
 | plugin-skill-teaching | [Error when excecuting script](/docs/agent-todos/plugin-skill-teaching/DONE_0000_error_when_excecuting_script.md) | done |

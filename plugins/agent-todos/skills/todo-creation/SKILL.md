@@ -1,6 +1,10 @@
 ---
 name: todo-creation
-description: This skill should be used when the user asks to "create a todo", "add a todo", "new todo", "make a todo", "new task", "create a task", "add a task file", or wants to create a new agent todo file in the configured todos directory (default: docs/agent-todos/).
+description: >
+  This skill should be used when the user asks to "create a todo", "add a todo",
+  "new todo", "make a todo", "new task", "create a task", "add a task file", or
+  wants to create a new agent todo file in the configured todos directory
+  (default: docs/agent-todos/).
 allowed-tools: Bash, Read, Write, Edit, AskUserQuestion
 invocation: user
 argument-hint: "[category] [title]"

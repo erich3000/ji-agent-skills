@@ -1,6 +1,9 @@
 ---
 name: todo-moving
-description: This skill should be used when the user asks to "move todos", "move todo files between categories", "renumber open todos", "close numbering gaps in todo folders", or "avoid collisions with DONE todo numbers".
+description: >
+  This skill should be used when the user asks to "move todos", "move todo files
+  between categories", "renumber open todos", "close numbering gaps in todo
+  folders", or "avoid collisions with DONE todo numbers".
 version: 0.1.0
 allowed-tools: Bash, Read, Write, Edit
 invocation: user
