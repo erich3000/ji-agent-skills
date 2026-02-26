@@ -1,6 +1,6 @@
 # Todo Overview
 
-Generated on 2026-02-26 14:19:40 CET.
+Generated on 2026-02-26 17:33:46 CET.
 
 ## Todo Kanban
 
@@ -38,6 +38,7 @@ kanban
     plugin-agent-todos-0015[Obsidian as primary todo store]@{ ticket: plugin-agent-todos-0015 }
     plugin-agent-todos-0016[Fix Obsidian Kanban settings block format]@{ ticket: plugin-agent-todos-0016 }
     plugin-agent-todos-0018[improve interoperatablility]@{ ticket: plugin-agent-todos-0018 }
+    plugin-agent-todos-0019[enhance-todo-processing]@{ ticket: plugin-agent-todos-0019 }
     plugin-skill-teaching-0000[Error when excecuting script]@{ ticket: plugin-skill-teaching-0000 }
 ```
 
@@ -70,5 +71,6 @@ kanban
 | plugin-agent-todos | [Obsidian as primary todo store](/docs/agent-todos/plugin-agent-todos/DONE_0015_obsidian_as_primary_todo_store.md) | done |
 | plugin-agent-todos | [Fix Obsidian Kanban settings block format](/docs/agent-todos/plugin-agent-todos/DONE_0016_fix_obsidian_kanban_settings_block_format.md) | done |
 | plugin-agent-todos | [improve interoperatablility](/docs/agent-todos/plugin-agent-todos/DONE_0018_improve_interoperatablility.md) | done |
+| plugin-agent-todos | [enhance-todo-processing](/docs/agent-todos/plugin-agent-todos/DONE_0019_enhance_todo_processing.md) | done |
 | plugin-hugo-blog | [Hugo markdown linting skill](/docs/agent-todos/plugin-hugo-blog/0001_hugo_markdown_linting_skill.md) | ready |
 | plugin-skill-teaching | [Error when excecuting script](/docs/agent-todos/plugin-skill-teaching/DONE_0000_error_when_excecuting_script.md) | done |
