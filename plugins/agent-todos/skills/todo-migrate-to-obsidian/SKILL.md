@@ -1,6 +1,10 @@
 ---
 name: todo-migrate-to-obsidian
-description: This skill should be used when the user asks to "migrate todos to obsidian", "move agent todos to obsidian vault", "use obsidian as primary todo store", "move docs/agent-todos to obsidian", or wants to configure Obsidian as the primary store for this project's todos.
+description: >
+  This skill should be used when the user asks to "migrate todos to obsidian",
+  "move agent todos to obsidian vault", "use obsidian as primary todo store",
+  "move docs/agent-todos to obsidian", or wants to configure Obsidian as the
+  primary store for this project's todos.
 allowed-tools: Bash, Read, Write, Edit, AskUserQuestion, Skill
 invocation: user
 argument-hint: "[vault-name] [project-name]"

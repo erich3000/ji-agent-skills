@@ -1,6 +1,10 @@
 ---
 name: todo-overview
-description: This skill should be used when the user asks to "create todo overview", "update todo overview", "generate TODO_OVERVIEW.md", "list all todos by status", "show todo table", "update kanban board", or wants a markdown table or Obsidian Kanban overview for the configured todos directory (default: docs/agent-todos).
+description: >
+  This skill should be used when the user asks to "create todo overview", "update
+  todo overview", "generate TODO_OVERVIEW.md", "list all todos by status", "show
+  todo table", "update kanban board", or wants a markdown table or Obsidian Kanban
+  overview for the configured todos directory (default: docs/agent-todos).
 allowed-tools: Bash, Read, Write, Edit
 invocation: user
 ---
