@@ -8,7 +8,7 @@ description: >
 allowed-tools: Bash, Read, Write, Edit, AskUserQuestion, Skill
 invocation: user
 argument-hint: "[vault-name] [project-name]"
-compatibility: macOS only (requires iCloud Drive with Obsidian vault)
+compatibility: macOS only (requires locally accessible Obsidian vault)
 ---
 
 # todo-migrate-to-obsidian
@@ -17,21 +17,36 @@ Migrate `docs/agent-todos/` to an Obsidian vault and configure the plugin to wri
 
 ## Workflow
 
-### 1. Gather Input
+### 1. Check Existing Config
+
+Read `.claude/agent-todos.local.json` in the project root, if it exists. Check for `vaultRoot` and `todosRoot` keys.
+
+**If both keys are present:**
+
+1. Check whether `docs/agent-todos/` still exists in the project root. If it does not, the migration was already completed and the source was deleted — inform the user and stop.
+2. Otherwise, the vault is already configured but migration can be re-run (e.g. to copy newly added todos). Skip vault discovery — use the existing `vaultRoot` value as the vault path argument to the migration script. Derive `project_name` from the `todosRoot` value (strip any trailing slash, then take the last path component, e.g. `my-project` from `.../agent-todos/my-project`). Proceed directly to Step 3 (Run Migration Script).
+
+**If the config is missing or incomplete:** Continue with Step 2.
+
+### 2. Gather Input
 
 Collect the vault name and project name. These may come from skill arguments or by asking the user.
 
 - **Vault name** — The Obsidian vault directory name under iCloud Drive's Obsidian folder. List available vaults:
+
   ```bash
   ls ~/Library/Mobile\ Documents/iCloud\~md\~obsidian/Documents/
   ```
+
 - **Project name** — Subdirectory name under `agent-todos/` in the vault. Defaults to the current project root directory name (e.g., `my-project`).
 
 If both values are provided as arguments (e.g., `/todo-migrate-to-obsidian vault-of-jens my-project`), parse the first word as vault name and the rest as project name.
 
+If the vault argument starts with `/` or `~` (an absolute path), do not split on spaces — treat the entire argument as the vault path. When in doubt, use AskUserQuestion to collect vault path and project name separately.
+
 If arguments are missing, ask the user using AskUserQuestion.
 
-### 2. Run Migration Script
+### 3. Run Migration Script
 
 ```bash
 bash <base_directory>/scripts/migrate-to-obsidian.sh "<project_root>" "<vault_name>" "<project_name>"
@@ -53,7 +68,7 @@ Parse the output lines to extract these three values.
 
 If the script exits with a non-zero status, report the error and stop.
 
-### 3. Write Config File
+### 4. Write Config File
 
 Create `.claude/agent-todos.local.json` in the project root using the three values from the script output:
 
@@ -67,11 +82,11 @@ Create `.claude/agent-todos.local.json` in the project root using the three valu
 
 Use the Write tool to create this file at `<project_root>/.claude/agent-todos.local.json`.
 
-### 4. Generate Initial Kanban Board
+### 5. Generate Initial Kanban Board
 
 Run `/todo-overview` to generate the initial Obsidian Kanban board at the configured `kanban_file` path. Confirm the output path from the script's stdout.
 
-### 5. Ask About Source Deletion
+### 6. Ask About Source Deletion
 
 Ask the user whether to delete `docs/agent-todos/` from the codebase:
 
@@ -87,7 +102,7 @@ If the user declines, leave the directory in place. Note that all todo skills wi
 
 ## Notes
 
-- macOS only — requires iCloud Drive with an Obsidian vault synced locally
+- macOS only — requires an Obsidian vault accessible on the local filesystem
 - Migration copies files — it does not move them; the user decides about source deletion
 - Sequential numbering and `DONE_` prefixes are preserved exactly
 - After migration, all skills (`/todo-creation`, `/todo-overview`, `/todo-moving`) use the vault path automatically via `.claude/agent-todos.local.json`
