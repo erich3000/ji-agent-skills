@@ -1,6 +1,8 @@
 ---
 name: todo-processing
-description: Work with AI agent todo files in the configured todos directory (default: docs/agent-todos)
+description: >
+  Work with AI agent todo files in the configured todos directory
+  (default: docs/agent-todos)
 invocation: none
 ---
 
@@ -90,13 +92,13 @@ Example: `DONE_0042_fix-soft-404-errors.md` → `Fix soft 404 errors`
 
 Tracks the lifecycle of a todo. Values and transitions:
 
-| Status     | Meaning                        | Transitions to     |
-|------------|--------------------------------|--------------------|
-| `new`      | Created but not yet fleshed out | `ready`           |
-| `ready`    | Has content, ready to work on  | `doing`           |
-| `doing`    | Currently being worked on      | `done`, `ready`   |
-| `done`     | Completed                      | `archived`        |
-| `archived` | Archived (reserved)            | —                  |
+| Status     | Meaning                         | Transitions to  |
+| ---------- | ------------------------------- | --------------- |
+| `new`      | Created but not yet fleshed out | `ready`         |
+| `ready`    | Has content, ready to work on   | `doing`         |
+| `doing`    | Currently being worked on       | `done`, `ready` |
+| `done`     | Completed                       | `archived`      |
+| `archived` | Archived (reserved)             | —               |
 
 - A file with the `DONE_` prefix should always have `status: done`.
 - When a file has meaningful content (problem description, tasks), use `ready`.
