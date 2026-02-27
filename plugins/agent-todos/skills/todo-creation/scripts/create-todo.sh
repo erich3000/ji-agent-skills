@@ -27,7 +27,7 @@ PROJECT_ROOT="$BASE_DIR"
 
 # ---------------------------------------------------------------------------
 # Agent-todos config reader
-# Reads .claude/agent-todos.local.json and sets TODOS_ROOT, VAULT_ROOT, KANBAN_FILE
+# Reads .agent-todos.local.json and sets TODOS_ROOT, VAULT_ROOT, KANBAN_FILE
 # ---------------------------------------------------------------------------
 _read_json_key() {
   python3 - "$1" "$2" <<'PYEOF' 2>/dev/null
@@ -43,7 +43,7 @@ PYEOF
 }
 
 read_agent_todos_config() {
-  local config_file="$PROJECT_ROOT/.claude/agent-todos.local.json"
+  local config_file="$PROJECT_ROOT/.agent-todos.local.json"
   TODOS_ROOT="$PROJECT_ROOT/docs/agent-todos"
   VAULT_ROOT=""
   KANBAN_FILE=""

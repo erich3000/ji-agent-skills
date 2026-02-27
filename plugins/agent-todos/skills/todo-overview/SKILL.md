@@ -15,7 +15,7 @@ Generate or update the todo overview from the configured todos directory (defaul
 
 **Default mode** — generates `TODO_OVERVIEW.md` with a Mermaid Kanban and a markdown table.
 
-**Obsidian mode** (when `.claude/agent-todos.local.json` sets `kanban_file`) — generates an Obsidian Kanban board file at the `kanban_file` path instead.
+**Obsidian mode** (when `.agent-todos.local.json` sets `kanban_file`) — generates an Obsidian Kanban board file at the `kanban_file` path instead.
 
 ## Output Format
 
@@ -48,7 +48,7 @@ Where:
 
 ## Notes
 
-- Reads `.claude/agent-todos.local.json` to determine todos directory and output format.
+- Reads `.agent-todos.local.json` to determine todos directory and output format.
 - Include both open and completed todos.
 - Preserve status values from YAML frontmatter when present.
 - Infer `status: done` for `DONE_` files that lack frontmatter.

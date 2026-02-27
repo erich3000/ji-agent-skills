@@ -1,6 +1,6 @@
 # agent-todos
 
-`agent-todos` provides structured todo workflows for AI agents. By default, todos are stored under `docs/agent-todos/` inside the project. For workplaces where committing AI task files is not acceptable, todos can be stored in an Obsidian vault instead — configured per project via `.claude/agent-todos.local.json`.
+`agent-todos` provides structured todo workflows for AI agents. By default, todos are stored under `docs/agent-todos/` inside the project. For workplaces where committing AI task files is not acceptable, todos can be stored in an Obsidian vault instead — configured per project via `.agent-todos.local.json`.
 
 ## What It Does
 
@@ -32,7 +32,7 @@ All skills read from and write to `docs/agent-todos/` inside the project root. N
 
 ### Obsidian mode
 
-Create `.claude/agent-todos.local.json` in the project root (this file is gitignored by Claude Code conventions):
+Create `.agent-todos.local.json` in the project root (this file is gitignored by Claude Code conventions):
 
 ```json
 {
@@ -54,7 +54,7 @@ When `kanban_file` is set (or derived from a non-default `todos_root`), `/todo-o
 
 ### Switching back to default
 
-Delete `.claude/agent-todos.local.json`. All skills fall back to `docs/agent-todos/` immediately — no other changes needed.
+Delete `.agent-todos.local.json`. All skills fall back to `docs/agent-todos/` immediately — no other changes needed.
 
 ### Migrating existing todos to Obsidian
 

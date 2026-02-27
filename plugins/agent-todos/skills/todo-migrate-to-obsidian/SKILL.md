@@ -19,7 +19,7 @@ Migrate `docs/agent-todos/` to an Obsidian vault and configure the plugin to wri
 
 ### 1. Check Existing Config
 
-Read `.claude/agent-todos.local.json` in the project root, if it exists. Check for `vaultRoot` and `todosRoot` keys.
+Read `.agent-todos.local.json` in the project root, if it exists. Check for `vaultRoot` and `todosRoot` keys.
 
 **If both keys are present:**
 
@@ -70,7 +70,7 @@ If the script exits with a non-zero status, report the error and stop.
 
 ### 4. Write Config File
 
-Create `.claude/agent-todos.local.json` in the project root using the three values from the script output:
+Create `.agent-todos.local.json` in the project root using the three values from the script output:
 
 ```json
 {
@@ -80,7 +80,7 @@ Create `.claude/agent-todos.local.json` in the project root using the three valu
 }
 ```
 
-Use the Write tool to create this file at `<project_root>/.claude/agent-todos.local.json`.
+Use the Write tool to create this file at `<project_root>/.agent-todos.local.json`.
 
 ### 5. Generate Initial Kanban Board
 
@@ -105,6 +105,6 @@ If the user declines, leave the directory in place. Note that all todo skills wi
 - macOS only — requires an Obsidian vault accessible on the local filesystem
 - Migration copies files — it does not move them; the user decides about source deletion
 - Sequential numbering and `DONE_` prefixes are preserved exactly
-- After migration, all skills (`/todo-creation`, `/todo-overview`, `/todo-moving`) use the vault path automatically via `.claude/agent-todos.local.json`
-- To revert, delete `.claude/agent-todos.local.json` — skills will fall back to `docs/agent-todos/`
+- After migration, all skills (`/todo-creation`, `/todo-overview`, `/todo-moving`) use the vault path automatically via `.agent-todos.local.json`
+- To revert, delete `.agent-todos.local.json` — skills will fall back to `docs/agent-todos/`
 - iCloud Drive may delay local availability of files; ensure the vault is fully synced before migrating

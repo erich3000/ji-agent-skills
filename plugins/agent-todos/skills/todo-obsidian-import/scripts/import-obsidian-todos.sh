@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # import-obsidian-todos.sh — Retrieve agent todo files from an Obsidian vault.
 #
-# Reads vault path from .claude/agent-todos.local.json (vaultRoot) when available.
+# Reads vault path from .agent-todos.local.json (vaultRoot) when available.
 # Falls back to iCloud Drive discovery on macOS when no config is set.
 #
 # Usage:
@@ -34,7 +34,7 @@ die() {
 
 require_macos() {
   if [[ "$(uname -s)" != "Darwin" ]]; then
-    die "This command only works on macOS (detected: $(uname -s)). Set vaultRoot in .claude/agent-todos.local.json to use a custom vault path."
+    die "This command only works on macOS (detected: $(uname -s)). Set vaultRoot in .agent-todos.local.json to use a custom vault path."
   fi
 }
 
@@ -56,7 +56,7 @@ todos_path() {
 
 # ---------------------------------------------------------------------------
 # Agent-todos config reader
-# Reads .claude/agent-todos.local.json and sets VAULT_ROOT
+# Reads .agent-todos.local.json and sets VAULT_ROOT
 # ---------------------------------------------------------------------------
 _read_json_key() {
   python3 - "$1" "$2" <<'PYEOF' 2>/dev/null
@@ -73,7 +73,7 @@ PYEOF
 
 read_agent_todos_config() {
   local project_root="$1"
-  local config_file="$project_root/.claude/agent-todos.local.json"
+  local config_file="$project_root/.agent-todos.local.json"
   VAULT_ROOT=""
   [ -f "$config_file" ] || return 0
   local v
