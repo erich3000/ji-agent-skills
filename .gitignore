@@ -1,3 +1,4 @@
 .claude/settings.local.json
 .agent-todos.local.json
+.claude/agent-todos.local.json
 .codex/skills
