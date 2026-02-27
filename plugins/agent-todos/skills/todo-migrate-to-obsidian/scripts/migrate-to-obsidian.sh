@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # migrate-to-obsidian.sh — Copy docs/agent-todos/ to an Obsidian vault and
-# print the resulting config values for .claude/agent-todos.local.json.
+# print the resulting config values for .agent-todos.local.json.
 #
 # Usage: migrate-to-obsidian.sh <project_root> <vault_name> [project_name]
 #

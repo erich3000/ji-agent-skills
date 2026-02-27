@@ -5,7 +5,7 @@ description: >
   "import obsidian todos", "sync obsidian todos", "get todos from obsidian",
   "import with configured vault", or wants to pull todos from a local Obsidian
   vault into the project's todos directory (default: docs/agent-todos/).
-  Supports any vault via vaultRoot in .claude/agent-todos.local.json, and falls
+  Supports any vault via vaultRoot in .agent-todos.local.json, and falls
   back to iCloud Drive discovery on macOS when no path is configured. Preferred
   over todo-obsidian-icloud-import when a configured vault path may be present.
 allowed-tools: Bash, Read, Write, Edit, Skill, AskUserQuestion
@@ -17,7 +17,7 @@ argument-hint: "[source-category]"
 
 Import agent todo markdown files from a local Obsidian vault into the project's configured todos directory (default: `docs/agent-todos/`).
 
-The vault path is read from `.claude/agent-todos.local.json` (`vaultRoot`). If not configured, the skill falls back to iCloud Drive vault discovery on macOS, or asks the user to enter a path on other platforms.
+The vault path is read from `.agent-todos.local.json` (`vaultRoot`). If not configured, the skill falls back to iCloud Drive vault discovery on macOS, or asks the user to enter a path on other platforms.
 
 ## Workflow
 
@@ -100,7 +100,7 @@ After importing all todos, run `/todo-overview` to refresh `docs/agent-todos/TOD
 
 ## Example
 
-Importing with `vaultRoot` set to `/Users/alice/vaults/Work` in `.claude/agent-todos.local.json`:
+Importing with `vaultRoot` set to `/Users/alice/vaults/Work` in `.agent-todos.local.json`:
 
 1. `--get-vault-path` returns `/Users/alice/vaults/Work` — vault prompt skipped.
 2. `--list-categories /Users/alice/vaults/Work` returns `misc`, `data`.
@@ -115,6 +115,6 @@ Importing with `vaultRoot` set to `/Users/alice/vaults/Work` in `.claude/agent-t
 - Only open todos (not prefixed with `DONE_`) are imported.
 - The local sequential numbering is independent of the Obsidian numbering — `/todo-creation` handles this.
 - Source files are moved to Trash (not permanently deleted) for safety.
-- On non-macOS, set `vaultRoot` in `.claude/agent-todos.local.json` to use this skill.
+- On non-macOS, set `vaultRoot` in `.agent-todos.local.json` to use this skill.
 - iCloud Drive may sync files with delay; ensure files are downloaded locally before importing.
 - The vault's `agent-todos/` directory structure mirrors the local todos directory convention.

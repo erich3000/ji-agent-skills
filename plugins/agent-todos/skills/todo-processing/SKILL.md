@@ -25,7 +25,7 @@ Use that file directly. Proceed to Step 2.
 
 **If no argument is given:**
 
-1. Read the configured todos directory from `.claude/agent-todos.local.json` (`todosRoot`), defaulting to `docs/agent-todos`.
+1. Read the configured todos directory from `.agent-todos.local.json` (`todosRoot`), defaulting to `docs/agent-todos`.
 
 2. Find all open todos (non-`DONE_`, non-`TODO_OVERVIEW.md` `.md` files):
 
@@ -70,7 +70,7 @@ Continue with `## Workflow` > **Reading a Todo** below.
 
 Todo files are organized in category subdirectories. Categories are flexible and can be created as needed.
 
-The todos directory is configurable via `.claude/agent-todos.local.json` (default: `docs/agent-todos/`).
+The todos directory is configurable via `.agent-todos.local.json` (default: `docs/agent-todos/`).
 
 ```text
 <todos-directory>/
@@ -223,7 +223,7 @@ When task is complete:
 
 ## Finding Tasks
 
-Read the configured todos directory from `.claude/agent-todos.local.json` (`todosRoot`), defaulting to `docs/agent-todos`. Substitute `<todos-dir>` below with that value.
+Read the configured todos directory from `.agent-todos.local.json` (`todosRoot`), defaulting to `docs/agent-todos`. Substitute `<todos-dir>` below with that value.
 
 To list all open (not done) tasks:
 
