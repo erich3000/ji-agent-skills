@@ -48,14 +48,14 @@ The project follows Claude Code's plugin system conventions:
 
 ### Plugins
 
-**agent-todos** — Organizes AI agent work into structured todo files under `docs/agent-todos/`. Formalizes a workflow where detailed prompts and context live in Markdown files instead of ad hoc CLI messages, making tasks easier to review, share, and track across a team:
+**agent-todos** — Organizes AI agent work into structured todo files in a configurable **todo store**. The default store is `docs/agent-todos/` inside the project; users can point it to any folder, including an Obsidian vault path, via `.agent-todos.local.json`. Obsidian users additionally get an auto-updated Kanban board when `kanbanFile` is configured:
 
-- `todo-init` — Initializes the todo folder structure with category subdirectories
+- `todo-init` — Sets up `.agent-todos.local.json` to configure the todo store path and optional Obsidian Kanban file
 - `todo-creation` — Creates a new todo file with sequential 4-digit numbering and YAML frontmatter via a bash script
-- `todo-gh-issue-import` — Imports GitHub issues into local todo files via `gh issue list`, then closes them
+- `todo-gh-issue-import` — Imports GitHub issues into the configured todo store via `gh issue list`, then closes them
 - `todo-processing` — Reference skill (not user-invocable) defining todo file conventions: naming (`[NNNN]_description.md`), completion (`DONE_` prefix), and progress tracking format
-- `todo-overview` — Generates or updates `TODO_OVERVIEW.md` with a Mermaid Kanban and markdown table
-- `todo-obsidian-icloud-import` — Imports todos from a local Obsidian vault synced via iCloud Drive (macOS only)
+- `todo-overview` — Regenerates the Obsidian Kanban board at the configured `kanbanFile` path (no-op if not configured)
+- `todo-moving` — Moves todo files between categories and renumbers to close gaps
 **skill-teaching** — Uses the Agent Skills open standard (from [agentskills.io](https://agentskills.io/)) to copy project-scoped skills to other agents' expected directories (e.g. `.codex/skills`):
 
 - Only operates on project-scoped skills in `.claude/skills` and plugin skills explicitly shared via `.claude/settings.json`

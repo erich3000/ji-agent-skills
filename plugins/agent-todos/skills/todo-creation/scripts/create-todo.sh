@@ -30,16 +30,7 @@ PROJECT_ROOT="$BASE_DIR"
 # Reads .agent-todos.local.json and sets TODOS_ROOT, VAULT_ROOT, KANBAN_FILE
 # ---------------------------------------------------------------------------
 _read_json_key() {
-  python3 - "$1" "$2" <<'PYEOF' 2>/dev/null
-import json, sys
-try:
-    d = json.load(open(sys.argv[1]))
-    v = d.get(sys.argv[2])
-    if v is not None:
-        print(v)
-except Exception:
-    pass
-PYEOF
+  jq -r --arg key "$2" '.[$key] // empty' "$1" 2>/dev/null
 }
 
 read_agent_todos_config() {
