@@ -1,80 +1,97 @@
 ---
 name: todo-init
-description: Initialize the docs/agent-todos folder structure (or the configured todos directory)
+description: >
+  This skill should be used when the user asks to "set up agent todos", "initialize
+  the todo store", "configure todos", "run todo init", "set up .agent-todos.local.json",
+  or wants to set up or reconfigure the todo store for this project.
 allowed-tools: Bash, Read, Write, AskUserQuestion
 invocation: user
 ---
 
 # todo-init
 
-Initialize the `docs/agent-todos/` folder structure for AI agent task tracking. If Obsidian mode is configured via `.agent-todos.local.json`, create the structure in the configured todos directory instead.
+Set up the agent todos configuration for this project. Creates `.agent-todos.local.json` in the project root and initializes the todo store directory.
+
+The default todo store is `docs/agent-todos/` inside the project. Users with Obsidian can point `todosRoot` to a vault path instead.
 
 ## Workflow
 
-1. Check if `docs/agent-todos/` already exists
-   - If yes, inform the user and ask if they want to add more categories
-   - If no, create the base directory
+### Step 1: Check for Existing Config
 
-2. Ask the user which category subdirectories to create (multi-select):
-   - `data/` - Data-related tasks
-   - `content/` - Content creation and editing tasks
-   - `misc/` - Miscellaneous tasks
-   - Custom categories as needed
+Read `.agent-todos.local.json` in the project root, if it exists.
 
-3. Create the selected subdirectories
+If a config file is found, show the current settings and ask the user whether to reconfigure or abort.
 
-4. Copy the `<base_directory>/resources/README.md` into `docs/agent-todos/` in order to explain the structure (only on initial setup)
+### Step 2: Determine Todo Store Path
+
+Ask the user where to store todos:
+
+- **Default** — `docs/agent-todos/` inside the project (works everywhere, no external tools needed)
+- **Custom path** — any absolute path, e.g. a path inside an Obsidian vault
+
+Use `AskUserQuestion` to let the user choose.
+
+### Step 3: Optionally Configure Obsidian Kanban
+
+If the user chose a custom path (not the project default), ask whether they use Obsidian and want a Kanban board:
+
+- **Yes** — ask for the `kanbanFile` path (an `.md` file in their vault, e.g. `~/Obsidian/my-vault/agent-todos/my-project-kanban.md`)
+- **No** — skip; no Kanban will be generated
+
+If the `todosRoot` path is inside a recognizable Obsidian vault (i.e. a parent directory contains `.obsidian/`), detect the vault root automatically and suggest a `kanbanFile` path like `<vault_root>/agent-todos/<project-name>-kanban.md`. Present this suggestion in the prompt so the user can confirm or override it.
+
+The `vaultRoot` field is set to the nearest parent directory that contains `.obsidian/`.
+
+### Step 4: Write Config File
+
+Create `.agent-todos.local.json` in the project root:
+
+```json
+{
+  "todosRoot": "<todos_root>"
+}
+```
+
+If Obsidian Kanban was configured, include:
+
+```json
+{
+  "todosRoot": "<todos_root>",
+  "vaultRoot": "<vault_root>",
+  "kanbanFile": "<kanban_file>"
+}
+```
+
+All paths should use `~` for the home directory when applicable.
+
+### Step 5: Create Todo Store Directory
+
+Create the `todosRoot` directory if it does not already exist:
+
+```bash
+mkdir -p "<todos_root>"
+```
+
+### Step 6: Ask for Initial Categories
+
+Ask the user which category subdirectories to create (multi-select). Suggest common ones:
+
+- `misc/` — Miscellaneous tasks
+- `data/` — Data-related tasks
+- `content/` — Content creation and editing tasks
+
+Create the selected subdirectories inside `todosRoot`.
+
+### Step 7: Copy README Template
+
+Copy `<base_directory>/resources/README.md` into the `todosRoot` directory (only if this is the first-time setup, not a reconfiguration).
 
 Where `<base_directory>` is the path shown in "Base directory for this skill:" at the top of the skill invocation.
 
-## README Template
-
-```markdown
-# Agent Todos
-
-This folder contains task files for AI agents working on this project.
-
-## Structure
-
-- Each subdirectory represents a category of tasks
-- Task files use the naming convention: `[NNNN]_[description].md`
-- Each todo file has YAML frontmatter with `title` and `status` fields
-- Completed tasks are prefixed with `DONE_`
-
-## Status Lifecycle
-
-Todo files include YAML frontmatter with a `status` field. Typical flow:
-
-```mermaid
-timeline
-  title Todo Status Lifecycle
-  new : Created but not yet fleshed out
-  ready : Has content and can be picked up
-  doing : Active work in progress
-  done : Completed (also rename file with DONE_ prefix)
-  archived : Reserved for future archiving
-```
-
-## Overview
-
-For an up-to-date overview of all todos, see:
-
-- [`/docs/agent-todos/TODO_OVERVIEW.md`](/docs/agent-todos/TODO_OVERVIEW.md)
-
-## Related Skills
-
-- `/todo-creation` - Create a new todo file with sequential numbering
-- `/todo-gh-issue-import` - Import GitHub issues as todo files
-- `/todo-overview` - Create and update the todo overview table
-- `/todo-processing` - Work with and update todo files
-
-See the skill documentation for details on file format and workflow.
-```
-
 ## Notes
 
-- This skill only creates the folder structure
-- Use `/todo-creation` to create individual todo files
-- Use `/todo-gh-issue-import` to populate with tasks from GitHub issues
-- Use `/todo-overview` to generate or refresh the todo overview
-- Use `/todo-processing` to work with existing todo files
+- `.agent-todos.local.json` is project-specific and should be added to `.gitignore` when `todosRoot` points outside the project
+- If `todosRoot` is inside the project (e.g. `docs/agent-todos`), it can be checked in
+- All todo skills (`/todo-creation`, `/todo-overview`, `/todo-processing`, etc.) read this config automatically
+- To use a different store later, re-run `/todo-init` or edit `.agent-todos.local.json` directly
+- Without `.agent-todos.local.json`, all skills fall back to `docs/agent-todos/` in the project root

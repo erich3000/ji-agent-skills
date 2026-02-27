@@ -8,16 +8,7 @@ PROJECT_ROOT="${1:-$PWD}"
 # Reads .agent-todos.local.json and sets TODOS_ROOT, VAULT_ROOT, KANBAN_FILE
 # ---------------------------------------------------------------------------
 _read_json_key() {
-  python3 - "$1" "$2" <<'PYEOF' 2>/dev/null
-import json, sys
-try:
-    d = json.load(open(sys.argv[1]))
-    v = d.get(sys.argv[2])
-    if v is not None:
-        print(v)
-except Exception:
-    pass
-PYEOF
+  jq -r --arg key "$2" '.[$key] // empty' "$1" 2>/dev/null
 }
 
 read_agent_todos_config() {
@@ -30,29 +21,25 @@ read_agent_todos_config() {
   v="$(_read_json_key "$config_file" todosRoot)";  [ -n "$v" ] && TODOS_ROOT="${v/#\~/$HOME}"
   v="$(_read_json_key "$config_file" vaultRoot)";  [ -n "$v" ] && VAULT_ROOT="${v/#\~/$HOME}"
   v="$(_read_json_key "$config_file" kanbanFile)"; [ -n "$v" ] && KANBAN_FILE="${v/#\~/$HOME}"
-  if [ -z "$KANBAN_FILE" ] && [ "$TODOS_ROOT" != "$PROJECT_ROOT/docs/agent-todos" ]; then
-    KANBAN_FILE="$(dirname "$TODOS_ROOT")/$(basename "$TODOS_ROOT")-kanban.md"
-  fi
 }
 
 read_agent_todos_config
 TODOS_DIR="$TODOS_ROOT"
 
-if [ -n "$KANBAN_FILE" ]; then
-  OUTPUT_FILE="$KANBAN_FILE"
-else
-  OUTPUT_FILE="$TODOS_DIR/TODO_OVERVIEW.md"
+if [ -z "$KANBAN_FILE" ]; then
+  echo "No kanbanFile configured in .agent-todos.local.json — skipping overview generation." >&2
+  echo "To enable the Kanban board, add \"kanbanFile\" to .agent-todos.local.json or run /todo-init." >&2
+  exit 0
 fi
 
 if [ ! -d "$TODOS_DIR" ]; then
-  echo "Error: $TODOS_DIR does not exist" >&2
+  echo "Error: todos directory does not exist: $TODOS_DIR" >&2
   exit 1
 fi
 
 tmpfile="$(mktemp)"
 rowsfile="$(mktemp)"
-kanbanfile="$(mktemp)"
-trap 'rm -f "$tmpfile" "$rowsfile" "$kanbanfile"' EXIT
+trap 'rm -f "$tmpfile" "$rowsfile"' EXIT
 
 extract_frontmatter_value() {
   local key="$1"
@@ -72,7 +59,6 @@ extract_frontmatter_value() {
 }
 
 while IFS= read -r file; do
-  rel_path="/${file#"$PROJECT_ROOT"/}"
   category="$(basename "$(dirname "$file")")"
   filename="$(basename "$file")"
 
@@ -94,16 +80,7 @@ while IFS= read -r file; do
     fi
   fi
 
-  todo_base="${filename%.md}"
-  todo_base="${todo_base#DONE_}"
-  if [[ "$todo_base" =~ ^([0-9]{4}) ]]; then
-    number="${BASH_REMATCH[1]}"
-    ticket="$category-$number"
-  else
-    ticket=""
-  fi
-
-  printf '%s\t%s\t%s\t%s\t%s\t%s\n' "$category" "$title" "$status" "$rel_path" "$ticket" "$file" >> "$rowsfile"
+  printf '%s\t%s\t%s\t%s\n' "$category" "$title" "$status" "$file" >> "$rowsfile"
 done < <(find "$TODOS_DIR" -mindepth 2 -maxdepth 2 -type f -name '*.md' ! -name 'README.md' ! -name 'overview.md' ! -name 'TODO_OVERVIEW.md' | sort)
 
 # ---------------------------------------------------------------------------
@@ -114,13 +91,13 @@ obsidian_lane() {
   local lane_label="$2"
   local checkbox="$3"
   printf '## %s\n' "$lane_label"
-  while IFS=$'\t' read -r category title status rel_path ticket full_path; do
+  while IFS=$'\t' read -r category title status full_path; do
     if [ "$status" = "$lane_status" ]; then
       local wiki_path esc_title
       if [ -n "$VAULT_ROOT" ]; then
         wiki_path="${full_path#"$VAULT_ROOT/"}"
       else
-        wiki_path="${rel_path#/}"
+        wiki_path="${full_path#"$PROJECT_ROOT/"}"
       fi
       wiki_path="${wiki_path%.md}"
       esc_title="${title//|/\\|}"
@@ -130,7 +107,7 @@ obsidian_lane() {
   printf '\n'
 }
 
-generate_obsidian_kanban() {
+{
   printf -- '---\nkanban-plugin: board\n---\n\n'
   obsidian_lane "new"   "New"   "- [ ]"
   obsidian_lane "ready" "Ready" "- [ ]"
@@ -145,88 +122,10 @@ generate_obsidian_kanban() {
 {"kanban-plugin":"board"}
 %%
 KANBAN_EOF
-}
-
-# ---------------------------------------------------------------------------
-# Mermaid Kanban generation (default)
-# ---------------------------------------------------------------------------
-append_lane() {
-  local lane="$1"
-  local lane_label="$2"
-  local has_lane_rows=0
-
-  printf '  %s[%s]\n' "$lane" "$lane_label" >> "$kanbanfile"
-  while IFS=$'\t' read -r category title status rel_path ticket full_path; do
-    if [ "$status" = "$lane" ] && [ -n "$ticket" ]; then
-      has_lane_rows=1
-      esc_title="${title//]/\\]}"
-      printf '    %s[%s]@{ ticket: %s }\n' "$ticket" "$esc_title" "$ticket" >> "$kanbanfile"
-    fi
-  done < "$rowsfile"
-
-  if [ "$has_lane_rows" -eq 0 ]; then
-    echo >> "$kanbanfile"
-  fi
-}
-
-has_rows=0
-while IFS=$'\t' read -r _ _ _ _ _ _; do
-  has_rows=1
-  break
-done < "$rowsfile"
-
-if [ -n "$KANBAN_FILE" ]; then
-  # Obsidian Kanban format
-  generate_obsidian_kanban > "$tmpfile"
-else
-  # Mermaid format
-  {
-    echo "# Todo Overview"
-    echo
-    echo "Generated on $(date '+%F %H:%M:%S %Z')."
-
-    echo
-    echo "## Todo Kanban"
-    echo
-
-    if [ "$has_rows" -eq 0 ]; then
-      echo "_No todos available for visualization._"
-    else
-      : > "$kanbanfile"
-      echo '```mermaid' >> "$kanbanfile"
-      echo "%%{init: {\"theme\":\"neutral\"}}%%" >> "$kanbanfile"
-      echo "kanban" >> "$kanbanfile"
-      append_lane "new" "New"
-      append_lane "ready" "Ready"
-      append_lane "doing" "Doing"
-      append_lane "done" "Done"
-      echo '```' >> "$kanbanfile"
-
-      cat "$kanbanfile"
-    fi
-
-    echo
-    echo "## Todo List"
-    echo
-    echo "| category | todo | status |"
-    echo "| --- | --- | --- |"
-
-    if [ "$has_rows" -eq 0 ]; then
-      echo "| - | - | - |"
-    else
-      while IFS=$'\t' read -r category title status rel_path ticket full_path; do
-        esc_title="${title//|/\\|}"
-        esc_category="${category//|/\\|}"
-        esc_status="${status//|/\\|}"
-
-        echo "| $esc_category | [$esc_title]($rel_path) | $esc_status |"
-      done < "$rowsfile"
-    fi
-  } > "$tmpfile"
-fi
+} > "$tmpfile"
 
 # Ensure parent directory exists (KANBAN_FILE may be outside project root)
-mkdir -p "$(dirname "$OUTPUT_FILE")"
+mkdir -p "$(dirname "$KANBAN_FILE")"
 
-mv "$tmpfile" "$OUTPUT_FILE"
-echo "$OUTPUT_FILE"
+mv "$tmpfile" "$KANBAN_FILE"
+echo "$KANBAN_FILE"
