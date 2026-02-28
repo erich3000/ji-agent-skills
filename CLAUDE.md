@@ -53,7 +53,7 @@ The project follows Claude Code's plugin system conventions:
 - `todo-init` — Sets up `.agent-todos.local.json` to configure the todo store path and optional Obsidian Kanban file
 - `todo-creation` — Creates a new todo file with sequential 4-digit numbering and YAML frontmatter via a bash script
 - `todo-gh-issue-import` — Imports GitHub issues into the configured todo store via `gh issue list`, then closes them
-- `todo-processing` — Reference skill (not user-invocable) defining todo file conventions: naming (`[NNNN]_description.md`), completion (`DONE_` prefix), and progress tracking format
+- `todo-processing` — Guides agents through picking up, working on, and completing todo files; defines naming conventions (`[NNNN]_description.md`), completion (`DONE_` prefix), and progress tracking format
 - `todo-overview` — Regenerates the Obsidian Kanban board at the configured `kanbanFile` path (no-op if not configured)
 - `todo-moving` — Moves todo files between categories and renumbers to close gaps
 **skill-teaching** — Uses the Agent Skills open standard (from [agentskills.io](https://agentskills.io/)) to copy project-scoped skills to other agents' expected directories (e.g. `.codex/skills`):
