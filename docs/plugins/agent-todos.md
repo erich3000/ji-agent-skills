@@ -6,10 +6,9 @@
 
 - Standardizes todo file creation, naming, and frontmatter.
 - Guides agents through a status lifecycle (`new`, `ready`, `doing`, `done`, `archived`).
-- Generates project-level todo overviews: Mermaid Kanban (default) or Obsidian Kanban board (Obsidian mode).
+- Generates an Obsidian Kanban board overview when `kanbanFile` is configured.
 - Moves open todos between categories and renumbers open items without colliding with DONE items.
-- Supports importing todos from GitHub issues and Obsidian/iCloud vaults.
-- Migrates an existing `docs/agent-todos/` to an Obsidian vault in one step.
+- Supports importing todos from GitHub issues.
 
 ## Skills
 
@@ -17,12 +16,10 @@
 | --- | --- |
 | `/todo-init` | Initializes the todos folder structure with category subdirectories. |
 | `/todo-creation` | Creates a new todo file with sequential 4-digit numbering and YAML frontmatter. |
-| `/todo-processing` | Reference skill defining todo file conventions, naming, and progress tracking. |
-| `/todo-overview` | Generates or updates the todo overview (Mermaid `TODO_OVERVIEW.md` or Obsidian Kanban board). |
+| `/todo-processing` | Guides agents through picking up, working on, and completing todo files. |
+| `/todo-overview` | Regenerates the Obsidian Kanban board at the configured `kanbanFile` path. |
 | `/todo-moving` | Moves selected open todos between categories and renumbers open todos in both folders. |
 | `/todo-gh-issue-import` | Imports open GitHub issues into local todo files using `gh issue list`. |
-| `/todo-obsidian-icloud-import` | Imports todos from a local Obsidian vault synced via iCloud Drive (macOS). |
-| `/todo-migrate-to-obsidian` | Copies `docs/agent-todos/` to an Obsidian vault and writes the config file (macOS). |
 
 ## Configuration
 
@@ -36,9 +33,9 @@ Create `.agent-todos.local.json` in the project root (this file is gitignored by
 
 ```json
 {
-  "todosRoot": "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/<vault-name>/agent-todos/<project-name>",
-  "vaultRoot": "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/<vault-name>",
-  "kanbanFile": "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/<vault-name>/agent-todos/<project-name>-kanban.md"
+  "todosRoot": "~/Obsidian/<vault-name>/agent-todos/<project-name>",
+  "vaultRoot": "~/Obsidian/<vault-name>",
+  "kanbanFile": "~/Obsidian/<vault-name>/agent-todos/<project-name>-kanban.md"
 }
 ```
 
@@ -46,23 +43,19 @@ Create `.agent-todos.local.json` in the project root (this file is gitignored by
 | --- | --- | --- |
 | `todosRoot` | yes | Absolute path to the todos root (holds category subdirectories). Replaces `docs/agent-todos/`. |
 | `vaultRoot` | no | Obsidian vault root. Used to compute wiki-link paths in the Kanban board. |
-| `kanbanFile` | no | Obsidian Kanban output path. Defaults to `$(dirname todosRoot)/$(basename todosRoot)-kanban.md`. |
+| `kanbanFile` | no | Obsidian Kanban output path. If not set, `/todo-overview` skips generation entirely. |
 
 `~` in paths is expanded to `$HOME` at runtime.
 
-When `kanban_file` is set (or derived from a non-default `todos_root`), `/todo-overview` generates an Obsidian Kanban board file instead of `TODO_OVERVIEW.md`.
+When `kanbanFile` is set, `/todo-overview` generates an Obsidian Kanban board file at that path.
 
 ### Switching back to default
 
 Delete `.agent-todos.local.json`. All skills fall back to `docs/agent-todos/` immediately — no other changes needed.
 
-### Migrating existing todos to Obsidian
-
-Run `/todo-migrate-to-obsidian` to copy `docs/agent-todos/` to the vault and write the config file automatically. The skill also generates the initial Kanban board and optionally removes `docs/agent-todos/` from the codebase.
-
 ## Obsidian Kanban output format
 
-When in Obsidian mode, `/todo-overview` generates a board compatible with the [Obsidian Kanban plugin](https://github.com/mgmeyers/obsidian-kanban):
+When `kanbanFile` is configured, `/todo-overview` generates a board compatible with the [Obsidian Kanban plugin](https://github.com/mgmeyers/obsidian-kanban):
 
 ````markdown
 ---
@@ -85,13 +78,11 @@ kanban-plugin: board
 ## Archive
 
 %% kanban:settings
-```json
 {"kanban-plugin":"board"}
-```
 %%
 ````
 
-Wiki-link paths are computed as the file path relative to `vault_root` with the `.md` extension stripped.
+Wiki-link paths are computed as the file path relative to `vaultRoot` with the `.md` extension stripped.
 
 ## Status Lifecycle
 
