@@ -42,7 +42,7 @@ The script:
 1. Scans all files in the category directory (including `DONE_` files) to find the highest numeric prefix
 2. Assigns the next sequential 4-digit number
 3. Converts the title to snake_case, truncated to 60 characters
-4. Creates the file with YAML frontmatter (`title`, `status: new`) and section stubs (`## Context`, `## Tasks`)
+4. Creates the file with YAML frontmatter (`title`, `status: new`, `tags: [todo, agent-todo]`) and section stubs (`## Context`, `## Tasks`)
 5. Prints the created file path to stdout
 
 If the script exits with a non-zero status, report the error output to the user and stop.
@@ -50,10 +50,6 @@ If the script exits with a non-zero status, report the error output to the user 
 ### 3. Prompt for Description
 
 After the file is created, inform the user of the file path and ask them to add a description or task details. Once content is added, update the frontmatter status from `new` to `ready`.
-
-### 4. Update Overview
-
-After creating the todo (and again after switching `status` to `ready`), run `/todo-overview` to refresh the todo overview.
 
 ## File Format
 
@@ -63,6 +59,9 @@ The created file follows this structure:
 ---
 title: Fix soft 404 errors
 status: new
+tags:
+- todo
+- agent-todo
 ---
 
 ## Context
@@ -76,6 +75,9 @@ After the user provides content, the recommended structure is:
 ---
 title: Fix soft 404 errors
 status: ready
+tags:
+- todo
+- agent-todo
 ---
 
 ## Problem / Context
@@ -94,4 +96,3 @@ status: ready
 - If the category directory does not exist, it is created automatically.
 - The filename is truncated to 60 characters (before the `.md` extension) to keep paths manageable.
 - After the user adds content, update the status to `ready` so the todo is recognized as actionable under the conventions defined by `todo-processing`.
-- Keep the todo overview in sync by invoking `/todo-overview` after creation and status updates.

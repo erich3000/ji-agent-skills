@@ -39,7 +39,6 @@ Where:
 - `<project_root>` is the repository root.
 
 3. Review script output for moved files, warnings, and renumbering actions.
-4. Run `/todo-overview` to refresh the todo overview.
 
 ## Todo Set Format
 
