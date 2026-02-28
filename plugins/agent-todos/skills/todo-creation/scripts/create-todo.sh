@@ -11,7 +11,7 @@
 #   1. Scans all files (open and DONE_) in the category to find the highest number
 #   2. Generates the next 4-digit prefix
 #   3. Converts the title to snake_case, truncated to 60 characters
-#   4. Creates the file with YAML frontmatter (title, status: new) and section stubs
+#   4. Creates the file with YAML frontmatter (title, status: new, tags) and section stubs
 
 set -euo pipefail
 
@@ -27,7 +27,7 @@ PROJECT_ROOT="$BASE_DIR"
 
 # ---------------------------------------------------------------------------
 # Agent-todos config reader
-# Reads .agent-todos.local.json and sets TODOS_ROOT, VAULT_ROOT, KANBAN_FILE
+# Reads .agent-todos.local.json and sets TODOS_ROOT
 # ---------------------------------------------------------------------------
 _read_json_key() {
   jq -r --arg key "$2" '.[$key] // empty' "$1" 2>/dev/null
@@ -36,16 +36,9 @@ _read_json_key() {
 read_agent_todos_config() {
   local config_file="$PROJECT_ROOT/.agent-todos.local.json"
   TODOS_ROOT="$PROJECT_ROOT/docs/agent-todos"
-  VAULT_ROOT=""
-  KANBAN_FILE=""
   [ -f "$config_file" ] || return 0
   local v
   v="$(_read_json_key "$config_file" todosRoot)";  [ -n "$v" ] && TODOS_ROOT="${v/#\~/$HOME}"
-  v="$(_read_json_key "$config_file" vaultRoot)";  [ -n "$v" ] && VAULT_ROOT="${v/#\~/$HOME}"
-  v="$(_read_json_key "$config_file" kanbanFile)"; [ -n "$v" ] && KANBAN_FILE="${v/#\~/$HOME}"
-  if [ -z "$KANBAN_FILE" ] && [ "$TODOS_ROOT" != "$PROJECT_ROOT/docs/agent-todos" ]; then
-    KANBAN_FILE="$(dirname "$TODOS_ROOT")/$(basename "$TODOS_ROOT")-kanban.md"
-  fi
 }
 
 read_agent_todos_config
@@ -93,6 +86,9 @@ cat > "$FILEPATH" <<EOF
 ---
 title: '${YAML_TITLE}'
 status: new
+tags:
+- todo
+- agent-todo
 ---
 
 ## Context

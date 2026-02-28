@@ -92,10 +92,6 @@ gh issue close <number> --comment "Imported to <file-path>"
 
 Where `<file-path>` is the relative path like `docs/agent-todos/data/0042_fix_soft_404_errors.md`.
 
-### 7. Update Overview
-
-After processing all issues (and closing them), run `/todo-overview` to refresh the todo overview.
-
 ## Example
 
 An imported issue #7 titled "Fix soft 404 errors" with label "data" becomes `<todos-directory>/data/0042_fix_soft_404_errors.md`:
@@ -104,6 +100,9 @@ An imported issue #7 titled "Fix soft 404 errors" with label "data" becomes `<to
 ---
 title: Fix soft 404 errors
 status: ready
+tags:
+- todo
+- agent-todo
 ---
 
 ## Problem / Context
@@ -124,4 +123,3 @@ The GitHub issue is then closed with the comment: `Imported to <todos-directory>
 - Imported todos always get `status: ready` since they already have content from the issue
 - The `/todo-creation` skill handles sequential numbering and file naming conventions
 - If `gh` is not authenticated, the user will see an auth error — direct them to run `gh auth login`
-- Keep the todo overview in sync by invoking `/todo-overview` after imports.

@@ -110,6 +110,9 @@ Each todo file should contain:
 ---
 title: Task Title
 status: ready
+tags:
+- todo
+- agent-todo
 ---
 
 ## Problem / Context
@@ -160,6 +163,16 @@ Tracks the lifecycle of a todo. Values and transitions:
 - When a file has meaningful content (problem description, tasks), use `ready`.
 - A freshly created empty file uses `new`.
 
+### `tags`
+
+Every todo file should include the following tags:
+
+```yaml
+tags:
+- todo
+- agent-todo
+```
+
 ## Workflow
 
 ### 1. Reading a Todo
@@ -170,7 +183,6 @@ When assigned a task:
 2. Update the frontmatter status from `ready` → `doing`
 3. Note any prerequisites or context
 4. Check for existing progress entries
-5. Run `/todo-overview` after status changes to refresh the todo overview
 
 ### 2. Working on a Task
 
@@ -209,7 +221,6 @@ When task is complete:
 2. Add a final progress entry documenting completion
 3. If the file has checkboxes, mark them all as `[x]`
 4. Rename the file with `DONE_` prefix
-5. Run `/todo-overview` after marking done to refresh the todo overview
 
 ## Best Practices
 
@@ -219,7 +230,6 @@ When task is complete:
 4. **Link to related files** - Reference files that were created/modified
 5. **Ask before assuming** - Add questions to the file and ask the user
 6. **Update internal docs** - After completing a task, update relevant documentation
-7. **Keep overview current** — Trigger `/todo-overview` whenever todo status changes
 
 ## Finding Tasks
 
