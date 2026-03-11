@@ -24,6 +24,8 @@ If a config file is found, show the current settings and ask the user whether to
 
 **Upgrade path — missing `projectName`:** If the existing config is kept (user chooses not to reconfigure) but `projectName` is absent, ask: "Would you like to add a `projectName` to your config? This value is included in the `projects:` frontmatter of every new todo (e.g. `[[my-project]]`)." If yes, ask for the value and write it to the config file.
 
+**Upgrade path — missing CLAUDE.md section:** If the existing config is kept but no `## Agent Todos` section exists in `CLAUDE.md`, proceed to Step 6 to add it.
+
 ### Step 2: Determine Todo Store Path
 
 Ask the user where to store todos:
@@ -79,6 +81,37 @@ Ask the user which category subdirectories to create (multi-select). Suggest com
 - `content/` — Content creation and editing tasks
 
 Create the selected subdirectories inside `todosRoot`.
+
+### Step 6: Add Agent Todos Section to CLAUDE.md
+
+Check whether a `CLAUDE.md` file exists in the project root and whether it already contains an `## Agent Todos` section:
+
+```bash
+grep -q "## Agent Todos" CLAUDE.md 2>/dev/null && echo "exists" || echo "missing"
+```
+
+If the section is **missing**, append the following reference block to `CLAUDE.md`. Replace `<todosRoot>` with the actual configured path:
+
+```markdown
+## Agent Todos
+
+This project uses the **agent-todos** plugin to manage tasks as structured Markdown files.
+
+**IMPORTANT:** Always read `.agent-todos.local.json` before any todo operation. It defines `todosRoot` — the actual directory where todo files are stored. Do not fall back to `docs/agent-todos/` when this file is present.
+
+**Current todo store:** `<todosRoot>`
+
+**Skills:**
+
+- `/todo-creation [category] [title]` — create a new todo file
+- `/todo-processing [category/number]` — pick up and work on a todo
+- `/todo-gh-issue-import [category]` — import GitHub issues as todos
+- `/todo-moving` — renumber or move todos between categories
+```
+
+If `CLAUDE.md` does not exist, create it with only this section.
+
+If the section already exists, skip this step.
 
 ## Notes
 
