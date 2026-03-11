@@ -42,7 +42,7 @@ The script:
 1. Scans all files in the category directory (including `DONE_` files) to find the highest numeric prefix
 2. Assigns the next sequential 4-digit number
 3. Converts the title to snake_case, truncated to 60 characters
-4. Creates the file with YAML frontmatter (`title`, `status: new`, `tags: [todo, agent-todo]`) and section stubs (`## Context`, `## Tasks`)
+4. Creates the file with YAML frontmatter (`title`, `status: new`, optional `projects` from config `projectName`, `tags: [todo, agent-todo]`) and section stubs (`## Context`, `## Tasks`)
 5. Prints the created file path to stdout
 
 If the script exits with a non-zero status, report the error output to the user and stop.
@@ -59,6 +59,8 @@ The created file follows this structure:
 ---
 title: Fix soft 404 errors
 status: new
+projects:
+- '[[my-project]]'
 tags:
 - todo
 - agent-todo
@@ -69,12 +71,16 @@ tags:
 ## Tasks
 ```
 
+The `projects:` field is included only when `projectName` is set in `.agent-todos.local.json`. If absent, the field is omitted entirely.
+
 After the user provides content, the recommended structure is:
 
 ```markdown
 ---
 title: Fix soft 404 errors
 status: ready
+projects:
+- '[[my-project]]'
 tags:
 - todo
 - agent-todo

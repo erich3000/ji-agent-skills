@@ -100,6 +100,8 @@ An imported issue #7 titled "Fix soft 404 errors" with label "data" becomes `<to
 ---
 title: Fix soft 404 errors
 status: ready
+projects:
+- '[[my-project]]'
 tags:
 - todo
 - agent-todo
