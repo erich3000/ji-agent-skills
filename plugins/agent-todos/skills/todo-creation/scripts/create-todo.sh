@@ -36,9 +36,11 @@ _read_json_key() {
 read_agent_todos_config() {
   local config_file="$PROJECT_ROOT/.agent-todos.local.json"
   TODOS_ROOT="$PROJECT_ROOT/docs/agent-todos"
+  PROJECT_NAME=""
   [ -f "$config_file" ] || return 0
   local v
-  v="$(_read_json_key "$config_file" todosRoot)";  [ -n "$v" ] && TODOS_ROOT="${v/#\~/$HOME}"
+  v="$(_read_json_key "$config_file" todosRoot)";    if [ -n "$v" ]; then TODOS_ROOT="${v/#\~/$HOME}"; fi
+  v="$(_read_json_key "$config_file" projectName)";  if [ -n "$v" ]; then PROJECT_NAME="$v"; fi
 }
 
 read_agent_todos_config
@@ -81,12 +83,20 @@ FILEPATH="$TODO_DIR/$FILENAME"
 # Escape single quotes in title for YAML single-quoted scalar
 YAML_TITLE=$(printf '%s' "$TITLE" | sed "s/'/''/g")
 
+# Build optional projects block
+PROJECTS_BLOCK=""
+if [ -n "$PROJECT_NAME" ]; then
+  PROJECTS_BLOCK="projects:
+- '${PROJECT_NAME}'
+"
+fi
+
 # Write the file
 cat > "$FILEPATH" <<EOF
 ---
 title: '${YAML_TITLE}'
 status: new
-tags:
+${PROJECTS_BLOCK}tags:
 - todo
 - agent-todo
 ---

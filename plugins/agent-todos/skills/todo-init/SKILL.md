@@ -22,6 +22,8 @@ Read `.agent-todos.local.json` in the project root, if it exists.
 
 If a config file is found, show the current settings and ask the user whether to reconfigure or abort.
 
+**Upgrade path — missing `projectName`:** If the existing config is kept (user chooses not to reconfigure) but `projectName` is absent, ask: "Would you like to add a `projectName` to your config? This value is included in the `projects:` frontmatter of every new todo (e.g. `[[my-project]]`)." If yes, ask for the value and write it to the config file.
+
 ### Step 2: Determine Todo Store Path
 
 Ask the user where to store todos:
@@ -31,6 +33,14 @@ Ask the user where to store todos:
 
 Use `AskUserQuestion` to let the user choose.
 
+### Step 2b: Determine Project Name (optional)
+
+After the todo store path is set, ask the user whether they want to associate todos with a project name:
+
+> Would you like to add a `projectName` to tag every new todo? This is included in the `projects:` frontmatter field (e.g. `[[my-project]]` for Obsidian task-notes integration). Leave blank to skip.
+
+This field is optional. If the user provides a value, include it in the config.
+
 ### Step 3: Write Config File
 
 Create `.agent-todos.local.json` in the project root:
@@ -38,6 +48,15 @@ Create `.agent-todos.local.json` in the project root:
 ```json
 {
   "todosRoot": "<todos_root>"
+}
+```
+
+If the user provided a `projectName`, include it:
+
+```json
+{
+  "todosRoot": "<todos_root>",
+  "projectName": "<project_name>"
 }
 ```
 
