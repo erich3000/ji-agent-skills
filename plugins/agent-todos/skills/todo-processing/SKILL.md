@@ -25,7 +25,7 @@ Use that file directly. Proceed to Step 2.
 
 **If no argument is given:**
 
-1. Read the configured todos directory from `.agent-todos.local.json` (`todosRoot`), defaulting to `docs/agent-todos`.
+1. Read the configured todos directory from `.agent-todos.local.json` (`todosRoot`), defaulting to `docs/agent-todos`. Look for this file in the project root. If not found there (e.g., when running inside a git worktree), run `git rev-parse --git-common-dir` to locate the main worktree's `.git` directory, then check for the config in its parent folder.
 
 2. Find all open todos (non-`DONE_`, non-`TODO_OVERVIEW.md` `.md` files):
 
@@ -233,7 +233,7 @@ When task is complete:
 
 ## Finding Tasks
 
-Read the configured todos directory from `.agent-todos.local.json` (`todosRoot`), defaulting to `docs/agent-todos`. Substitute `<todos-dir>` below with that value.
+Read the configured todos directory from `.agent-todos.local.json` (`todosRoot`), defaulting to `docs/agent-todos`. If the config is not found in the project root (e.g., inside a git worktree), run `git rev-parse --git-common-dir` and check the parent of that path. Substitute `<todos-dir>` below with the resolved value.
 
 To list all open (not done) tasks:
 
