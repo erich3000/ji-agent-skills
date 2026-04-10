@@ -35,7 +35,7 @@ Run the bundled script to create the todo file:
 bash <base_directory>/scripts/create-todo.sh "<category>" "<title>" "<project_root>"
 ```
 
-Where `<base_directory>` is the path shown in "Base directory for this skill:" at the top of the skill invocation, and `<project_root>` is the root of the current project.
+Where `<base_directory>` is the path shown in "Base directory for this skill:" at the top of the skill invocation, and `<project_root>` is the root of the current project. The script reads `.agent-todos.local.json` from `<project_root>` and falls back to the main worktree root automatically when operating inside a git worktree.
 
 The script:
 

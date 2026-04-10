@@ -37,6 +37,17 @@ read_agent_todos_config() {
   local config_file="$PROJECT_ROOT/.agent-todos.local.json"
   TODOS_ROOT="$PROJECT_ROOT/docs/agent-todos"
   PROJECT_NAME=""
+
+  # Worktree fallback: if config not found in PROJECT_ROOT, check the main worktree root
+  if [ ! -f "$config_file" ]; then
+    local git_common_dir
+    git_common_dir=$(git -C "$PROJECT_ROOT" rev-parse --git-common-dir 2>/dev/null) || true
+    if [ -n "$git_common_dir" ]; then
+      [[ "$git_common_dir" = /* ]] || git_common_dir="$PROJECT_ROOT/$git_common_dir"
+      config_file="$(dirname "$git_common_dir")/.agent-todos.local.json"
+    fi
+  fi
+
   [ -f "$config_file" ] || return 0
   local v
   v="$(_read_json_key "$config_file" todosRoot)";    if [ -n "$v" ]; then TODOS_ROOT="${v/#\~/$HOME}"; fi
