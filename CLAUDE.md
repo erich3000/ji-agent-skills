@@ -78,6 +78,10 @@ The plugin provides the following skills:
 - `trello-media-download` — Downloads Trello-hosted images locally and rewrites Markdown links to local paths
 - `trello-set-thumbnail` — Adds a `thumbnail` frontmatter field from the first image in each card note
 
+**cmux-tools** — Browser workflow skills for `cmux`:
+
+- `cmux-browser-screenshooting` — Discovers or opens a `cmux` browser pane, navigates to a URL when needed, waits for load completion, and captures a screenshot to a local file
+
 ## Installation
 
 ```bash
@@ -87,6 +91,7 @@ claude plugin install skill-teaching@ji-agent-skills --scope project
 claude plugin install hugo-blog@ji-agent-skills --scope project
 claude plugin install obsidian@ji-agent-skills --scope project
 claude plugin install trello2obsidian@ji-agent-skills --scope project
+claude plugin install cmux-tools@ji-agent-skills --scope project
 ```
 
 ## Development Workflow

@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "A collection of Claude Code plugins for AI agent workflows and skill sharing",
-    "version": "0.0.2"
+    "version": "0.0.3"
   },
   "plugins": [
     {
@@ -37,6 +37,12 @@
       "version": "0.1.0",
       "source": "./plugins/trello2obsidian",
       "description": "Convert Trello JSON exports into Obsidian-compatible notes"
+    },
+    {
+      "name": "cmux-tools",
+      "version": "0.2.0",
+      "source": "./plugins/cmux-tools",
+      "description": "cmux browser workflow skills for opening, navigating, and screenshotting pages"
     }
   ]
 }
