@@ -43,6 +43,12 @@
       "version": "0.2.0",
       "source": "./plugins/cmux-tools",
       "description": "cmux browser workflow skills for opening, navigating, and screenshotting pages"
+    },
+    {
+      "name": "office",
+      "version": "0.1.0",
+      "source": "./plugins/office",
+      "description": "Microsoft Office file manipulation skills"
     }
   ]
 }

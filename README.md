@@ -14,6 +14,7 @@ See the [Plugins Reference](https://code.claude.com/docs/en/plugins-reference) f
 | `obsidian`        | Obsidian vault, Kanban, and styling skills                 | [obsidian.md](docs/plugins/obsidian.md)               |
 | `trello2obsidian` | Convert Trello JSON exports into Obsidian-compatible notes | [trello2obsidian.md](docs/plugins/trello2obsidian.md) |
 | `cmux-tools`      | `cmux` browser opening, navigation, and screenshot skills  | [cmux-tools.md](docs/plugins/cmux-tools.md)           |
+| `office`          | Microsoft Office file manipulation skills                  | [office.md](docs/plugins/office.md)                   |
 
 Plugin-specific details, skill lists, and setup can be found under `docs/plugins/`.
 
@@ -49,4 +50,8 @@ claude plugin install trello2obsidian@ji-agent-skills --scope project
 
 ```bash
 claude plugin install cmux-tools@ji-agent-skills --scope project
+```
+
+```bash
+claude plugin install office@ji-agent-skills --scope project
 ```
