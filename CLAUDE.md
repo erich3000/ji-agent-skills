@@ -82,6 +82,10 @@ The plugin provides the following skills:
 
 - `cmux-browser-screenshooting` — Discovers or opens a `cmux` browser pane, navigates to a URL when needed, waits for load completion, and captures a screenshot to a local file
 
+**office** — Microsoft Office file manipulation skills:
+
+- `powerpoint-neutralizing` — Applies uniform PowerPoint styling by standardizing slide background, fonts, sizes, text color, and removing text shadows in a generated output file
+
 ## Installation
 
 ```bash
@@ -92,6 +96,7 @@ claude plugin install hugo-blog@ji-agent-skills --scope project
 claude plugin install obsidian@ji-agent-skills --scope project
 claude plugin install trello2obsidian@ji-agent-skills --scope project
 claude plugin install cmux-tools@ji-agent-skills --scope project
+claude plugin install office@ji-agent-skills --scope project
 ```
 
 ## Development Workflow
