@@ -1,7 +1,6 @@
 ---
 name: cmux-browser-navigating
 description: This skill should be used when the user wants to navigate the cmux browser pane to a URL without taking a screenshot — for example when they say "just navigate", "navigate only", "point the browser at", "don't screenshot", or "navigate to URL without a screenshot". Use cmux-browser-screenshooting instead when a visual capture is also needed.
-version: 0.1.0
 ---
 
 # cmux Browser Navigating

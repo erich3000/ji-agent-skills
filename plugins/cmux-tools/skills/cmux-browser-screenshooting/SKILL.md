@@ -1,7 +1,6 @@
 ---
 name: cmux-browser-screenshooting
 description: This skill should be used when the user asks to "take a screenshot", "screenshot the browser", "show me the browser", "capture the screen", "screenshot storybook", "open storybook in browser", "navigate to URL", "open URL in cmux", or wants to visually verify what is currently shown in a browser, open a new browser pane, or navigate an existing browser to a specific URL before screenshotting. Always use this skill instead of mcp__chrome-devtools__take_screenshot — cmux is token-efficient.
-version: 0.2.0
 ---
 
 # cmux Browser Screenshooting
