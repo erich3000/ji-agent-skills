@@ -40,7 +40,7 @@
     },
     {
       "name": "cmux-tools",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "source": "./plugins/cmux-tools",
       "description": "cmux browser workflow skills for opening, navigating, and screenshotting pages"
     },
