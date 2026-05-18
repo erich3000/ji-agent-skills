@@ -81,6 +81,7 @@ The plugin provides the following skills:
 **cmux-tools** — Browser workflow skills for `cmux`:
 
 - `cmux-browser-screenshooting` — Discovers or opens a `cmux` browser pane, navigates to a URL when needed, waits for load completion, and captures a screenshot to a local file
+- `cmux-browser-navigating` — Navigates the `cmux` browser pane to a URL without taking a screenshot; opens a split browser if none exists
 
 **office** — Microsoft Office file manipulation skills:
 

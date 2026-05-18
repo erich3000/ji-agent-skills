@@ -15,6 +15,7 @@
 | Skill | Description |
 | --- | --- |
 | `/cmux-browser-screenshooting` | Opens or reuses a `cmux` browser pane, navigates to a target URL when needed, waits for the page to load, and captures a screenshot. |
+| `/cmux-browser-navigating` | Navigates the `cmux` browser pane to a URL without taking a screenshot. Opens a split browser if none exists. |
 
 ## Typical Usage
 
