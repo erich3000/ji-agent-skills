@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Sync Claude Code skills to other AI agents
 # Usage: sync-skills.sh <target> [project-root]
-# Targets: codex
+# Targets: codex, opencode, agents, gemini
 
 PROJECT_ROOT="${2:-$PWD}"
 SETTINGS_FILE="$PROJECT_ROOT/.claude/settings.json"
@@ -14,7 +14,7 @@ TARGET="${1:-}"
 
 if [[ -z "$TARGET" ]]; then
   echo "Usage: sync-skills.sh <target>"
-  echo "Available targets: codex"
+  echo "Available targets: codex, opencode, agents, gemini"
   exit 1
 fi
 
@@ -23,9 +23,21 @@ case "$TARGET" in
     DEST="$PROJECT_ROOT/.codex/skills"
     MANIFEST="$DEST/.claude-synced-skills.json"
     ;;
+  opencode)
+    DEST="$PROJECT_ROOT/.opencode/skills"
+    MANIFEST="$DEST/.claude-synced-skills.json"
+    ;;
+  agents)
+    DEST="$PROJECT_ROOT/.agents/skills"
+    MANIFEST="$DEST/.claude-synced-skills.json"
+    ;;
+  gemini)
+    DEST="$PROJECT_ROOT/.gemini/skills"
+    MANIFEST="$DEST/.claude-synced-skills.json"
+    ;;
   *)
     echo "Error: Unknown target '$TARGET'"
-    echo "Available targets: codex"
+    echo "Available targets: codex, opencode, agents, gemini"
     exit 1
     ;;
 esac
