@@ -14,16 +14,19 @@ Synchronize Claude Code skills to other AI agents in the project. This enables k
 Determine the target agent where skills should be synced:
 
 - `codex` - OpenAI Codex agent (destination: `.codex/skills`)
+- `opencode` - OpenCode agent (destination: `.opencode/skills`)
+- `agents` - Generic agents folder (destination: `.agents/skills`)
+- `gemini` - Gemini agent (destination: `.gemini/skills`)
 
 ### Step 2: Execute Sync Script
 
 Run the sync script from the project root with the target agent identifier:
 
 ```bash
-bash <base_directory>/scripts/sync-skills.sh <target> <project_root>
+bash <base_directory>/scripts/sync-skills.sh <target>
 ```
 
-Where `<base_directory>` is the path shown in "Base directory for this skill:" output.
+Where `<base_directory>` is the path shown in "Base directory for this skill:" output. Pass a second argument `<project_root>` when running from a directory other than the project root (defaults to `$PWD`).
 
 ### Step 3: Verify Sync Results
 
@@ -40,6 +43,15 @@ The script performs these operations:
 ```bash
 # Sync all skills to Codex agent
 bash <base_directory>/scripts/sync-skills.sh codex
+
+# Sync all skills to OpenCode agent
+bash <base_directory>/scripts/sync-skills.sh opencode
+
+# Sync all skills to generic agents folder
+bash <base_directory>/scripts/sync-skills.sh agents
+
+# Sync all skills to Gemini agent
+bash <base_directory>/scripts/sync-skills.sh gemini
 ```
 
 ## Additional Resources
@@ -48,4 +60,4 @@ bash <base_directory>/scripts/sync-skills.sh codex
 
 The skill includes a utility script for skill synchronization:
 
-- **`scripts/sync-skills.sh`** - Executes the sync operation with manifest management
+- **`scripts/sync-skills.sh`** - Executes the sync operation with manifest management. Supported targets: `codex`, `opencode`, `agents`, `gemini`.
