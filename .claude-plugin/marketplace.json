@@ -49,6 +49,12 @@
       "version": "0.1.0",
       "source": "./plugins/office",
       "description": "Microsoft Office file manipulation skills"
+    },
+    {
+      "name": "figma",
+      "version": "0.1.0",
+      "source": "./plugins/figma",
+      "description": "Figma Dev Mode MCP server integration — load Figma design tools on demand"
     }
   ]
 }

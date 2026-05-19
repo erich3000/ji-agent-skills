@@ -1,0 +1,5 @@
+{
+  "name": "figma",
+  "description": "Figma Dev Mode MCP server integration — load Figma design tools on demand to avoid token waste when not doing design work",
+  "version": "0.1.0"
+}
