@@ -86,6 +86,11 @@ The plugin provides the following skills:
 
 - `powerpoint-neutralizing` — Applies uniform PowerPoint styling by standardizing slide background, fonts, sizes, text color, and removing text shadows in a generated output file
 
+**figma** — Figma Dev Mode MCP server integration for on-demand design tools:
+
+- `figma-mcp-setup` — Walks through enabling the Figma Dev Mode MCP server in the Figma desktop app (Preferences → Dev Mode → toggle), verifies connectivity via `curl`/`nc` on `127.0.0.1:3845`, and activates the plugin with `/plugin enable figma` + `/reload-plugins`. Avoids loading ~9 Figma tool schemas on every Claude Code session when not doing design work.
+- `figma-implementing` — Takes a Figma URL, checks MCP availability, fetches component data via the Dev Mode MCP tools, detects the current repo's tech stack (framework, language, styling, tokens) from `package.json`/`CLAUDE.md`/existing files, and implements the component following repo conventions.
+
 ## Installation
 
 ```bash
@@ -97,6 +102,7 @@ claude plugin install obsidian@ji-agent-skills --scope project
 claude plugin install trello2obsidian@ji-agent-skills --scope project
 claude plugin install cmux-tools@ji-agent-skills --scope project
 claude plugin install office@ji-agent-skills --scope project
+claude plugin install figma@ji-agent-skills --scope project
 ```
 
 ## Development Workflow
