@@ -88,6 +88,10 @@ The plugin provides the following skills:
 
 - `powerpoint-neutralizing` — Applies uniform PowerPoint styling by standardizing slide background, fonts, sizes, text color, and removing text shadows in a generated output file
 
+**git-skills** — Git workflow skills for repository maintenance:
+
+- `git-local-branch-cleaning` — Deletes local (and matching remote) branches that are fully merged into `main`, have a gone remote tracking ref, or whose PR is merged/closed; fetches, shows candidates, and asks for confirmation before deleting
+
 **figma** — Figma Dev Mode MCP server integration for on-demand design tools:
 
 - `figma-mcp-setup` — Walks through enabling the Figma Dev Mode MCP server in the Figma desktop app (Preferences → Dev Mode → toggle), verifies connectivity via `curl`/`nc` on `127.0.0.1:3845`, and activates the plugin with `/plugin enable figma` + `/reload-plugins`. Avoids loading ~9 Figma tool schemas on every Claude Code session when not doing design work.
@@ -105,6 +109,7 @@ claude plugin install trello2obsidian@ji-agent-skills --scope project
 claude plugin install cmux-tools@ji-agent-skills --scope project
 claude plugin install office@ji-agent-skills --scope project
 claude plugin install figma@ji-agent-skills --scope project
+claude plugin install git-skills@ji-agent-skills --scope project
 ```
 
 ## Development Workflow
