@@ -115,19 +115,19 @@ claude plugin install figma@ji-agent-skills --scope project
 claude plugin install git-skills@ji-agent-skills --scope project
 ```
 
-### Codex / other agents (no Claude Code required)
+### Any agent (no Claude Code required)
 
-`install-skills.sh` copies skills directly into any agent's skills directory:
+`install-skills.sh` auto-detects installed agents (Codex, Claude Code, OpenCode, Gemini, …) and installs skills into each one. Requires only `bash` and `git`.
 
 ```bash
-# All skills → .codex/skills/ (default)
+# Auto-detect agents, install all plugins
 curl -sSL https://raw.githubusercontent.com/erich3000/ji-agent-skills/main/install-skills.sh | bash
 
 # Specific plugins only
 curl -sSL https://raw.githubusercontent.com/erich3000/ji-agent-skills/main/install-skills.sh | bash -s -- cmux-tools git-skills
 
-# Custom target directory
-bash install-skills.sh --target .claude/skills
+# Explicit target directory
+bash install-skills.sh --target .codex/skills
 ```
 
 ## Development Workflow
