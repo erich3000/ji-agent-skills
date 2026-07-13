@@ -100,6 +100,8 @@ The plugin provides the following skills:
 
 ## Installation
 
+### Claude Code
+
 ```bash
 claude plugin marketplace add https://github.com/erich3000/ji-agent-skills
 claude plugin install agent-todos@ji-agent-skills --scope project
@@ -111,6 +113,21 @@ claude plugin install cmux-tools@ji-agent-skills --scope project
 claude plugin install office@ji-agent-skills --scope project
 claude plugin install figma@ji-agent-skills --scope project
 claude plugin install git-skills@ji-agent-skills --scope project
+```
+
+### Codex / other agents (no Claude Code required)
+
+`install-skills.sh` copies skills directly into any agent's skills directory:
+
+```bash
+# All skills → .codex/skills/ (default)
+curl -sSL https://raw.githubusercontent.com/erich3000/ji-agent-skills/main/install-skills.sh | bash
+
+# Specific plugins only
+curl -sSL https://raw.githubusercontent.com/erich3000/ji-agent-skills/main/install-skills.sh | bash -s -- cmux-tools git-skills
+
+# Custom target directory
+bash install-skills.sh --target .claude/skills
 ```
 
 ## Development Workflow
