@@ -84,6 +84,7 @@ The plugin provides the following skills:
 - `cmux-browser-navigating` — Navigates the `cmux` browser pane to a URL without taking a screenshot; opens a split browser if none exists
 - `cmux-browser-chatgpting` — Sends a question to the ChatGPT browser surface open in cmux, submits via the send-button fallback chain (contenteditable textarea, no keyboard events), and captures the response as a screenshot
 - `cmux-browser-content-reading` — Reads text content from an already-open browser surface without navigating; discovers surface by title match, reads URL, and extracts text via `get text --selector`
+- `cmux-file-previewing` — Opens one or more files as viewer tabs in a dedicated cmux pane; reuses the same pane across calls via a cached pane ref so repeated previews accumulate as tabs instead of scattering across the workspace
 
 **office** — Microsoft Office file manipulation skills:
 
