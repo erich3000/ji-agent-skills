@@ -87,19 +87,15 @@ Output format (JSON):
 
 ### 2. Search by Sender
 
-Search messages from a specific sender:
-
-```bash
-mail-app-cli search "from:alice@example.com" | jq
-```
-
-Or use natural language:
+Search messages from a specific sender using free-text (no special syntax like `from:`):
 
 ```bash
 mail-app-cli search "alice@example.com" | jq
 ```
 
-The search will match subject or sender containing the email address.
+This searches both subject and sender fields for the text. The search will match messages from alice@example.com or with that address in the subject.
+
+Note: Gmail-style operators like `from:alice@example.com` do NOT work — this would search for the literal string "from:" instead.
 
 ### 3. Search by Subject or Topic
 
@@ -115,26 +111,42 @@ Control result count:
 
 ```bash
 mail-app-cli search "invoice" -l 10 | jq
-mail-app-cli search "from alice" -l 25 | jq
+mail-app-cli search "alice" -l 25 | jq
 ```
+
+Note: The second example searches for messages containing "alice" in the subject or sender field, not using a special `from:` operator.
 
 ### 5. Search Specific Account
 
-Narrow search to one account:
+Narrow search to one account. First, discover your configured accounts:
+
+```bash
+mail-app-cli accounts list | jq '.[] | .name'
+```
+
+Then use the exact account name from the list:
 
 ```bash
 mail-app-cli search "invoice" -a 'user@example.com' | jq
 ```
 
+**Important:** Account names are typically email addresses. Use the exact name from `accounts list` — account name matching may be case-sensitive.
+
 ### 6. Search Specific Mailbox
 
-Search within a mailbox (requires account):
+Search within a mailbox (requires account). First, discover mailboxes for your account:
+
+```bash
+mail-app-cli mailboxes list -a 'user@example.com' | jq '.[] | .name'
+```
+
+Then search within that mailbox:
 
 ```bash
 mail-app-cli search "invoice" -a 'user@example.com' -m 'All Mail' | jq
 ```
 
-The mailbox name must be discovered first using `mac-mail-reading`'s mailbox listing.
+**Important:** Mailbox names must be discovered first — they vary by account type and provider. Common names include: INBOX, Archive, Sent, Drafts, Trash, Junk, or custom folder names.
 
 ## Advanced Filtering
 
@@ -180,10 +192,10 @@ mail-app-cli search "invoice" | jq '.[] | select(.read==false and .date > "2026-
 
 ### Extract Specific Fields
 
-Show only sender and subject:
+Show only sender and subject (searching for "alice" in subject or sender):
 
 ```bash
-mail-app-cli search "from alice" | jq '.[] | {sender, subject, date}'
+mail-app-cli search "alice" | jq '.[] | {sender, subject, date}'
 ```
 
 ## Search Query Patterns
