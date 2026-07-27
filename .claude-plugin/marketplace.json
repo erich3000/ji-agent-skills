@@ -61,6 +61,12 @@
       "version": "0.1.0",
       "source": "./plugins/git-skills",
       "description": "Git workflow skills for repository maintenance"
+    },
+    {
+      "name": "mac-mail-app",
+      "version": "0.1.0",
+      "source": "./plugins/mac-mail-app",
+      "description": "Control Apple Mail.app through mail-app-cli command-line interface"
     }
   ]
 }

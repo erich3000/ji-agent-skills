@@ -1,0 +1,5 @@
+{
+  "name": "mac-mail-app",
+  "description": "Control Apple Mail.app through mail-app-cli command-line interface",
+  "version": "0.1.0"
+}
