@@ -89,7 +89,10 @@ Report these hits to the user and update them when asked.
 
 ### 6. Report
 
-State how many skills were copied, which folder was removed, and the `.gitignore` changes.
+State how many skills were copied, which folder was removed, and the `.gitignore` changes. If the
+script printed a `NOTE` about non-Markdown files, pass it on: when `agent-skills/` is synced with a
+note app, scripts only reach other devices if the app syncs all file types (Obsidian Sync: "Sync
+all other types" on every device).
 
 ## Notes
 

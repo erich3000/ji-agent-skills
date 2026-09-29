@@ -13,6 +13,8 @@ agent-skills/                        # canonical source, visible and synced
 - Copies the skills from one existing hidden folder (`.claude/skills`, `.agents/skills` or `.codex/skills`) into `agent-skills/`, verifies the copies and then deletes the source folder. No backup is kept.
 - Adds the hidden skill folders to an existing `.gitignore`.
 - Creates the symlinks idempotently, with a `--check` mode, and never overwrites a real folder.
+- Reports files a `SKILL.md` names but that are missing, e.g. scripts a note app did not sync.
+  Obsidian Sync needs "Sync all other types" enabled on every device for `.sh` and `.py` files.
 
 ## Skills
 
