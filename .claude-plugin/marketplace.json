@@ -76,7 +76,7 @@
     },
     {
       "name": "agent-skills",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "source": "./plugins/agent-skills",
       "description": "Keep project skills in one visible agent-skills/ folder and link Claude Code and Codex to it"
     }

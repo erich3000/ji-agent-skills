@@ -33,9 +33,14 @@ bash <base_directory>/scripts/share.sh --check
 | `missing` | nothing there yet |
 | `CONFLICT` | a real folder, a file or another symlink occupies the path; an absolute link to `agent-skills/` counts as well |
 
-Exit code 0 means everything is linked.
+After the links, the script checks that every file a `SKILL.md` names exists (`scripts/...`,
+`references/...`, `assets/...`, `agent-skills/<skill>/...`). A missing one is reported as
+`MISSING`.
 
-### 2. Resolve conflicts
+Exit codes: 0 everything linked and complete, 2 link conflicts or (with `--check`) missing links,
+3 links fine but referenced files missing.
+
+### 2. Resolve conflicts and missing files
 
 The script never overwrites anything. For a conflict:
 
@@ -45,6 +50,11 @@ The script never overwrites anything. For a conflict:
 - **Symlink pointing elsewhere:** show the user where it points and ask before removing it.
 - **No `agent-skills/` at all:** the script exits with code 1 and changes nothing. Run
   `agent-skills-init` first.
+- **`MISSING` files:** typical on a second device when `agent-skills/` is synced by a note app.
+  Obsidian Sync skips `.sh`, `.py` and other non-note files unless "Sync all other types"
+  (Settings > Sync) is enabled, on the device that uploads and on the one that downloads. Tell
+  the user, wait for the sync, rerun with `--check`. The check is a heuristic: it only sees paths
+  spelled out in a `SKILL.md`.
 
 ### 3. Create the links
 

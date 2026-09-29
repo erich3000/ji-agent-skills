@@ -133,4 +133,10 @@ fi
 if [[ $tracked -eq 1 ]]; then
   echo "NOTE      $SOURCE was tracked by git. Stage the removal: git rm -r --cached \"$SOURCE\""
 fi
+other_types="$(find agent-skills -type f ! -name '*.md' 2>/dev/null | sed -E 's/.*\.([^./]+)$/.\1/; /\//d' | sort -u | tr '\n' ' ')"
+if [[ -n "$other_types" ]]; then
+  echo "NOTE      agent-skills/ contains non-Markdown files (${other_types% })."
+  echo "          If it is synced to other devices with a note app, make sure these are synced too:"
+  echo "          in Obsidian Sync enable \"Sync all other types\" (Settings > Sync) on every device."
+fi
 echo "Done. Next: run agent-skills-share to create the symlinks."
