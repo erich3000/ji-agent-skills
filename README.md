@@ -18,6 +18,7 @@ See the [Plugins Reference](https://code.claude.com/docs/en/plugins-reference) f
 | `figma`           | Figma Dev Mode MCP server integration                      | [figma.md](docs/plugins/figma.md)                     |
 | `git-skills`      | Git workflow skills for repository maintenance             | [git-skills.md](docs/plugins/git-skills.md)           |
 | `mac-mail-app`    | Apple Mail.app access and management skills                | [mac-mail-app.md](docs/plugins/mac-mail-app.md)       |
+| `pdf-skills`      | PDF compression, OCR, and XFA form skills                  | [pdf-skills.md](docs/plugins/pdf-skills.md)           |
 
 Plugin-specific details, skill lists, and setup can be found under `docs/plugins/`.
 
@@ -38,6 +39,7 @@ claude plugin install office@ji-agent-skills --scope project
 claude plugin install figma@ji-agent-skills --scope project
 claude plugin install git-skills@ji-agent-skills --scope project
 claude plugin install mac-mail-app@ji-agent-skills --scope project
+claude plugin install pdf-skills@ji-agent-skills --scope project
 ```
 
 ### Any agent (no Claude Code required)
