@@ -1,21 +1,21 @@
 # skill-teaching
 
-`skill-teaching` helps share Claude Code skills with other coding agents.
+`skill-teaching` is deprecated. Use the `agent-skills` plugin instead.
 
 ## What It Does
 
-- Uses the Agent Skills open standard (published at [agentskills.io](https://agentskills.io/)).
-- Syncs project-scoped skills to other agents' expected directories.
-- Supported targets: `codex` (`.codex/skills`), `opencode` (`.opencode/skills`), `agents` (`.agents/skills`), `gemini` (`.gemini/skills`).
-- Reads from `.claude/settings.json` and the local Claude plugin cache.
+- Shows an English deprecation notice.
+- Points users to `agent-skills-init` for migrating existing hidden agent skill folders into `agent-skills/`.
+- Points users to `agent-skills-share` for linking agent-specific skill folders to `agent-skills/`.
+- Does not run the old `sync-skills.sh` workflow.
 
 ## Main Skill
 
-| Skill             | Description                                                         |
-| ----------------- | ------------------------------------------------------------------- |
-| `/skill-teaching` | Copies configured project skills to target agent skill directories. |
+| Skill             | Description                                           |
+| ----------------- | ----------------------------------------------------- |
+| `/skill-teaching` | Deprecated; redirects users to the `agent-skills` plugin. |
 
 ## Notes
 
-- It operates on project-scoped skills and explicitly shared plugin skills.
-- Avoid committing local settings or generated cache content.
+- New workflows should use `agent-skills-init` and `agent-skills-share`.
+- The old sync script remains in the plugin folder for historical compatibility, but the skill no longer instructs agents to run it.

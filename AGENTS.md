@@ -39,7 +39,7 @@ When you catch yourself being cheerful, stop and rewrite with a factual tone.
 - `.claude-plugin/marketplace.json` defines the marketplace and available plugins.
 - `plugins/<plugin-name>/.claude-plugin/plugin.json` stores per-plugin metadata.
 - `plugins/<plugin-name>/skills/<skill-name>/SKILL.md` contains skill definitions and instructions.
-- `plugins/skill-teaching/skills/skill-teaching/scripts/sync-skills.sh` syncs skills to other agents.
+- `plugins/agent-skills/` is the replacement workflow for sharing project skills across agents.
 - `install-skills.sh` installs selected plugins into supported agents without requiring Claude Code.
 
 ## Architecture
@@ -68,7 +68,6 @@ Update the metadata and `SKILL.md` files first. Only update `AGENTS.md` when a s
 ```bash
 claude plugin marketplace add https://github.com/erich3000/ji-agent-skills
 claude plugin install agent-todos@ji-agent-skills --scope project
-claude plugin install skill-teaching@ji-agent-skills --scope project
 claude plugin install hugo-blog@ji-agent-skills --scope project
 claude plugin install obsidian@ji-agent-skills --scope project
 claude plugin install trello2obsidian@ji-agent-skills --scope project
@@ -100,7 +99,7 @@ There is no build, test, or CI workflow. Typical usage is installing the plugin 
 
 - `claude plugin marketplace add https://github.com/erich3000/ji-agent-skills`
 - `claude plugin install agent-todos@ji-agent-skills --scope project`
-- `claude plugin install skill-teaching@ji-agent-skills --scope project`
+- `claude plugin install agent-skills@ji-agent-skills --scope project`
 
 ## Development Workflow
 
@@ -116,7 +115,7 @@ There is no build, test, or CI workflow. Typical usage is installing the plugin 
 - Skill files must be named `SKILL.md` and live under `plugins/<plugin>/skills/<skill>/`.
 - Use concise, descriptive plugin and skill names with hyphens, for example `agent-todos` and `skill-teaching`.
 - Inter-skill invocation can call another skill by name when the current agent supports that workflow.
-- `sync-skills.sh` reads `.claude/settings.json` for enabled plugins and accesses the plugin cache at `~/.claude/plugins/cache/`.
+- `skill-teaching` is deprecated; use `agent-skills-init` and `agent-skills-share` for cross-agent skill sharing.
 
 ## Testing Guidelines
 
@@ -134,4 +133,4 @@ When opening a PR:
 
 ## Security & Configuration Tips
 
-The `skill-teaching` plugin reads from `.claude/settings.json` and the Claude plugin cache at `~/.claude/plugins/cache/`. Avoid committing any local settings or generated caches.
+The deprecated `skill-teaching` plugin previously read from `.claude/settings.json` and the Claude plugin cache at `~/.claude/plugins/cache/`. Avoid committing any local settings or generated caches.

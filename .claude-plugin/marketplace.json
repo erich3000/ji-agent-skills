@@ -16,9 +16,9 @@
     },
     {
       "name": "skill-teaching",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "source": "./plugins/skill-teaching",
-      "description": "Share Claude Code skills with other AI agents"
+      "description": "Deprecated; use the agent-skills plugin for skill sharing"
     },
     {
       "name": "hugo-blog",
