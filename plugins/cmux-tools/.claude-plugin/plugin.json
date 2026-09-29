@@ -1,5 +1,5 @@
 {
   "name": "cmux-tools",
-  "description": "cmux workflow skills for opening, navigating, screenshotting, and previewing files",
-  "version": "0.6.0"
+  "description": "cmux workflow skills for opening, navigating, screenshotting, clearing browser cache, and previewing files",
+  "version": "0.6.1"
 }

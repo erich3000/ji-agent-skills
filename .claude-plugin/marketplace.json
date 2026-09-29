@@ -40,9 +40,9 @@
     },
     {
       "name": "cmux-tools",
-      "version": "0.6.0",
+      "version": "0.6.1",
       "source": "./plugins/cmux-tools",
-      "description": "cmux workflow skills for opening, navigating, screenshotting, reading page content, and previewing files"
+      "description": "cmux workflow skills for opening, navigating, screenshotting, reading page content, clearing browser cache, and previewing files"
     },
     {
       "name": "office",
