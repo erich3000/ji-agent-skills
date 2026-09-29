@@ -1,63 +1,25 @@
 ---
 name: skill-teaching
-description: This skill should be used when the user asks to "sync skills to agent", "share skills with agent", "push skills to target", "teach agent skills", or requests synchronizing Claude Code skills with other AI agents in the project.
+description: Deprecated. Use this skill only to tell the user that skill synchronization has moved to the agent-skills plugin.
 ---
 
-# Skill Teaching
+# Skill Teaching Deprecated
 
-Synchronize Claude Code skills to other AI agents in the project. This enables knowledge and workflow sharing across agents while preserving each agent's own skills.
+The `skill-teaching` plugin is deprecated. Do not run its sync script, do not copy skills, and do
+not modify agent skill folders through this skill.
 
-## Workflow
+When this skill is invoked, respond in English with this guidance:
 
-### Step 1: Identify Target Agent
+```text
+The skill-teaching plugin is deprecated.
 
-Determine the target agent where skills should be synced:
+Use the agent-skills plugin instead:
 
-- `codex` - OpenAI Codex agent (destination: `.codex/skills`)
-- `opencode` - OpenCode agent (destination: `.opencode/skills`)
-- `agents` - Generic agents folder (destination: `.agents/skills`)
-- `gemini` - Gemini agent (destination: `.gemini/skills`)
-
-### Step 2: Execute Sync Script
-
-Run the sync script from the project root with the target agent identifier:
-
-```bash
-bash <base_directory>/scripts/sync-skills.sh <target>
+- Run agent-skills-init to migrate existing hidden agent skill folders into the visible agent-skills/ folder.
+- Run agent-skills-share to create local symlinks from agent-specific skill folders to agent-skills/.
 ```
 
-Where `<base_directory>` is the path shown in "Base directory for this skill:" output. Pass a second argument `<project_root>` when running from a directory other than the project root (defaults to `$PWD`).
+## Replacement
 
-### Step 3: Verify Sync Results
-
-The script performs these operations:
-
-1. Reads previously synced skills from manifest (`.claude-synced-skills.json`)
-2. Deletes only previously synced skills (preserves target agent's own skills)
-3. Copies local skills from `.claude/skills/` (except `skill-teaching` itself)
-4. Copies plugin skills from enabled plugins in `.claude/settings.json`
-5. Writes updated manifest with list of synced skills
-
-## Example Invocation
-
-```bash
-# Sync all skills to Codex agent
-bash <base_directory>/scripts/sync-skills.sh codex
-
-# Sync all skills to OpenCode agent
-bash <base_directory>/scripts/sync-skills.sh opencode
-
-# Sync all skills to generic agents folder
-bash <base_directory>/scripts/sync-skills.sh agents
-
-# Sync all skills to Gemini agent
-bash <base_directory>/scripts/sync-skills.sh gemini
-```
-
-## Additional Resources
-
-### Scripts
-
-The skill includes a utility script for skill synchronization:
-
-- **`scripts/sync-skills.sh`** - Executes the sync operation with manifest management. Supported targets: `codex`, `opencode`, `agents`, `gemini`.
+Use `agent-skills-init` for the one-time migration into `agent-skills/`.
+Use `agent-skills-share` to link agent-specific skill folders to `agent-skills/` on each device.
