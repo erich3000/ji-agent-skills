@@ -1,5 +1,5 @@
 {
   "name": "agent-todos",
-  "description": "Agent todo file management skills",
-  "version": "2.0.2"
+  "description": "Agent todo file management, moving, and archiving skills",
+  "version": "2.1.0"
 }

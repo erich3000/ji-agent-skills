@@ -7,6 +7,7 @@
 - Standardizes todo file creation, naming, and frontmatter.
 - Guides agents through a status lifecycle (`new`, `ready`, `doing`, `done`, `archived`).
 - Moves open todos between categories and renumbers open items without colliding with DONE items.
+- Archives completed todos into per-category `_archived/` folders and maintains archive indexes.
 - Supports importing todos from GitHub issues.
 
 ## Skills
@@ -17,6 +18,7 @@
 | `/todo-creation` | Creates a new todo file with sequential 4-digit numbering and YAML frontmatter. |
 | `/todo-processing` | Guides agents through picking up, working on, and completing todo files. |
 | `/todo-moving` | Moves selected open todos between categories and renumbers open todos in both folders. |
+| `/todo-archiving` | Archives completed `DONE_` todos in a category and regenerates `_archived/Index.md`. |
 | `/todo-gh-issue-import` | Imports open GitHub issues into local todo files using `gh issue list`. |
 
 ## Configuration
@@ -87,5 +89,5 @@ timeline
   ready : Has content and can be picked up
   doing : Active work in progress
   done : Completed (also rename file with DONE_ prefix)
-  archived : Reserved for future archiving
+  archived : Moved to _archived/ with ARCHIVED_ prefix
 ```

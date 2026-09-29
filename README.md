@@ -9,7 +9,7 @@ See the [Plugins Reference](https://code.claude.com/docs/en/plugins-reference) f
 | Plugin            | Description                                                | Docs                                                  |
 | ----------------- | ---------------------------------------------------------- | ----------------------------------------------------- |
 | `agent-skills`    | Visible `agent-skills/` folder linked to Claude and Codex  | [agent-skills.md](docs/plugins/agent-skills.md)       |
-| `agent-todos`     | Agent todo management, moving, and overview skills         | [agent-todos.md](docs/plugins/agent-todos.md)         |
+| `agent-todos`     | Agent todo management, moving, and archiving skills        | [agent-todos.md](docs/plugins/agent-todos.md)         |
 | `cmux-tools`      | `cmux` browser opening, navigation, screenshot, and cache skills | [cmux-tools.md](docs/plugins/cmux-tools.md)           |
 | `figma`           | Figma Dev Mode MCP server integration                      | [figma.md](docs/plugins/figma.md)                     |
 | `git-skills`      | Git workflow skills for repository maintenance             | [git-skills.md](docs/plugins/git-skills.md)           |

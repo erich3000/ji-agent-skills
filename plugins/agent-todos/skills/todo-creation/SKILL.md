@@ -39,7 +39,7 @@ Where `<base_directory>` is the path shown in "Base directory for this skill:" a
 
 The script:
 
-1. Scans all files in the category directory (including `DONE_` files) to find the highest numeric prefix
+1. Scans all files in the category directory (including `DONE_` files and `_archived/ARCHIVED_` files) to find the highest numeric prefix
 2. Assigns the next sequential 4-digit number
 3. Converts the title to snake_case, truncated to 60 characters
 4. Creates the file with YAML frontmatter (`title`, `status: new`, optional `projects` from config `projectName`, `tags: [todo, agent-todo]`) and section stubs (`## Context`, `## Tasks`)
@@ -98,7 +98,7 @@ tags:
 
 ## Notes
 
-- The sequential number accounts for both open and completed (`DONE_`) files to avoid collisions.
+- The sequential number accounts for open, completed (`DONE_`), and archived (`_archived/ARCHIVED_`) files to avoid collisions.
 - If the category directory does not exist, it is created automatically.
 - The filename is truncated to 60 characters (before the `.md` extension) to keep paths manageable.
 - After the user adds content, update the status to `ready` so the todo is recognized as actionable under the conventions defined by `todo-processing`.

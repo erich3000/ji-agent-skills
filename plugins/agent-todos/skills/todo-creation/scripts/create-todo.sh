@@ -8,7 +8,7 @@
 #   base-dir  — Project root (defaults to $PWD)
 #
 # The script:
-#   1. Scans all files (open and DONE_) in the category to find the highest number
+#   1. Scans all files (open, DONE_, and archived) in the category to find the highest number
 #   2. Generates the next 4-digit prefix
 #   3. Converts the title to snake_case, truncated to 60 characters
 #   4. Creates the file with YAML frontmatter (title, status: new, tags) and section stubs
@@ -60,24 +60,37 @@ TODO_DIR="$TODOS_ROOT/$CATEGORY"
 # Create category directory if it does not exist
 mkdir -p "$TODO_DIR"
 
-# Find the highest numeric prefix across all files in the category.
-# Matches patterns: NNNN_*, DONE_NNNN_*
-MAX_NUM=0
-for file in "$TODO_DIR"/*; do
-  [ -e "$file" ] || continue
-  base=$(basename "$file")
-  # Strip DONE_ prefix if present
+consider_prefix_from_basename() {
+  local base="$1"
+  local stripped num num_val
+
   stripped=${base#DONE_}
-  # Extract leading digits
+  stripped=${stripped#ARCHIVED_}
   num=${stripped%%[!0-9]*}
+
   if [ -n "$num" ]; then
-    # Remove leading zeros for arithmetic
     num_val=$((10#$num))
     if [ "$num_val" -gt "$MAX_NUM" ]; then
       MAX_NUM=$num_val
     fi
   fi
+}
+
+# Find the highest numeric prefix across all files in the category.
+# Matches patterns: NNNN_*, DONE_NNNN_*, _archived/ARCHIVED_NNNN_*
+MAX_NUM=0
+for file in "$TODO_DIR"/*; do
+  [ -e "$file" ] || continue
+  [ -f "$file" ] || continue
+  consider_prefix_from_basename "$(basename "$file")"
 done
+
+if [ -d "$TODO_DIR/_archived" ]; then
+  for file in "$TODO_DIR/_archived"/ARCHIVED_*.md; do
+    [ -e "$file" ] || continue
+    consider_prefix_from_basename "$(basename "$file")"
+  done
+fi
 
 NEXT_NUM=$((MAX_NUM + 1))
 PREFIX=$(printf "%04d" "$NEXT_NUM")
