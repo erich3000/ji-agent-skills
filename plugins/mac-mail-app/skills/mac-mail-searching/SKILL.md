@@ -134,19 +134,22 @@ mail-app-cli search "invoice" -a 'user@example.com' | jq
 
 ### 6. Search Specific Mailbox
 
-Search within a mailbox (requires account). First, discover mailboxes for your account:
+Search within a mailbox (requires account). First, discover all available mailboxes:
 
 ```bash
-mail-app-cli mailboxes list -a 'user@example.com' | jq '.[] | .name'
+mail-app-cli mailboxes list | jq
 ```
 
-Then search within that mailbox:
+Identify the relevant account and mailbox names from the global mailbox list. Then search within
+that mailbox using the exact account and mailbox names:
 
 ```bash
 mail-app-cli search "invoice" -a 'user@example.com' -m 'All Mail' | jq
 ```
 
-**Important:** Mailbox names must be discovered first — they vary by account type and provider. Common names include: INBOX, Archive, Sent, Drafts, Trash, Junk, or custom folder names.
+**Important:** Discover mailboxes without an account filter first. Account-filtered mailbox listing
+can return incomplete results depending on the provider. Mailbox names vary by account type and
+provider. Common names include: INBOX, Archive, Sent, Drafts, Trash, Junk, or custom folder names.
 
 ## Advanced Filtering
 
