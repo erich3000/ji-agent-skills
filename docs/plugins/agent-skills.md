@@ -10,7 +10,7 @@ agent-skills/                        # canonical source, visible and synced
 
 ## What It Does
 
-- Copies the skills from one existing hidden folder (`.claude/skills`, `.agents/skills` or `.codex/skills`) into `agent-skills/`, verifies the copies and renames the source to `<source>.pre-agent-skills`.
+- Copies the skills from one existing hidden folder (`.claude/skills`, `.agents/skills` or `.codex/skills`) into `agent-skills/`, verifies the copies and then deletes the source folder. No backup is kept.
 - Adds the hidden skill folders to an existing `.gitignore`.
 - Creates the symlinks idempotently, with a `--check` mode, and never overwrites a real folder.
 

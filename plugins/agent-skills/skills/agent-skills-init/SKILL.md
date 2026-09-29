@@ -1,6 +1,6 @@
 ---
 name: agent-skills-init
-description: This skill should be used when the user asks to "set up agent-skills", "migrate .claude/skills", "move skills to agent-skills", "Skills in agent-skills verschieben", "Obsidian does not sync .claude/skills", or "run agent-skills-init". One-time migration of the skills in a hidden agent folder (.claude/skills, .agents/skills, .codex/skills) into a visible agent-skills/ folder, with backup and .gitignore update. Linking follows with agent-skills-share.
+description: This skill should be used when the user asks to "set up agent-skills", "migrate .claude/skills", "move skills to agent-skills", "Skills in agent-skills verschieben", "Obsidian does not sync .claude/skills", or "run agent-skills-init". One-time migration of the skills in a hidden agent folder (.claude/skills, .agents/skills, .codex/skills) into a visible agent-skills/ folder, removing the old folder and updating .gitignore. Linking follows with agent-skills-share.
 ---
 
 # agent-skills-init
@@ -48,16 +48,16 @@ Show the plan to the user. The lines mean:
 | --- | --- |
 | `copy` | skill will be copied into `agent-skills/` |
 | `identical` | already in `agent-skills/` with the same content, skipped |
-| `ignore` | file such as a manifest, not copied; it only survives in the backup |
+| `ignore` | file such as a manifest, not copied; it is deleted with the source |
 | `BLOCKED` | directory without `SKILL.md` (grouped layout, lowercase `skill.md`); the run aborts |
 | `CONFLICT` | same name in `agent-skills/` with different content; the run aborts |
-| `rename` | the source folder becomes `<source>.pre-agent-skills` |
+| `delete` | the source folder is removed after the copies are verified |
 | `gitignore` | entry to be appended to an existing `.gitignore` |
 | `NOTE` | another real skills folder exists and stays untouched |
 
 On `CONFLICT`, show the difference (`diff -r`) and let the user decide which version wins. Never
-resolve it silently. On `BLOCKED`, show the directory to the user; renaming the source would hide
-it from every agent, so it has to be flattened or removed first.
+resolve it silently. On `BLOCKED`, show the directory to the user; deleting the source would lose
+it, so it has to be flattened or moved out first.
 
 ### 3. Apply
 
@@ -67,13 +67,13 @@ After the user agrees:
 bash <base_directory>/scripts/init.sh --source .claude/skills --apply
 ```
 
-The script copies, verifies each copy with `diff -rq`, and only then renames the source. If
-verification fails, it stops before the rename and nothing is lost.
+The script copies, verifies each copy with `diff -rq`, and only then deletes the source. If
+verification fails, it stops before the deletion and nothing is lost. No backup is kept.
 
 ### 4. Link the agents
 
 Invoke `agent-skills-share` to create the symlinks. Until then, the agent whose folder was
-renamed no longer sees the project skills.
+removed no longer sees the project skills.
 
 ### 5. Fix hard-coded paths
 
@@ -89,16 +89,16 @@ Report these hits to the user and update them when asked.
 
 ### 6. Report
 
-State how many skills were copied, the backup path, and the `.gitignore` changes. Mention that
-the backup `<source>.pre-agent-skills` can be deleted once both agents have been tested.
+State how many skills were copied, which folder was removed, and the `.gitignore` changes.
 
 ## Notes
 
-- Nothing is deleted. The source is renamed, never removed.
+- The source folder is deleted, but only after every copy has been verified byte for byte.
+  Files listed as `ignore` go with it; point them out in the dry run.
 - Only the source folder is touched. A second real skills folder stays as it is and blocks its
   symlink until it is migrated or removed.
-- `.gitignore` is only edited if it exists, and then also covers the `.pre-agent-skills` backups.
+- `.gitignore` is only edited if it exists.
   `agent-skills/` itself must never be ignored.
-- If the source was tracked by git, the script prints a note: untrack it with
-  `git rm -r --cached <source>`, since a `.gitignore` entry alone does not untrack files.
+- If the source was tracked by git, the script prints a note: stage the removal with
+  `git rm -r --cached <source>`.
 - Restart the agents afterwards so they pick up the new location.

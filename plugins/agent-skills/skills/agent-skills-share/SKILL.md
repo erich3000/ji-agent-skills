@@ -41,7 +41,7 @@ The script never overwrites anything. For a conflict:
 
 - **Real skills folder:** its skills are not in `agent-skills/` yet, or they are stale copies.
   Invoke `agent-skills-init` with that folder as the source. It copies what is missing and
-  renames the folder out of the way.
+  removes the folder once the copies are verified.
 - **Symlink pointing elsewhere:** show the user where it points and ask before removing it.
 - **No `agent-skills/` at all:** the script exits with code 1 and changes nothing. Run
   `agent-skills-init` first.
