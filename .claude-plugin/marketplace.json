@@ -73,6 +73,12 @@
       "version": "0.1.0",
       "source": "./plugins/pdf-skills",
       "description": "PDF compression, OCR, and XFA form extraction and conversion skills"
+    },
+    {
+      "name": "agent-skills",
+      "version": "0.1.0",
+      "source": "./plugins/agent-skills",
+      "description": "Keep project skills in one visible agent-skills/ folder and link Claude Code and Codex to it"
     }
   ]
 }

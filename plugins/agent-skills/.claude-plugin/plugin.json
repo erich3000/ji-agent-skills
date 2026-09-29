@@ -1,0 +1,5 @@
+{
+  "name": "agent-skills",
+  "description": "Keep project skills in one visible agent-skills/ folder and link Claude Code and Codex to it",
+  "version": "0.1.0"
+}

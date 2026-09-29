@@ -76,6 +76,7 @@ claude plugin install cmux-tools@ji-agent-skills --scope project
 claude plugin install office@ji-agent-skills --scope project
 claude plugin install figma@ji-agent-skills --scope project
 claude plugin install pdf-skills@ji-agent-skills --scope project
+claude plugin install agent-skills@ji-agent-skills --scope project
 ```
 
 ### Any Agent
