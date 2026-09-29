@@ -152,6 +152,15 @@ renumber_open_todos() {
     fi
   done < <(find "$category_dir" -maxdepth 1 -type f -name 'DONE_*.md' | sort)
 
+  if [ -d "$category_dir/_archived" ]; then
+    while IFS= read -r done_file; do
+      base="$(basename "$done_file")"
+      if [[ "$base" =~ ^ARCHIVED_([0-9]{4})_ ]]; then
+        RESERVED_NUMS+=("${BASH_REMATCH[1]}")
+      fi
+    done < <(find "$category_dir/_archived" -maxdepth 1 -type f -name 'ARCHIVED_*.md' | sort)
+  fi
+
   while IFS= read -r open_file; do
     base="$(basename "$open_file")"
     if [[ "$base" =~ ^[0-9]{4}_.+\.md$ ]]; then

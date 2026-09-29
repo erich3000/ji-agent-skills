@@ -57,6 +57,6 @@ After moving files, renumber open todos in source and target categories:
 - open files: `^[0-9]{4}_.*\.md$`
 - done files: `^DONE_[0-9]{4}_.*\.md$`
 - assign open todos to the smallest free numbers from `0001` upward
-- keep numbers used by DONE files reserved
+- keep numbers used by DONE and `_archived/ARCHIVED_` files reserved
 
-Produce gapless numbering for open todos without DONE collisions.
+Produce gapless numbering for open todos without DONE or archived collisions.
