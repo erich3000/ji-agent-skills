@@ -13,12 +13,12 @@
 #      A skill that already exists there with identical content is skipped; one with
 #      different content aborts the whole run before anything is changed.
 #   2. Verify each copy byte for byte.
-#   3. Rename the source folder to <source>.pre-agent-skills, so agent-skills-share can put
-#      a symlink in its place. The backup stays until the user deletes it.
-#   4. If a .gitignore exists, add the three skill folders and their backups to it.
+#   3. Delete the source folder, so agent-skills-share can put a symlink in its place.
+#      This only happens after every copy has been verified. No backup is kept.
+#   4. If a .gitignore exists, add the three skill folders to it.
 #
 # Refuses to run when the source holds subdirectories without a SKILL.md (grouped layouts,
-# lowercase skill.md): renaming the source would hide them from every agent.
+# lowercase skill.md): deleting the source would lose them.
 #
 # Exit codes: 0 success (or clean dry run), 1 usage or precondition error, 2 conflict.
 
@@ -84,17 +84,15 @@ echo "Source:  $PWD/$SOURCE"
 echo "Target:  $PWD/agent-skills/"
 for n in ${copy[@]+"${copy[@]}"};         do echo "copy      $n"; done
 for n in ${same[@]+"${same[@]}"};         do echo "identical $n (already in agent-skills/, skipped)"; done
-for n in ${skipped[@]+"${skipped[@]}"};   do echo "ignore    $n (file, not copied, stays in the backup)"; done
-for n in ${blocked[@]+"${blocked[@]}"};   do echo "BLOCKED   $n/ (directory without SKILL.md, would be hidden after the rename)"; done
+for n in ${skipped[@]+"${skipped[@]}"};   do echo "ignore    $n (file, not copied, deleted with the source)"; done
+for n in ${blocked[@]+"${blocked[@]}"};   do echo "BLOCKED   $n/ (directory without SKILL.md, would be lost with the source)"; done
 for n in ${conflict[@]+"${conflict[@]}"}; do echo "CONFLICT  $n (exists in agent-skills/ with different content)"; done
 
-backup="$SOURCE.pre-agent-skills"
-[[ -e "$backup" ]] && backup="$SOURCE.pre-agent-skills-$(date +%Y%m%d-%H%M%S)"
-echo "rename    $SOURCE -> $backup"
+echo "delete    $SOURCE (after verifying the copies)"
 
 gi_add=()
 if [[ -f .gitignore ]]; then
-  for p in .claude/skills .agents/skills .codex/skills '.claude/skills.pre-agent-skills*' '.agents/skills.pre-agent-skills*' '.codex/skills.pre-agent-skills*'; do
+  for p in .claude/skills .agents/skills .codex/skills; do
     grep -qxF "$p" .gitignore || grep -qxF "/$p" .gitignore || gi_add+=("$p")
   done
   for p in ${gi_add[@]+"${gi_add[@]}"}; do echo "gitignore $p"; done
@@ -121,16 +119,18 @@ mkdir -p agent-skills
 for n in ${copy[@]+"${copy[@]}"}; do
   cp -Rp "$SOURCE/$n" "agent-skills/$n"
   if ! diff -rq "$SOURCE/$n" "agent-skills/$n" >/dev/null; then
-    echo "Verification failed for $n. Stopping before the source is renamed." >&2
+    echo "Verification failed for $n. Stopping before the source is deleted." >&2
     exit 1
   fi
 done
-mv "$SOURCE" "$backup"
+tracked=0
+if git rev-parse --is-inside-work-tree >/dev/null 2>&1 && [[ -n "$(git ls-files -- "$SOURCE")" ]]; then tracked=1; fi
+rm -rf "$SOURCE"
 if [[ ${#gi_add[@]} -gt 0 ]]; then
   [[ -s .gitignore && "$(tail -c1 .gitignore)" != "" ]] && echo >> .gitignore
   printf '%s\n' "${gi_add[@]}" >> .gitignore
 fi
-if git rev-parse --is-inside-work-tree >/dev/null 2>&1 && [[ -n "$(git ls-files -- "$backup")" ]]; then
-  echo "NOTE      $SOURCE was tracked by git. Untrack it: git rm -r --cached \"$SOURCE\""
+if [[ $tracked -eq 1 ]]; then
+  echo "NOTE      $SOURCE was tracked by git. Stage the removal: git rm -r --cached \"$SOURCE\""
 fi
 echo "Done. Next: run agent-skills-share to create the symlinks."
