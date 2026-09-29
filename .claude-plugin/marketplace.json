@@ -67,6 +67,12 @@
       "version": "0.1.0",
       "source": "./plugins/mac-mail-app",
       "description": "Control Apple Mail.app through mail-app-cli command-line interface"
+    },
+    {
+      "name": "pdf-skills",
+      "version": "0.1.0",
+      "source": "./plugins/pdf-skills",
+      "description": "PDF compression, OCR, and XFA form extraction and conversion skills"
     }
   ]
 }
