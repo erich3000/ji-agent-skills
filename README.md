@@ -45,15 +45,17 @@ claude plugin install trello2obsidian@ji-agent-skills --scope project
 
 ### Any agent (no Claude Code required)
 
-`install-skills.sh` auto-detects installed agents (Codex, Claude Code, OpenCode, Gemini, …) and installs skills into each one. Requires only `bash` and `git`.
+`install-skills.sh` installs skills into the visible project `agent-skills/` folder. Run
+`agent-skills-share` afterwards on each device to link local agent folders to it. Requires only
+`bash` and `git`.
 
 ```bash
-# Auto-detect agents, install all plugins
+# Install all plugins into ./agent-skills
 curl -sSL https://raw.githubusercontent.com/erich3000/ji-agent-skills/main/install-skills.sh | bash
 
 # Specific plugins only
 curl -sSL https://raw.githubusercontent.com/erich3000/ji-agent-skills/main/install-skills.sh | bash -s -- cmux-tools git-skills
 
-# Explicit target directory
+# Explicit legacy target directory
 bash install-skills.sh --target .codex/skills
 ```

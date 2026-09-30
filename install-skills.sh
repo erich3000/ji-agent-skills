@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Install skills from ji-agent-skills into any agent's skills directory.
+# Install skills from ji-agent-skills into the visible agent-skills/ folder.
 #
 # Usage:
-#   bash install-skills.sh                          # auto-detect installed agents, install all plugins
+#   bash install-skills.sh                          # install all plugins into ./agent-skills
 #   bash install-skills.sh cmux-tools git-skills    # install specific plugins only
-#   bash install-skills.sh --target .claude/skills  # install to a specific directory
+#   bash install-skills.sh --target .claude/skills  # install to a specific legacy directory
 #   bash install-skills.sh cmux-tools --target ~/.codex/skills
 #
 # Remote usage (no clone needed):
@@ -16,10 +16,6 @@ set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 EXPLICIT_TARGET=""
 PLUGINS=()
-
-# Known agent CLI names and their corresponding skills directories (relative to project root)
-AGENT_NAMES=(codex claude opencode gemini agents)
-AGENT_SKILL_DIRS=(".codex/skills" ".claude/skills" ".opencode/skills" ".gemini/skills" ".agents/skills")
 
 # Parse arguments
 while [[ $# -gt 0 ]]; do
@@ -59,7 +55,7 @@ if [[ ${#PLUGINS[@]} -eq 0 ]]; then
   done < <(find "$REPO_ROOT/plugins" -mindepth 1 -maxdepth 1 -type d | sort)
 fi
 
-# Determine target directories
+# Determine target directory
 CWD="$(pwd)"
 TARGETS=()
 
@@ -69,27 +65,14 @@ if [[ -n "$EXPLICIT_TARGET" ]]; then
   else
     TARGETS+=("$CWD/$EXPLICIT_TARGET")
   fi
+  echo "Installing to explicit target:"
+  echo "  $EXPLICIT_TARGET"
+  echo ""
 else
-  # Auto-detect: include any agent whose CLI is installed or whose config dir exists
-  for i in "${!AGENT_NAMES[@]}"; do
-    agent="${AGENT_NAMES[$i]}"
-    rel_dir="${AGENT_SKILL_DIRS[$i]}"
-    config_dir="$CWD/${rel_dir%%/skills*}"  # e.g. .codex from .codex/skills
-    if command -v "$agent" &>/dev/null || [[ -d "$config_dir" ]]; then
-      TARGETS+=("$CWD/$rel_dir")
-    fi
-  done
-
-  if [[ ${#TARGETS[@]} -eq 0 ]]; then
-    echo "No known agents detected. Specify a target directory with --target." >&2
-    echo "Example: bash install-skills.sh --target .codex/skills" >&2
-    exit 1
-  fi
-
-  echo "Detected agents:"
-  for t in "${TARGETS[@]}"; do
-    echo "  → $t"
-  done
+  TARGETS+=("$CWD/agent-skills")
+  echo "Installing to canonical project skills folder:"
+  echo "  agent-skills/"
+  echo "Run agent-skills-share afterwards to link local agents to it."
   echo ""
 fi
 
@@ -113,7 +96,7 @@ install_to() {
       dest_dir="$target_abs/$skill_name"
       mkdir -p "$dest_dir"
       cp "$skill_md" "$dest_dir/SKILL.md"
-      for sub in scripts references; do
+      for sub in scripts references assets; do
         [[ -d "$skill_dir/$sub" ]] && cp -r "$skill_dir/$sub" "$dest_dir/"
       done
       installed+=("$skill_name")
@@ -136,3 +119,6 @@ for target in "${TARGETS[@]}"; do
 done
 
 echo "Done."
+if [[ -z "$EXPLICIT_TARGET" ]]; then
+  echo "Next: run agent-skills-share in this project to create local agent symlinks."
+fi

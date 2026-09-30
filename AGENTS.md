@@ -40,7 +40,7 @@ When you catch yourself being cheerful, stop and rewrite with a factual tone.
 - `plugins/<plugin-name>/.claude-plugin/plugin.json` stores per-plugin metadata.
 - `plugins/<plugin-name>/skills/<skill-name>/SKILL.md` contains skill definitions and instructions.
 - `plugins/agent-skills/` is the replacement workflow for sharing project skills across agents.
-- `install-skills.sh` installs selected plugins into supported agents without requiring Claude Code.
+- `install-skills.sh` installs selected plugins into the visible `agent-skills/` folder without requiring Claude Code.
 
 ## Architecture
 
@@ -80,16 +80,16 @@ claude plugin install agent-skills@ji-agent-skills --scope project
 
 ### Any Agent
 
-`install-skills.sh` auto-detects installed agents including Codex, Claude Code, OpenCode, and Gemini, then installs skills into each one. It requires only `bash` and `git`.
+`install-skills.sh` installs skills into the visible project `agent-skills/` folder. Run `agent-skills-share` afterwards on each device to link local agent folders to it. It requires only `bash` and `git`.
 
 ```bash
-# Auto-detect agents, install all plugins
+# Install all plugins into ./agent-skills
 curl -sSL https://raw.githubusercontent.com/erich3000/ji-agent-skills/main/install-skills.sh | bash
 
 # Specific plugins only
 curl -sSL https://raw.githubusercontent.com/erich3000/ji-agent-skills/main/install-skills.sh | bash -s -- cmux-tools git-skills
 
-# Explicit target directory
+# Explicit legacy target directory
 bash install-skills.sh --target .codex/skills
 ```
 
