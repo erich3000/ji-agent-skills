@@ -1,0 +1,17 @@
+{
+  "name": "mac-mail-app",
+  "version": "0.1.0",
+  "description": "Control Apple Mail.app through mail-app-cli command-line interface",
+  "author": {
+    "name": "Jens Ihrig"
+  },
+  "repository": "https://github.com/erich3000/ji-agent-skills",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Apple Mail",
+    "shortDescription": "Control Apple Mail.app through mail-app-cli command-line interface",
+    "developerName": "Jens Ihrig",
+    "category": "Communication"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "trello2obsidian",
+  "version": "0.1.0",
+  "description": "Convert Trello JSON exports into Obsidian-compatible notes",
+  "author": {
+    "name": "Jens Ihrig"
+  },
+  "repository": "https://github.com/erich3000/ji-agent-skills",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Trello to Obsidian",
+    "shortDescription": "Convert Trello JSON exports into Obsidian-compatible notes",
+    "developerName": "Jens Ihrig",
+    "category": "Productivity"
+  }
+}

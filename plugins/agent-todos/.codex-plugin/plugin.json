@@ -1,0 +1,17 @@
+{
+  "name": "agent-todos",
+  "version": "2.1.0",
+  "description": "Agent todo file management, moving, and archiving skills",
+  "author": {
+    "name": "Jens Ihrig"
+  },
+  "repository": "https://github.com/erich3000/ji-agent-skills",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Agent Todos",
+    "shortDescription": "Agent todo file management, moving, and archiving skills",
+    "developerName": "Jens Ihrig",
+    "category": "Productivity"
+  }
+}

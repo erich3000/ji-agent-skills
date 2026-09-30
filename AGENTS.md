@@ -37,7 +37,8 @@ When you catch yourself being cheerful, stop and rewrite with a factual tone.
 ## Project Structure & Module Organization
 
 - `.claude-plugin/marketplace.json` defines the marketplace and available plugins.
-- `plugins/<plugin-name>/.claude-plugin/plugin.json` stores per-plugin metadata.
+- `plugins/<plugin-name>/.claude-plugin/plugin.json` stores per-plugin metadata for Claude Code.
+- `.agents/plugins/marketplace.json` and `plugins/<plugin-name>/.codex-plugin/plugin.json` are the Codex counterparts.
 - `plugins/<plugin-name>/skills/<skill-name>/SKILL.md` contains skill definitions and instructions.
 - `plugins/agent-skills/` is the replacement workflow for sharing project skills across agents.
 - `install-skills.sh` installs selected plugins into the visible `agent-skills/` folder without requiring Claude Code.
@@ -78,6 +79,13 @@ claude plugin install pdf-skills@ji-agent-skills --scope project
 claude plugin install agent-skills@ji-agent-skills --scope project
 ```
 
+### Codex
+
+```bash
+codex plugin marketplace add erich3000/ji-agent-skills --ref main
+codex plugin add agent-todos@ji-agent-skills
+```
+
 ### Any Agent
 
 `install-skills.sh` installs skills into the visible project `agent-skills/` folder. Run `agent-skills-share` afterwards on each device to link local agent folders to it. It requires only `bash` and `git`.
@@ -103,10 +111,12 @@ There is no build, test, or CI workflow. Typical usage is installing the plugin 
 
 ## Development Workflow
 
-- To add a new plugin, create `plugins/<name>/.claude-plugin/plugin.json` and add an entry to `.claude-plugin/marketplace.json`.
+- To add a new plugin, create `plugins/<name>/.claude-plugin/plugin.json` and `plugins/<name>/.codex-plugin/plugin.json`, and add an entry to both `.claude-plugin/marketplace.json` and `.agents/plugins/marketplace.json`.
+- When bumping a plugin version, change it in all three places: both `plugin.json` files and `.claude-plugin/marketplace.json`. The Codex marketplace carries no versions.
+- A plugin with `.mcp.json` references it as `"mcpServers": "./.mcp.json"` in its Codex manifest. Keep the file in the `{"mcpServers": {...}}` form, which both agents read.
 - To add a new skill in Claude Code, use the `plugin-dev:skill-development` skill, then review with `plugin-dev:skill-reviewer`.
 - To add or edit a skill outside Claude Code, follow the existing `SKILL.md` structure, frontmatter conventions, plugin metadata conventions, and review the result manually.
-- To test locally, install the plugin with `claude plugin install <name>@ji-agent-skills --scope project`.
+- To test locally, install the plugin with `claude plugin install <name>@ji-agent-skills --scope project`, and in Codex with `codex plugin marketplace add ./` followed by `codex plugin add <name>@ji-agent-skills`. Use a temporary `CODEX_HOME` to keep your own Codex config untouched.
 
 ## Coding Style & Naming Conventions
 

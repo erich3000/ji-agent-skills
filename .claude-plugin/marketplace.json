@@ -52,7 +52,7 @@
     },
     {
       "name": "figma",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "source": "./plugins/figma",
       "description": "Figma Dev Mode MCP server integration — load Figma design tools on demand"
     },

@@ -43,6 +43,26 @@ claude plugin install pdf-skills@ji-agent-skills --scope project
 claude plugin install trello2obsidian@ji-agent-skills --scope project
 ```
 
+### Codex
+
+The repository is also a Codex plugin marketplace (`.agents/plugins/marketplace.json`, one
+`.codex-plugin/plugin.json` per plugin).
+
+```bash
+codex plugin marketplace add erich3000/ji-agent-skills --ref main
+
+codex plugin add agent-skills@ji-agent-skills
+codex plugin add pdf-skills@ji-agent-skills
+# ... any other plugin from the table above
+```
+
+For local development, point Codex at the checkout instead: `codex plugin marketplace add ./`
+(or the absolute path). Pin a release with `--ref <tag-or-commit>` instead of `main`. After
+pulling changes from GitHub, refresh with `codex plugin marketplace upgrade`.
+
+The Claude hook files of `agent-todos` and `skill-teaching` are not part of the Codex manifests;
+they only print a Claude Code restart notice.
+
 ### Any agent (no Claude Code required)
 
 `install-skills.sh` installs skills into the visible project `agent-skills/` folder. Run

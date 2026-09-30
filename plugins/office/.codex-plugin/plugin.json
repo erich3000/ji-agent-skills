@@ -1,0 +1,17 @@
+{
+  "name": "office",
+  "version": "0.1.0",
+  "description": "Microsoft Office file manipulation skills",
+  "author": {
+    "name": "Jens Ihrig"
+  },
+  "repository": "https://github.com/erich3000/ji-agent-skills",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Office",
+    "shortDescription": "Microsoft Office file manipulation skills",
+    "developerName": "Jens Ihrig",
+    "category": "Productivity"
+  }
+}

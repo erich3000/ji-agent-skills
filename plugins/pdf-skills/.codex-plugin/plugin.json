@@ -1,0 +1,17 @@
+{
+  "name": "pdf-skills",
+  "version": "0.1.0",
+  "description": "PDF compression, OCR, and XFA form extraction and conversion skills",
+  "author": {
+    "name": "Jens Ihrig"
+  },
+  "repository": "https://github.com/erich3000/ji-agent-skills",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "PDF Skills",
+    "shortDescription": "PDF compression, OCR, and XFA form extraction and conversion skills",
+    "developerName": "Jens Ihrig",
+    "category": "Productivity"
+  }
+}

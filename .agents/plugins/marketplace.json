@@ -1,0 +1,152 @@
+{
+  "name": "ji-agent-skills",
+  "interface": {
+    "displayName": "ji-agent-skills"
+  },
+  "plugins": [
+    {
+      "name": "agent-todos",
+      "source": {
+        "source": "local",
+        "path": "./plugins/agent-todos"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "skill-teaching",
+      "source": {
+        "source": "local",
+        "path": "./plugins/skill-teaching"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "hugo-blog",
+      "source": {
+        "source": "local",
+        "path": "./plugins/hugo-blog"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "obsidian",
+      "source": {
+        "source": "local",
+        "path": "./plugins/obsidian"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "trello2obsidian",
+      "source": {
+        "source": "local",
+        "path": "./plugins/trello2obsidian"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "cmux-tools",
+      "source": {
+        "source": "local",
+        "path": "./plugins/cmux-tools"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "office",
+      "source": {
+        "source": "local",
+        "path": "./plugins/office"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "figma",
+      "source": {
+        "source": "local",
+        "path": "./plugins/figma"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "git-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/git-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "mac-mail-app",
+      "source": {
+        "source": "local",
+        "path": "./plugins/mac-mail-app"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Communication"
+    },
+    {
+      "name": "pdf-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/pdf-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "agent-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/agent-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

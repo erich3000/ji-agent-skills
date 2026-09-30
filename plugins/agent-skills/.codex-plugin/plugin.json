@@ -1,0 +1,17 @@
+{
+  "name": "agent-skills",
+  "version": "0.3.0",
+  "description": "Keep project skills in one visible agent-skills/ folder and link Claude Code and Codex to it",
+  "author": {
+    "name": "Jens Ihrig"
+  },
+  "repository": "https://github.com/erich3000/ji-agent-skills",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Agent Skills",
+    "shortDescription": "Keep project skills in one visible agent-skills/ folder and link Claude Code and Codex to it",
+    "developerName": "Jens Ihrig",
+    "category": "Developer Tools"
+  }
+}
