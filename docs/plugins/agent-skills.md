@@ -33,3 +33,15 @@ agent-skills/                        # canonical source, visible and synced
 ```bash
 claude plugin install agent-skills@ji-agent-skills --scope project
 ```
+
+## Standalone installer
+
+For agents that consume raw skill folders, use `install-skills.sh` to install marketplace skills
+into the visible `agent-skills/` folder:
+
+```bash
+curl -sSL https://raw.githubusercontent.com/erich3000/ji-agent-skills/main/install-skills.sh | bash
+```
+
+Afterwards, run `agent-skills-share` on each device to link local agent folders to `agent-skills/`.
+Use `--target` only when intentionally installing into a legacy or custom skills directory.
