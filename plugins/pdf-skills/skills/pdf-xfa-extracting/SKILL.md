@@ -1,6 +1,6 @@
 ---
 name: pdf-xfa-extracting
-description: This skill should be used when a PDF shows only a "Please wait — if this message is not eventually replaced…" placeholder instead of its content, or when the user asks to "read this PDF", "make this form readable", "das PDF zeigt nichts an", "Acrobat-PDF konvertieren", "XFA extrahieren", or "run pdf-xfa-extracting". Typical for forms from German banks and public authorities (Sparkasse/OSPlus, LBS, insurers). Extracts the hidden XFA data into searchable Markdown.
+description: This skill should be used when a PDF shows only a "Please wait — if this message is not eventually replaced…" placeholder instead of its content (an XFA form with /NeedsRendering), or when the user asks to "read this XFA form", "das PDF zeigt nur Please wait", "XFA-Formular auslesen", "XFA extrahieren", or "run pdf-xfa-extracting". Typical for forms from German banks, insurers and public authorities. First step for any XFA form: extracts the field data into searchable Markdown. Use pdf-xfa-printing afterwards only if the body text is needed.
 ---
 
 # pdf-xfa-extracting
@@ -16,8 +16,8 @@ directly.
 ### 1. Confirm it is actually XFA
 
 ```bash
-pdftotext -f 1 -l 1 "datei.pdf" - | head -3        # → "Please wait..."
-strings "datei.pdf" | grep -c NeedsRendering       # → ≥1
+pdftotext -f 1 -l 1 "file.pdf" - | head -3        # → "Please wait..."
+strings "file.pdf" | grep -c NeedsRendering       # → ≥1
 ```
 
 `/NeedsRendering` marks it dynamic. A page count of 1 on a document that should be longer is
@@ -27,15 +27,24 @@ compressed object stream.
 ### 2. Extract
 
 ```bash
-python3 scripts/xfa_extract.py "datei.pdf" [...] -o _extrahiert
+python3 <base_directory>/scripts/xfa_extract.py "file.pdf" [...] -o "<pdf-dir>/_extrahiert"
 ```
 
-Writes one Markdown file per PDF. Options:
+`<base_directory>` is the path shown as "Base directory for this skill"; the script is not in the
+current directory. Always pass `-o` with a folder next to the source PDFs, the default
+`_extrahiert` is relative to the current directory.
+
+Writes one Markdown file per PDF, named after the PDF. Two PDFs with the same name overwrite each
+other's output, so extract them into separate folders. Options:
 
 - `--bilder` also writes embedded images. Off by default because they are almost always the
   sender's logos and stock photography, easily hundreds of KB of clutter.
-- `--roh` keeps every field. By default a noise filter drops layout, institution master data and
-  debug fields, which are roughly two thirds of the payload.
+- `--roh` keeps every field. By default a noise filter drops layout, institution master data,
+  archive metadata (`ARCHIV*`) and debug fields, which are roughly two thirds of the payload.
+
+Long text values such as clauses are kept; only long values without spaces (embedded binary data)
+are skipped. "kein Datenpaket" for a file that is XFA means the stream is encrypted or not
+FlateDecode-compressed, which the script does not handle.
 
 Requires only the standard library, no dependencies.
 

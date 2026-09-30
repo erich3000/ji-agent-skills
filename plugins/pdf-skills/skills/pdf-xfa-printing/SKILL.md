@@ -1,6 +1,6 @@
 ---
 name: pdf-xfa-printing
-description: This skill should be used when an XFA form's real body text is needed, not just its field data — when the user asks to "convert this PDF", "XFA konvertieren", "das PDF lesbar machen", "PDF ausdrucken und ersetzen", "make this form a normal PDF", or "run pdf-xfa-printing". Takes one or more XFA PDFs, walks the user through printing them from Adobe Reader to a virtual PDF printer, then verifies the result and replaces the original. Complements pdf-xfa-extracting, which only reaches the data part.
+description: This skill should be used when an XFA form's real body text is needed, not just its field data — when the user asks to "convert this XFA form", "XFA konvertieren", "XFA-Formular in normales PDF umwandeln", "XFA-PDF ausdrucken und ersetzen", "make this XFA form a normal PDF", or "run pdf-xfa-printing", or when a pdf-xfa-extracting result lacks the body text. macOS only (Adobe Reader plus the PDFwriter virtual printer). Walks the user through printing, then verifies the result and replaces the original.
 ---
 
 # pdf-xfa-printing
@@ -31,18 +31,19 @@ brew install --cask rwts-pdfwriter
 ```
 
 The package installs the driver and the queue. Output lands in `/private/var/spool/pdfwriter/$USER/`
-— not in `~/PDFwriter` or `/Users/Shared/PDFwriter`, whatever the project's documentation says.
+— not in `~/PDFwriter` or `/Users/Shared/PDFwriter`.
 
 ## Workflow
 
 ### 1. Confirm the file is XFA and worth printing
 
 ```bash
-pdftotext -f 1 -l 1 "datei.pdf" - | head -3        # → "Please wait..."
+pdftotext -f 1 -l 1 "file.pdf" - | head -3        # → "Please wait..."
 ```
 
-Check the extract if one exists. If `_extrahiert/<name>.md` is only 6–9 KB and consists of
-`ARCHIVINFO`, `AttrId`, `Stapelname` and similar, the body text is missing and printing is worth it.
+Check the extract if one exists. If `_extrahiert/<name>.md` is only a few KB and holds job and
+filename metadata but no clause texts, the body text is missing and printing is worth it. (With
+`--roh` such an extract consists mostly of `ARCHIVINFO`, `AttrId`, `Stapelname` and similar.)
 
 ### 2. Give the user these instructions verbatim
 
@@ -71,8 +72,8 @@ marker. Match by time first, then confirm by page count and content.
 For each printed file, before touching the original:
 
 ```bash
-pdfinfo "gedruckt.pdf" | grep -i pages          # plausible page count, not 1
-pdftotext "gedruckt.pdf" - | wc -c              # clearly more than the extract
+pdfinfo "printed.pdf" | grep -i pages          # plausible page count, not 1
+pdftotext "printed.pdf" - | wc -c              # clearly more than the extract
 ```
 
 Then cross-check identity against the original or its extract — customer number, contract number,
@@ -85,11 +86,12 @@ Finanzierungsübersicht arrived at 19,8 MB. Check the size and compress before f
 
 ```bash
 gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dPDFSETTINGS=/printer \
-   -sOutputFile=klein.pdf "gedruckt.pdf"
-pdftotext klein.pdf - | wc -c      # must match the uncompressed count
+   -sOutputFile=small.pdf "printed.pdf"
+pdftotext small.pdf - | wc -c      # must match the uncompressed count
 ```
 
-`/printer` (300 dpi) took that file to 721 KB, `/ebook` (150 dpi) to 196 KB. Prefer `/printer` when
+`/printer` (300 dpi) took that file to 721 KB, `/ebook` (150 dpi) to 196 KB. This skill uses `/printer`, not the `/ebook` preset of `pdf-compressing`,
+because the result replaces the original. Prefer `/printer` when
 the document carries charts or a signature image; the text layer is identical either way. Always
 re-check the character count afterwards.
 
@@ -101,15 +103,15 @@ in `_extrahiert/<name>.md` but not in the print:
 
 ```bash
 grep -oE '\*\*[A-Z_0-9]+:\*\* [0-9.]+,[0-9]{2}' "_extrahiert/<name>.md" | sort -u
-# then grep each value in `pdftotext gedruckt.pdf -`
+# then grep each value in `pdftotext printed.pdf -`
 ```
 
 If something is missing, build a supplement page and append it, rather than keeping two files:
 
 ```bash
 # render plain text to PDF with macOS' own filter, then concatenate
-cupsfilter -i text/plain -m application/pdf nachtrag.txt > nachtrag.pdf
-gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=komplett.pdf "gedruckt.pdf" nachtrag.pdf
+cupsfilter -i text/plain -m application/pdf supplement.txt > supplement.pdf
+gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=complete.pdf "printed.pdf" supplement.pdf
 ```
 
 Label the supplement in its own heading as reconstructed from the data part, so nobody later mistakes

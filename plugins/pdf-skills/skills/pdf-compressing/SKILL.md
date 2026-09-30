@@ -1,6 +1,6 @@
 ---
 name: pdf-compressing
-description: This skill should be used when the user asks to "compress a pdf", "shrink a pdf", "reduce pdf file size", or "run pdf-compressing". Uses Ghostscript to compress a given PDF, writing the output next to the original with a `_komprimiert.pdf` suffix.
+description: This skill should be used when the user asks to "compress a pdf", "shrink a pdf", "reduce pdf file size", "PDF komprimieren", "PDF verkleinern", or "run pdf-compressing". Uses Ghostscript to compress a given PDF, writing the output next to the original with a `_komprimiert.pdf` suffix.
 ---
 
 # pdf-compressing
@@ -42,4 +42,5 @@ Compare file sizes of input and output (`ls -lh` or `du -h`) and report the size
 ## Notes
 
 - Never overwrite the original file.
-- If the output ends up larger than the input (rare, e.g. already-compressed PDFs), tell the user rather than silently keeping a worse result.
+- If the output ends up larger than the input (rare, e.g. already-compressed PDFs), delete the output and tell the user rather than keeping a worse result.
+- `/ebook` downsamples images to 150 dpi. That is fine for screen reading but can make small print in scans hard to read. For scans that must stay legible, or a result that replaces an original, use `/printer` (300 dpi) instead and say so.
