@@ -1,0 +1,17 @@
+{
+  "name": "cmux-tools",
+  "version": "0.6.1",
+  "description": "cmux workflow skills for opening, navigating, screenshotting, clearing browser cache, and previewing files",
+  "author": {
+    "name": "Jens Ihrig"
+  },
+  "repository": "https://github.com/erich3000/ji-agent-skills",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "cmux Tools",
+    "shortDescription": "cmux workflow skills for opening, navigating, screenshotting, clearing browser cache, and previewing files",
+    "developerName": "Jens Ihrig",
+    "category": "Developer Tools"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "skill-teaching",
+  "version": "0.1.1",
+  "description": "Deprecated; use the agent-skills plugin for skill sharing",
+  "author": {
+    "name": "Jens Ihrig"
+  },
+  "repository": "https://github.com/erich3000/ji-agent-skills",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Skill Teaching (deprecated)",
+    "shortDescription": "Deprecated; use the agent-skills plugin for skill sharing",
+    "developerName": "Jens Ihrig",
+    "category": "Developer Tools"
+  }
+}

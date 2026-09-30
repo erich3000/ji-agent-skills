@@ -1,0 +1,17 @@
+{
+  "name": "git-skills",
+  "version": "0.1.0",
+  "description": "Git workflow skills for repository maintenance",
+  "author": {
+    "name": "Jens Ihrig"
+  },
+  "repository": "https://github.com/erich3000/ji-agent-skills",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Git Skills",
+    "shortDescription": "Git workflow skills for repository maintenance",
+    "developerName": "Jens Ihrig",
+    "category": "Developer Tools"
+  }
+}

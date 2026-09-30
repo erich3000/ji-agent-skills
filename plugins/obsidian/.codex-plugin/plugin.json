@@ -1,0 +1,17 @@
+{
+  "name": "obsidian",
+  "version": "0.1.0",
+  "description": "Obsidian vault management skills",
+  "author": {
+    "name": "Jens Ihrig"
+  },
+  "repository": "https://github.com/erich3000/ji-agent-skills",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Obsidian",
+    "shortDescription": "Obsidian vault management skills",
+    "developerName": "Jens Ihrig",
+    "category": "Productivity"
+  }
+}
