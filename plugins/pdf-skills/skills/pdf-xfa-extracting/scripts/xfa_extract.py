@@ -12,6 +12,7 @@ liest das Datenpaket aus und schreibt es als Markdown.
 """
 import argparse
 import base64
+import json
 import re
 import sys
 import zlib
@@ -24,9 +25,11 @@ NOISE = re.compile(
     r'^(DEBUG_|FUSS\d|KIZEILE|ARTIKEL_INST|MARKE|HSC|TBX|BARCODE|DSV|'
     r'INSTITUTS|ABSENDER|SPARKASSEN?S?$|AGB$|CARD|KASSEN|RIESTER|SKMINUS|'
     r'WEBSERVICE_|FDBNAME|FDVNAME|ANWDKZNAME|HILFSFELD|VIRT_|ARCHIV|'
-    r'TARGETURL|Datamerge_|FORMULAR_VERARB)'
+    r'TARGETURL|Datamerge_)'
 )
 BINARY_TAGS = {'BILD', 'DIAGRAMM', 'LOGO'}
+# Längere Werte ohne Leerzeichen sind eingebettete Binärdaten und werden
+# übersprungen. Lange Texte (Klauseln) bleiben erhalten.
 MAX_FIELD = 4000
 
 
@@ -76,9 +79,14 @@ def extract_images(root, dest, stem):
     return written
 
 
-def render(node, depth=0, lines=None, keep_all=False):
+def is_blob(text):
+    return len(text) >= MAX_FIELD and ' ' not in text[:500]
+
+
+def render(node, depth=0, lines=None, keep_all=False, counter=None):
     """Datenbaum als eingerückte Markdown-Liste."""
     lines = [] if lines is None else lines
+    counter = [0] if counter is None else counter
     tag = node.tag.split('}')[-1]
     if tag in BINARY_TAGS or (not keep_all and NOISE.match(tag)):
         return lines
@@ -87,27 +95,31 @@ def render(node, depth=0, lines=None, keep_all=False):
     text = (node.text or '').strip()
     pad = '  ' * depth
     if not children:
-        if text and len(text) < MAX_FIELD:
+        if text and not is_blob(text):
             lines.append(f'{pad}- **{tag}:** ' + text.replace('\n', f'\n{pad}  '))
+            counter[0] += 1
     else:
         lines.append(f'{pad}- **{tag}**')
         for child in children:
-            render(child, depth + 1, lines, keep_all)
+            render(child, depth + 1, lines, keep_all, counter)
     return lines
 
 
 def convert(pdf, dest, want_images=False, keep_all=False):
     packet = datasets_packet(pdf)
     if packet is None:
-        note = '' if is_xfa(pdf) else ' (kein XFA-PDF)'
+        note = (' (XFA, aber kein lesbares Datenpaket: verschlüsselt oder nicht'
+                ' FlateDecode-komprimiert)' if is_xfa(pdf) else ' (kein XFA-PDF)')
         print(f'  {pdf.name}: kein Datenpaket gefunden{note}')
         return False
     root = ET.fromstring(packet.decode('utf-8', 'replace'))
     images = extract_images(root, dest, pdf.stem) if want_images else []
-    body = '\n'.join(render(root, keep_all=keep_all))
+    counter = [0]
+    body = '\n'.join(render(root, keep_all=keep_all, counter=counter))
     out = dest / f'{pdf.stem}.md'
     header = (
-        f'---\ntitle: "{pdf.stem}"\nquelle: "{pdf.name}"\n'
+        f'---\ntitle: {json.dumps(pdf.stem, ensure_ascii=False)}\n'
+        f'quelle: {json.dumps(pdf.name, ensure_ascii=False)}\n'
         f'hinweis: "Aus den XFA-Daten extrahiert, ohne Layout"\n---\n\n'
         f'# {pdf.stem}\n\n'
         f'Extrahiert aus `{pdf.name}`, einem dynamischen XFA-Formular, das '
@@ -117,7 +129,7 @@ def convert(pdf, dest, want_images=False, keep_all=False):
         header += ('Eingebettete Bilder: '
                    + ', '.join(f'`{p.name}`' for p in images) + '\n\n')
     out.write_text(header + body + '\n', encoding='utf-8')
-    print(f'  {pdf.name} → {out.name}  ({len(body.splitlines())} Felder'
+    print(f'  {pdf.name} → {out.name}  ({counter[0]} Felder'
           + (f', {len(images)} Bilder' if images else '') + ')')
     return True
 

@@ -23,7 +23,7 @@
 - `gs` (Ghostscript) and `pdftotext`/`pdfinfo` (Poppler)
 - `ocrmypdf` and `tesseract-lang` for `pdf-ocr-adding`
 - `python3` for `pdf-xfa-extracting`
-- macOS, Adobe Reader, and `rwts-pdfwriter` for `pdf-xfa-printing`
+- macOS, Adobe Reader, and `rwts-pdfwriter` for `pdf-xfa-printing` (macOS only)
 
 ## Installation
 

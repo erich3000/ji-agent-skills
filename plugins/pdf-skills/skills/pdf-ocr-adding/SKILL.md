@@ -34,7 +34,8 @@ If `ocrmypdf` is missing or `deu` is not among the languages, install both. Tell
 language pack is large:
 
 ```bash
-brew install ocrmypdf tesseract-lang
+brew install ocrmypdf tesseract-lang          # macOS
+sudo apt install ocrmypdf tesseract-ocr-deu    # Debian/Ubuntu, one package per language
 ```
 
 `tesseract-lang` is about 686 MB because it carries every language. Reversible with
@@ -48,8 +49,8 @@ Never write directly over the original.
 ocrmypdf -l deu --output-type pdf "input.pdf" "<scratchpad>/ocr_out.pdf"
 ```
 
-- `-l deu` for German documents, `-l deu+eng` for mixed ones. The default is English and produces
-  broken umlauts on German text.
+- Set `-l` to the document's language: `deu` for German, `deu+eng` for mixed, `fra`, `ita` and so
+  on. The default is English, which breaks umlauts and accents on other languages.
 - ⚠️ **Do not use `--deskew` or `--rotate-pages` on documents that are already straight.** They force
   a re-encode of every page image. On a 842 KB contract this produced an 8.5 MB output, ten times the
   original. Without them, ocrmypdf's image optimisation usually makes the file *smaller*.
@@ -57,25 +58,7 @@ ocrmypdf -l deu --output-type pdf "input.pdf" "<scratchpad>/ocr_out.pdf"
   rasterises everything and loses existing real text, `--redo-ocr` is the safer repair. Neither is
   needed for a plain scan.
 
-### 3. Verify before replacing
-
-Two checks, both cheap:
-
-```bash
-pdftotext -layout "<scratchpad>/ocr_out.pdf" - | wc -c
-```
-
-and a content spot check on terms that must occur — names, street names, amounts, umlauts:
-
-```bash
-for t in 'Straße' 'Müller' '1.250,00'; do
-  printf '%-16s %s\n' "$t" "$(pdftotext "<scratchpad>/ocr_out.pdf" - | grep -ci "$t")"
-done
-```
-
-Umlauts are the telltale: if `ß` and `ä` come out wrong, the wrong language pack was used.
-
-### 3b. Existing bad text: `--redo-ocr`
+### 2b. Pages with bad existing text: `--redo-ocr`
 
 `--skip-text` silently leaves a page alone if it already carries text — including text from a *bad*
 earlier OCR. Symptom: German words full of mangled characters, `FŠttigkeitsmitteilungen` instead of
@@ -88,6 +71,25 @@ ocrmypdf -l deu --redo-ocr --output-type pdf "input.pdf" "<scratchpad>/ocr_out.p
 
 `--redo-ocr` strips the existing OCR layer and redoes it, while leaving genuine digital text alone.
 Prefer it over `--force-ocr`, which rasterises the whole page and destroys real text.
+
+### 3. Verify before replacing
+
+Two checks, both cheap:
+
+```bash
+pdftotext -layout "<scratchpad>/ocr_out.pdf" - | wc -c
+```
+
+and a content spot check on terms that must occur — names, street names, amounts, special
+characters (the examples below are placeholders, take real terms from the page image):
+
+```bash
+for t in 'Straße' 'Müller' '1.250,00'; do
+  printf '%-16s %s\n' "$t" "$(pdftotext "<scratchpad>/ocr_out.pdf" - | grep -ci "$t")"
+done
+```
+
+Special characters are the telltale: if `ß`, `ä` or `é` come out wrong, the wrong language was set.
 
 ### 4. Replace the original
 
@@ -111,7 +113,7 @@ Give before and after for file size and character count, and name the backup pat
 ⚠️ **A shell loop that OCRs and replaces in one pass is not atomic.** If it is interrupted — by the
 user, an error, a timeout — the files already processed are *already replaced*, while the rest are
 untouched. The result is a half-converted archive that nobody asked for, and the interruption message
-will suggest nothing happened. This has actually gone wrong once.
+will suggest nothing happened.
 
 Two rules:
 
@@ -125,7 +127,8 @@ Always back up every original into the scratchpad before replacing, preserving t
 an unwanted change can be reverted byte-exactly:
 
 ```bash
-cp "$SCRATCH/$f" "$f" && cmp -s "$f" "$SCRATCH/$f" && echo "reverted $f"
+mkdir -p "$SCRATCH/$(dirname "$f")" && cp -p "$f" "$SCRATCH/$f"      # backup
+cp "$SCRATCH/$f" "$f" && cmp -s "$f" "$SCRATCH/$f" && echo "reverted $f"  # revert
 ```
 
 ⚠️ **Scratchpad backups are session-temporary.** Say so when reporting, so the user knows the
