@@ -12,8 +12,8 @@ Take a screenshot of a browser pane in the current cmux workspace. Can open a ne
 Run both commands, then parse:
 
 ```bash
-WS=$(cmux identify | jq -r '.focused.workspace_ref')
-SURF=$(cmux rpc surface.list "{\"workspace_ref\":\"$WS\"}" | jq -r '[.surfaces[] | select(.type == "browser")] | first | .ref // empty')
+WS=$(cmux identify | jq -r '.caller.workspace_ref')
+SURF=$(cmux rpc surface.list "{\"workspace_id\":\"$WS\"}" | jq -r '[.surfaces[] | select(.type == "browser")] | first | .ref // empty')
 ```
 
 - If `SURF` is non-empty → a browser pane exists. Check its URL if needed:
@@ -67,8 +67,8 @@ Read `/tmp/cmux-shot.png` with the Read tool to render the image inline.
 ## Full one-liner (screenshot existing browser)
 
 ```bash
-WS=$(cmux identify | jq -r '.focused.workspace_ref') && \
-SURF=$(cmux rpc surface.list "{\"workspace_ref\":\"$WS\"}" | jq -r '[.surfaces[] | select(.type == "browser")] | first | .ref') && \
+WS=$(cmux identify | jq -r '.caller.workspace_ref') && \
+SURF=$(cmux rpc surface.list "{\"workspace_id\":\"$WS\"}" | jq -r '[.surfaces[] | select(.type == "browser")] | first | .ref') && \
 cmux browser $SURF screenshot --out /tmp/cmux-shot.png
 ```
 

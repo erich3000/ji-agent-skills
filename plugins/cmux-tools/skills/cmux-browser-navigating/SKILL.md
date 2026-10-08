@@ -10,12 +10,15 @@ Navigate the cmux browser to a URL without taking a screenshot. Opens a split br
 ## Step 1 — Discover workspace and browser surface
 
 ```bash
-WS=$(cmux identify | jq -r '.focused.workspace_ref')
-SURF=$(cmux rpc surface.list "{\"workspace_ref\":\"$WS\"}" | jq -r '[.surfaces[] | select(.type == "browser")] | first | .ref // empty')
+WS=$(cmux identify | jq -r '.caller.workspace_ref')
+SURF=$(cmux rpc surface.list "{\"workspace_id\":\"$WS\"}" | jq -r '[.surfaces[] | select(.type == "browser")] | first | .ref // empty')
 ```
 
 - If `SURF` is non-empty → a browser pane exists.
 - If `SURF` is empty → no browser pane open.
+
+Use `.caller.workspace_ref`, not `.focused.workspace_ref`: `focused` is the workspace the user is looking at right now, so after a switch the page would open
+in another workspace's browser. `surface.list` takes `workspace_id`; it silently ignores `workspace_ref` and lists the focused workspace instead.
 
 ## Step 2 — Open or navigate
 
