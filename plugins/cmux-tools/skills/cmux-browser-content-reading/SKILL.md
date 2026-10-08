@@ -10,13 +10,13 @@ Read text content from an already-open browser surface in cmux without navigatin
 ## Step 1 — Discover workspace and browser surfaces
 
 ```bash
-WS=$(cmux identify | jq -r '.focused.workspace_ref')
+WS=$(cmux identify | jq -r '.caller.workspace_ref')
 ```
 
 List all browser surfaces with their titles to decide which one to target:
 
 ```bash
-cmux rpc surface.list "{\"workspace_ref\":\"$WS\"}" | jq -r '.surfaces[] | select(.type == "browser") | [.ref, .title] | @tsv'
+cmux rpc surface.list "{\"workspace_id\":\"$WS\"}" | jq -r '.surfaces[] | select(.type == "browser") | [.ref, .title] | @tsv'
 ```
 
 ### If the user named a specific tab
@@ -24,7 +24,7 @@ cmux rpc surface.list "{\"workspace_ref\":\"$WS\"}" | jq -r '.surfaces[] | selec
 Match by title keyword (case-insensitive):
 
 ```bash
-SURF=$(cmux rpc surface.list "{\"workspace_ref\":\"$WS\"}" | \
+SURF=$(cmux rpc surface.list "{\"workspace_id\":\"$WS\"}" | \
   jq -r '[.surfaces[] | select(.type == "browser" and (.title | test("KEYWORD"; "i")))] | first | .ref // empty')
 ```
 
@@ -35,7 +35,7 @@ Replace `KEYWORD` with the relevant word from the request (e.g. `"Seobility"`, `
 Fall back to the first available browser surface:
 
 ```bash
-SURF=$(cmux rpc surface.list "{\"workspace_ref\":\"$WS\"}" | \
+SURF=$(cmux rpc surface.list "{\"workspace_id\":\"$WS\"}" | \
   jq -r '[.surfaces[] | select(.type == "browser")] | first | .ref // empty')
 ```
 

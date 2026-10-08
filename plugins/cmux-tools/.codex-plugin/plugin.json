@@ -1,6 +1,6 @@
 {
   "name": "cmux-tools",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "cmux workflow skills for opening, navigating, screenshotting, clearing browser cache, and previewing files",
   "author": {
     "name": "Jens Ihrig"
