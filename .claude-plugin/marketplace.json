@@ -9,6 +9,12 @@
   },
   "plugins": [
     {
+      "name": "claude-sessions",
+      "version": "0.1.0",
+      "source": "./plugins/claude-sessions",
+      "description": "Inspect and safely stop local Claude Code sessions"
+    },
+    {
       "name": "agent-todos",
       "version": "2.1.0",
       "source": "./plugins/agent-todos",

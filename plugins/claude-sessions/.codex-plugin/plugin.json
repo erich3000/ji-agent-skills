@@ -1,0 +1,15 @@
+{
+  "name": "claude-sessions",
+  "version": "0.1.0",
+  "description": "Inspect and safely stop local Claude Code sessions",
+  "author": {"name": "Jens Ihrig"},
+  "repository": "https://github.com/erich3000/ji-agent-skills",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Claude Sessions",
+    "shortDescription": "Inspect and safely stop local Claude Code sessions",
+    "developerName": "Jens Ihrig",
+    "category": "Developer Tools"
+  }
+}
