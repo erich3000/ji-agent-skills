@@ -1,0 +1,5 @@
+{
+  "name": "claude-sessions",
+  "description": "Inspect and safely stop local Claude Code sessions",
+  "version": "0.1.0"
+}

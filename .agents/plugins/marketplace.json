@@ -5,6 +5,18 @@
   },
   "plugins": [
     {
+      "name": "claude-sessions",
+      "source": {
+        "source": "local",
+        "path": "./plugins/claude-sessions"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
       "name": "agent-todos",
       "source": {
         "source": "local",
